@@ -144,7 +144,7 @@ class Sen2FireDataSet(data.Dataset):
     
 if __name__ == '__main__':
     
-    root_path = "/mimer/NOBACKUP/groups/alvis_cvl/yonghao/Data/Sen2Fire/"
+    root_path = "./../Sen2Fire"
     list_file_path = "train.txt"
     train_dataset = Sen2FireDataSet(root=root_path, list_path=list_file_path, max_iters=None, mode=1)
     max_values = train_dataset.compute_max_values()
