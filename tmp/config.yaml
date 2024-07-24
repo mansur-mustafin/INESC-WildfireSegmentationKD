@@ -1,0 +1,16 @@
+# Define some constants
+
+defaults:
+  - _self_
+
+hydra:
+  run:
+    dir: outputs/
+
+path:
+  data: "./../Sen2Fire_baseline/Sen2Fire/"
+  scene1: "./../Sen2Fire_baseline/Sen2Fire/scene1"
+  scene2: "./../Sen2Fire_baseline/Sen2Fire/scene2"
+  scene3: "./../Sen2Fire_baseline/Sen2Fire/scene3"
+  scene4: "./../Sen2Fire_baseline/Sen2Fire/scene4"
+  output_model: "models/"
