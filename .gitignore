@@ -1,6 +1,6 @@
 # Main
 Sen2Fire_baseline/Sen2Fire/
-
+tmp/models/lrasp*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
