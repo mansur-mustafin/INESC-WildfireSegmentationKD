@@ -8,8 +8,8 @@ hydra:
     dir: outputs/
 
 model:
-  # name: "lraspp"
-  name: "fcn_resnet50"
+  name: "lraspp"
+  # name: "fcn_resnet50"
   # name: "fcn_resnet101"
   # name: "deeplabv3_resnet50"
   # name: "deeplabv3_resnet101"
@@ -25,5 +25,5 @@ path:
 
 const:
   lr: 0.0001
-  num_epochs: 50
-  batch_size: 2
+  num_epochs: 5
+  batch_size: 8

@@ -16,10 +16,10 @@ from utils import eval_image
 
 class FirePredict():
 
-    def __init__(self, cfg: DictConfig) -> None:
+    def __init__(self, cfg: DictConfig, path = None) -> None:
         self.cfg = cfg
         self._create_data_loaders()
-        self._setup_model()
+        self._setup_model(path)
         self.criterion = nn.CrossEntropyLoss()
         self.optimizer = optim.Adam(self.model.parameters(), lr=self.cfg.const.lr)
 
@@ -167,7 +167,8 @@ class FirePredict():
         for epoch in range(num_epochs):
             self.model.train()
             running_loss = 0.0
-            for images, labels in tqdm(self.train_dataloader, desc=f"Epoch {epoch+1}/{num_epochs}"):
+            # for images, labels in tqdm(self.train_dataloader, desc=f"Epoch {epoch+1}/{num_epochs}"):
+            for images, labels in self.train_dataloader:
                 images, labels = images.to(device), labels.to(device)
                 
                 self.optimizer.zero_grad()
@@ -179,7 +180,7 @@ class FirePredict():
                 running_loss += loss.item()
             
             epoch_loss = running_loss / len(self.train_dataloader)
-            print(f'Loss: {epoch_loss:.4f}')
+            print(f'Epoch {epoch+1}/{num_epochs} Training loss: {epoch_loss:.4f}')
             
             # Validation
             self.model.eval()

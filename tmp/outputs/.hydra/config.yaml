@@ -1,5 +1,5 @@
 model:
-  name: fcn_resnet50
+  name: lraspp
 path:
   data: ./../Sen2Fire_baseline/Sen2Fire/
   scene1: ./../Sen2Fire_baseline/Sen2Fire/scene1
@@ -9,5 +9,5 @@ path:
   output_model: models/
 const:
   lr: 0.0001
-  num_epochs: 50
-  batch_size: 2
+  num_epochs: 5
+  batch_size: 8
