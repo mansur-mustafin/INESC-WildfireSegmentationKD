@@ -52,7 +52,7 @@ def label_mapping(input, mapping):
 def eval_image(predict,label,num_classes):
     index = np.where((label>=0) & (label<num_classes))
     predict = predict[index]
-    label = label[index] 
+    label = label[index]
     
     TP = np.zeros((num_classes, 1))
     FP = np.zeros((num_classes, 1))

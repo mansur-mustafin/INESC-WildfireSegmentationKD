@@ -1,3 +1,5 @@
+model:
+  name: fcn_resnet50
 path:
   data: ./../Sen2Fire_baseline/Sen2Fire/
   scene1: ./../Sen2Fire_baseline/Sen2Fire/scene1
@@ -5,3 +7,7 @@ path:
   scene3: ./../Sen2Fire_baseline/Sen2Fire/scene3
   scene4: ./../Sen2Fire_baseline/Sen2Fire/scene4
   output_model: models/
+const:
+  lr: 0.0001
+  num_epochs: 50
+  batch_size: 2
