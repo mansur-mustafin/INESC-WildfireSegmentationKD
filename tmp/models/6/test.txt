@@ -1,0 +1,6 @@
+models/6/deeplabv3_resnet101_0_val_0.29_f1_0.02.pt       - Precision: 0.007, Recall: 0.001, F1 Score: 0.001, IoU: 0.001, Accuracy: 0.936
+models/6/deeplabv3_resnet101_12_val_0.10_f1_0.28.pt      - Precision: 0.403, Recall: 0.090, F1 Score: 0.147, IoU: 0.080, Accuracy: 0.940
+models/6/deeplabv3_resnet101_1_val_0.20_f1_0.46.pt       - Precision: 0.299, Recall: 0.406, F1 Score: 0.344, IoU: 0.208, Accuracy: 0.911
+models/6/deeplabv3_resnet101_2_val_0.15_f1_0.43.pt       - Precision: 0.228, Recall: 0.309, F1 Score: 0.263, IoU: 0.151, Accuracy: 0.900
+models/6/deeplabv3_resnet101_4_val_0.11_f1_0.43.pt       - Precision: 0.407, Recall: 0.199, F1 Score: 0.267, IoU: 0.154, Accuracy: 0.937
+models/6/deeplabv3_resnet101_8_val_0.10_f1_0.24.pt       - Precision: 0.389, Recall: 0.085, F1 Score: 0.140, IoU: 0.075, Accuracy: 0.939

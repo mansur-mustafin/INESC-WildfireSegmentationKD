@@ -3,6 +3,7 @@ import hydra
 import torch
 import torch.nn as nn
 import numpy as np
+import time
 
 from omegaconf import DictConfig, OmegaConf
 from torch.utils.data import Dataset, DataLoader
@@ -65,7 +66,8 @@ class FirePredict():
         """
         if os.path.exists(path):
             self.model.load_state_dict(torch.load(path))
-            print(f"Model weights loaded from {path}")
+            # print(f"Model weights loaded from {path}")
+            print(path, end="\t")
         else:
             print(f"Path {path} does not exist. Skipping loading weights.")
 
@@ -180,8 +182,8 @@ class FirePredict():
         for epoch in range(num_epochs):
             self.model.train()
             running_loss = 0.0
-            # for images, labels in tqdm(self.train_dataloader, desc=f"Epoch {epoch+1}/{num_epochs}"):
-            for images, labels in self.train_dataloader:
+            for images, labels in tqdm(self.train_dataloader, desc=f"Epoch {epoch+1}/{num_epochs}"):
+            # for images, labels in self.train_dataloader:
                 images, labels = images.to(device), labels.to(device)
                 
                 self.optimizer.zero_grad()
@@ -254,7 +256,8 @@ class FirePredict():
         epsilon = 1e-14
 
         with torch.no_grad():
-            for images, labels in tqdm(test_dataloader):
+            # for images, labels in tqdm(test_dataloader):
+            for images, labels in test_dataloader:
                 images, labels = images.to(device), labels.to(device)
                 outputs = self.model(images)['out']
 
@@ -266,14 +269,14 @@ class FirePredict():
                 FP_all += FP
                 TN_all += TN
                 FN_all += FN
-
+        
         accuracy = (TP_all[1] + TN_all[1]) / (TP_all[1] + TN_all[1] + FP_all[1] + FN_all[1] + epsilon)
         precision = TP_all[1] / (TP_all[1] + FP_all[1] + epsilon)
         recall = TP_all[1] / (TP_all[1] + FN_all[1] + epsilon)
         f1 = 2 * precision * recall / (precision + recall + epsilon)
         iou = TP_all[1] / (TP_all[1] + FP_all[1] + FN_all[1] + epsilon)
 
-        print(f'Test Metrics - Precision: {precision[0]:.3f}, Recall: {recall[0]:.3f}, F1 Score: {f1[0]:.3f}, IoU: {iou[0]:.3f}, Accuracy: {accuracy[0]:.3f}')
+        print(f' - Precision: {precision[0]:.3f}, Recall: {recall[0]:.3f}, F1 Score: {f1[0]:.3f}, IoU: {iou[0]:.3f}, Accuracy: {accuracy[0]:.3f}')
 
 
 @hydra.main(config_path="", config_name="config", version_base=None)
@@ -281,15 +284,19 @@ def main(cfg: DictConfig):
     print("Configuration: ")
     print(OmegaConf.to_yaml(cfg))
 
-    fp = FirePredict(cfg, "models/1/lraspp_0_val_0.17_f1_0.00.pt")
-    fp.test()
-    fp = FirePredict(cfg, "models/1/lraspp_2_val_0.13_f1_0.19.pt")
-    fp.test()
-    fp = FirePredict(cfg, "models/1/lraspp_3_val_0.11_f1_0.39.pt")
-    fp.test()
-    fp = FirePredict(cfg, "models/1/lraspp_4_val_0.10_f1_0.41.pt")
-    fp.test()
 
+    folder_path = "models/7/"
+    for root, dirs, files in os.walk(folder_path):
+        files = sorted(files)
+        for file in files:
+            # Construct the full file path
+            if file.endswith('.pt'):
+                file_path = os.path.join(root, file)
+                fp = FirePredict(cfg, file_path)
+                fp.test()
+
+    
+    # fp = FirePredict(cfg)
     # fp.train()
     
 if __name__ == "__main__":

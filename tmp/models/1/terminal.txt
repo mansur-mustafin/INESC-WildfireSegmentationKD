@@ -1,0 +1,56 @@
+(venv) mansur@g14:~/Desktop/NewSpace/tmp$ python3 test.py 
+Configuration: 
+model:
+  name: lraspp
+path:
+  data: ./../Sen2Fire_baseline/Sen2Fire/
+  scene1: ./../Sen2Fire_baseline/Sen2Fire/scene1
+  scene2: ./../Sen2Fire_baseline/Sen2Fire/scene2
+  scene3: ./../Sen2Fire_baseline/Sen2Fire/scene3
+  scene4: ./../Sen2Fire_baseline/Sen2Fire/scene4
+  output_model: models/
+const:
+  lr: 0.0001
+  num_epochs: 10
+  batch_size: 8
+
+Epoch 1/10: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 183/183 [00:37<00:00,  4.91it/s]
+Epoch 1/10 Training loss: 0.2431
+Validation Loss: 0.156, Precision: 0.000, Recall: 0.000, F1 Score: 0.000, IoU: 0.000, Acc: 0.964
+Saved model to: models/lraspp_0_val_0.16_f1_0.00.pt
+Epoch 2/10: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 183/183 [00:37<00:00,  4.89it/s]
+Epoch 2/10 Training loss: 0.1009
+Validation Loss: 0.132, Precision: 0.601, Recall: 0.043, F1 Score: 0.080, IoU: 0.042, Acc: 0.965
+Saved model to: models/lraspp_1_val_0.13_f1_0.08.pt
+Epoch 3/10: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 183/183 [00:37<00:00,  4.83it/s]
+Epoch 3/10 Training loss: 0.0831
+Validation Loss: 0.119, Precision: 0.450, Recall: 0.146, F1 Score: 0.220, IoU: 0.124, Acc: 0.963
+Saved model to: models/lraspp_2_val_0.12_f1_0.22.pt
+Epoch 4/10: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 183/183 [00:37<00:00,  4.82it/s]
+Epoch 4/10 Training loss: 0.0742
+Validation Loss: 0.117, Precision: 0.500, Recall: 0.270, F1 Score: 0.351, IoU: 0.213, Acc: 0.964
+Saved model to: models/lraspp_3_val_0.12_f1_0.35.pt
+Epoch 5/10: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 183/183 [00:38<00:00,  4.80it/s]
+Epoch 5/10 Training loss: 0.0658
+Validation Loss: 0.119, Precision: 0.372, Recall: 0.303, F1 Score: 0.334, IoU: 0.200, Acc: 0.957
+Saved model to: models/lraspp_4_val_0.12_f1_0.33.pt
+Epoch 6/10: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 183/183 [00:38<00:00,  4.77it/s]
+Epoch 6/10 Training loss: 0.0572
+Validation Loss: 0.156, Precision: 0.288, Recall: 0.578, F1 Score: 0.384, IoU: 0.238, Acc: 0.934
+Saved model to: models/lraspp_5_val_0.16_f1_0.38.pt
+Epoch 7/10: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 183/183 [00:38<00:00,  4.77it/s]
+Epoch 7/10 Training loss: 0.0540
+Validation Loss: 0.156, Precision: 0.290, Recall: 0.531, F1 Score: 0.376, IoU: 0.231, Acc: 0.937
+Saved model to: models/lraspp_6_val_0.16_f1_0.38.pt
+Epoch 8/10: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 183/183 [00:38<00:00,  4.75it/s]
+Epoch 8/10 Training loss: 0.0514
+Validation Loss: 0.120, Precision: 0.456, Recall: 0.278, F1 Score: 0.346, IoU: 0.209, Acc: 0.963
+Saved model to: models/lraspp_7_val_0.12_f1_0.35.pt
+Epoch 9/10: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 183/183 [00:38<00:00,  4.80it/s]
+Epoch 9/10 Training loss: 0.0489
+Validation Loss: 0.137, Precision: 0.349, Recall: 0.489, F1 Score: 0.407, IoU: 0.256, Acc: 0.949
+Saved model to: models/lraspp_8_val_0.14_f1_0.41.pt
+Epoch 10/10: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 183/183 [00:38<00:00,  4.78it/s]
+Epoch 10/10 Training loss: 0.0401
+Validation Loss: 0.119, Precision: 0.547, Recall: 0.315, F1 Score: 0.399, IoU: 0.250, Acc: 0.966
+Saved model to: models/lraspp_9_val_0.12_f1_0.40.pt

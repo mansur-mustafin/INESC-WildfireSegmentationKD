@@ -1,0 +1,3 @@
+models/4/deeplabv3_mobilenet_v3_large_0_val_0.16_f1_0.00.pt      - Precision: 0.099, Recall: 0.000, F1 Score: 0.000, IoU: 0.000, Accuracy: 0.942
+models/4/deeplabv3_mobilenet_v3_large_1_val_0.13_f1_0.01.pt      - Precision: 1.000, Recall: 0.001, F1 Score: 0.001, IoU: 0.001, Accuracy: 0.942
+models/4/deeplabv3_mobilenet_v3_large_3_val_0.11_f1_0.31.pt      - Precision: 0.383, Recall: 0.105, F1 Score: 0.164, IoU: 0.089, Accuracy: 0.939
