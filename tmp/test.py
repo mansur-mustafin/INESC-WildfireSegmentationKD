@@ -1,19 +1,34 @@
 import os
-import hydra
-import torch
-import torch.nn as nn
-import numpy as np
 import time
 
+import hydra
+import numpy as np
 from omegaconf import DictConfig, OmegaConf
-from torch.utils.data import Dataset, DataLoader
-from torchvision.models.segmentation import lraspp_mobilenet_v3_large, fcn_resnet50, fcn_resnet101, deeplabv3_resnet50, deeplabv3_resnet101, deeplabv3_mobilenet_v3_large
-from torchvision.models.segmentation import LRASPP_MobileNet_V3_Large_Weights, FCN_ResNet50_Weights, FCN_ResNet101_Weights, DeepLabV3_ResNet50_Weights, DeepLabV3_ResNet101_Weights, DeepLabV3_MobileNet_V3_Large_Weights
-import torch.optim as optim
 from tqdm import tqdm
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from torch.utils.data import DataLoader
+from torchvision.models.segmentation import (
+    lraspp_mobilenet_v3_large, 
+    fcn_resnet50, 
+    fcn_resnet101, 
+    deeplabv3_resnet50, 
+    deeplabv3_resnet101, 
+    deeplabv3_mobilenet_v3_large
+)
+from torchvision.models.segmentation import (
+    LRASPP_MobileNet_V3_Large_Weights, 
+    FCN_ResNet50_Weights, 
+    FCN_ResNet101_Weights, 
+    DeepLabV3_ResNet50_Weights, 
+    DeepLabV3_ResNet101_Weights, 
+    DeepLabV3_MobileNet_V3_Large_Weights
+)
 
 from Sen2FireLoader import Sen2FireDataset
 from utils import eval_image
+
 
 class FirePredict():
 
@@ -28,47 +43,36 @@ class FirePredict():
 
 
     def _setup_model(self):
-        
         model_name = self.cfg.model.name.lower()
+        model_mappings = {
+            "lraspp": (lraspp_mobilenet_v3_large, LRASPP_MobileNet_V3_Large_Weights.DEFAULT, self._modify_lraspp_model),
+            "fcn_resnet50": (fcn_resnet50, FCN_ResNet50_Weights.DEFAULT, self._modify_fcn_model),
+            "fcn_resnet101": (fcn_resnet101, FCN_ResNet101_Weights.DEFAULT, self._modify_fcn_model),
+            "deeplabv3_resnet50": (deeplabv3_resnet50, DeepLabV3_ResNet50_Weights.DEFAULT, self._modify_deeplab_model),
+            "deeplabv3_resnet101": (deeplabv3_resnet101, DeepLabV3_ResNet101_Weights.DEFAULT, self._modify_deeplab_model),
+            "deeplabv3_mobilenet_v3_large": (deeplabv3_mobilenet_v3_large, DeepLabV3_MobileNet_V3_Large_Weights.DEFAULT, self._modify_deeplab_mobilenet_model),
+        }
 
-        if model_name == "lraspp":
-            self.model = lraspp_mobilenet_v3_large(weights=LRASPP_MobileNet_V3_Large_Weights.DEFAULT)
-            self._modify_lraspp_model(num_input_channels=13, num_classes=2)
-        
-        elif model_name == "fcn_resnet50":
-            self.model = fcn_resnet50(weights=FCN_ResNet50_Weights.DEFAULT)
-            self._modify_fcn_model(num_input_channels=13, num_classes=2)
-
-        elif model_name == "fcn_resnet101":
-            self.model = fcn_resnet101(weights=FCN_ResNet101_Weights.DEFAULT)
-            self._modify_fcn_model(num_input_channels=13, num_classes=2)
-
-        elif model_name == "deeplabv3_resnet50":
-            self.model = deeplabv3_resnet50(weights=DeepLabV3_ResNet50_Weights.DEFAULT)
-            self._modify_deeplab_model(num_input_channels=13, num_classes=2)
-
-        elif model_name == "deeplabv3_resnet101":
-            self.model = deeplabv3_resnet101(weights=DeepLabV3_ResNet101_Weights.DEFAULT)
-            self._modify_deeplab_model(num_input_channels=13, num_classes=2)
-
-        elif model_name == "deeplabv3_mobilenet_v3_large":
-            self.model = deeplabv3_mobilenet_v3_large(weights=DeepLabV3_MobileNet_V3_Large_Weights.DEFAULT)
-            self._modify_deeplab_mobilenet_model(num_input_channels=13, num_classes=2)
-
+        if model_name in model_mappings:
+            model_fn, weights, modify_fn = model_mappings[model_name]
+            self.model = model_fn(weights=weights)
+            modify_fn(
+                num_input_channels=self.cfg.const.num_input_channels,
+                num_classes=self.cfg.const.num_classes
+            )
         else:
-            print(f"Model {model_name} was not found.")
-            return
+            raise ValueError(f"Model '{model_name}' not found.")
     
 
     def _load_weights(self, path):
         """
         Function to load model weights from a given path.
         """
-        if os.path.exists(path):
+        try:
             self.model.load_state_dict(torch.load(path))
-            # print(f"Model weights loaded from {path}")
             print(path, end="\t")
-        else:
+            # print(f"Model weights loaded from {path}")
+        except FileNotFoundError:
             print(f"Path {path} does not exist. Skipping loading weights.")
 
 
@@ -95,7 +99,7 @@ class FirePredict():
 
         self.model.backbone['0'] = nn.Sequential(new_conv, new_bn, new_activation)
 
-        # Classifire
+        # Classifier
         self.model.classifier.low_classifier = nn.Conv2d(
             40, num_classes, kernel_size=(1, 1), stride=(1, 1)
         )
@@ -116,7 +120,7 @@ class FirePredict():
         self.model.backbone.conv1.weight.data[:, 0:0].zero_()
         self.model.backbone.conv1.weight.data[:, 5:].zero_()
 
-        # Classifire
+        # Classifier
         self.model.classifier[4] = nn.Conv2d(512, num_classes, kernel_size=(1, 1), stride=(1, 1))
 
 
@@ -132,7 +136,7 @@ class FirePredict():
         self.model.backbone.conv1.weight.data[:, 0:0].zero_()
         self.model.backbone.conv1.weight.data[:, 5:].zero_()
 
-        # Classifire
+        # Classifier
         self.model.classifier[4] = nn.Conv2d(256, num_classes, kernel_size=(1, 1), stride=(1, 1))
 
 
@@ -158,7 +162,7 @@ class FirePredict():
 
         self.model.backbone['0'] = nn.Sequential(new_conv, new_bn, new_activation)
 
-        # Classifire
+        # Classifier
         self.model.classifier[4] = nn.Conv2d(256, num_classes, kernel_size=(1, 1), stride=(1, 1))
 
 
