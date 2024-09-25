@@ -1,0 +1,76 @@
+(venv) mansur@g14:~/Desktop/NewSpace/tmp$ python3 test.py 
+Configuration: 
+model:
+  name: lraspp
+path:
+  data: ./../datasets/Sen2Fire/
+  scene1: ./../datasets/Sen2Fire/scene1
+  scene2: ./../datasets/Sen2Fire/scene2
+  scene3: ./../datasets/Sen2Fire/scene3
+  scene4: ./../datasets/Sen2Fire/scene4
+  output_model: models/
+const:
+  lr: 0.0001
+  num_epochs: 10
+  batch_size: 8
+  num_input_channels: 13
+  num_classes: 2
+
+Epoch 1/10: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 183/183 [00:38<00:00,  4.81it/s]
+Epoch 1/10 Training loss: 0.2098
+Validation Loss: 0.173, Precision: 0.417, Recall: 0.000, F1 Score: 0.001, IoU: 0.000, Acc: 0.964
+Saved model to: models/lraspp_0_val_0.17_f1_0.00.pt
+Epoch 2/10: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 183/183 [00:39<00:00,  4.67it/s]
+Epoch 2/10 Training loss: 0.0973
+Validation Loss: 0.139, Precision: 0.391, Recall: 0.014, F1 Score: 0.027, IoU: 0.014, Acc: 0.964
+Saved model to: models/lraspp_1_val_0.14_f1_0.03.pt
+Epoch 3/10: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 183/183 [00:38<00:00,  4.70it/s]
+Epoch 3/10 Training loss: 0.0846
+Validation Loss: 0.111, Precision: 0.559, Recall: 0.263, F1 Score: 0.358, IoU: 0.218, Acc: 0.966
+Saved model to: models/lraspp_2_val_0.11_f1_0.36.pt
+Epoch 4/10: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 183/183 [00:39<00:00,  4.63it/s]
+Epoch 4/10 Training loss: 0.0666
+Validation Loss: 0.125, Precision: 0.677, Recall: 0.062, F1 Score: 0.114, IoU: 0.061, Acc: 0.966
+Epoch 5/10: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 183/183 [00:38<00:00,  4.69it/s]
+Epoch 5/10 Training loss: 0.0636
+Validation Loss: 0.108, Precision: 0.590, Recall: 0.194, F1 Score: 0.292, IoU: 0.171, Acc: 0.967
+Saved model to: models/lraspp_4_val_0.11_f1_0.29.pt
+Epoch 6/10: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 183/183 [00:38<00:00,  4.72it/s]
+Epoch 6/10 Training loss: 0.0529
+Validation Loss: 0.111, Precision: 0.474, Recall: 0.415, F1 Score: 0.443, IoU: 0.284, Acc: 0.963
+Epoch 7/10: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 183/183 [00:39<00:00,  4.69it/s]
+Epoch 7/10 Training loss: 0.0569
+Validation Loss: 0.101, Precision: 0.616, Recall: 0.251, F1 Score: 0.357, IoU: 0.217, Acc: 0.968
+Saved model to: models/lraspp_6_val_0.10_f1_0.36.pt
+Epoch 8/10: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 183/183 [00:39<00:00,  4.69it/s]
+Epoch 8/10 Training loss: 0.0476
+Validation Loss: 0.120, Precision: 0.441, Recall: 0.480, F1 Score: 0.459, IoU: 0.298, Acc: 0.960
+Epoch 9/10: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 183/183 [00:38<00:00,  4.69it/s]
+Epoch 9/10 Training loss: 0.0453
+Validation Loss: 0.107, Precision: 0.513, Recall: 0.353, F1 Score: 0.419, IoU: 0.265, Acc: 0.965
+Epoch 10/10: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 183/183 [00:38<00:00,  4.72it/s]
+Epoch 10/10 Training loss: 0.0448
+Validation Loss: 0.112, Precision: 0.531, Recall: 0.244, F1 Score: 0.334, IoU: 0.200, Acc: 0.965
+(venv) mansur@g14:~/Desktop/NewSpace/tmp$ python3 test.py 
+Configuration: 
+model:
+  name: lraspp
+path:
+  data: ./../datasets/Sen2Fire/
+  scene1: ./../datasets/Sen2Fire/scene1
+  scene2: ./../datasets/Sen2Fire/scene2
+  scene3: ./../datasets/Sen2Fire/scene3
+  scene4: ./../datasets/Sen2Fire/scene4
+  output_model: models/
+const:
+  lr: 0.0001
+  num_epochs: 10
+  batch_size: 8
+  num_input_channels: 13
+  num_classes: 2
+
+models/test/lraspp_0_val_0.17_f1_0.00.pt         - Precision: 0.203, Recall: 0.000, F1 Score: 0.001, IoU: 0.000, Accuracy: 0.942
+models/test/lraspp_1_val_0.14_f1_0.03.pt         - Precision: 0.958, Recall: 0.008, F1 Score: 0.015, IoU: 0.008, Accuracy: 0.943
+models/test/lraspp_2_val_0.11_f1_0.36.pt         - Precision: 0.291, Recall: 0.091, F1 Score: 0.139, IoU: 0.075, Accuracy: 0.935
+models/test/lraspp_4_val_0.11_f1_0.29.pt         - Precision: 0.313, Recall: 0.045, F1 Score: 0.079, IoU: 0.041, Accuracy: 0.939
+models/test/lraspp_6_val_0.10_f1_0.36.pt         - Precision: 0.390, Recall: 0.107, F1 Score: 0.168, IoU: 0.091, Accuracy: 0.939

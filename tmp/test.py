@@ -8,7 +8,7 @@ from tqdm import tqdm
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, ConcatDataset, random_split
 from torchvision.models.segmentation import (
     lraspp_mobilenet_v3_large, 
     fcn_resnet50, 
@@ -27,7 +27,7 @@ from torchvision.models.segmentation import (
 )
 
 from Sen2FireLoader import Sen2FireDataset
-from utils import eval_image
+from utils import eval_image, init_seeds
 
 
 class FirePredict():
@@ -171,6 +171,14 @@ class FirePredict():
         train_data.add_data_dir(self.cfg.path.scene2)
         val_dataset = Sen2FireDataset(self.cfg.path.scene3)
 
+        combined_dataset = ConcatDataset([train_data, val_dataset])
+
+        total_len = len(combined_dataset)
+        train_len = int(0.8 * total_len)
+        val_len = total_len - train_len
+
+        train_data, val_dataset = random_split(combined_dataset, [train_len, val_len])
+
         self.train_dataloader = DataLoader(train_data, batch_size = self.cfg.const.batch_size, shuffle=True, num_workers=4)
         self.val_dataloader = DataLoader(val_dataset, batch_size = self.cfg.const.batch_size, shuffle=False, num_workers=4)
 
@@ -288,20 +296,23 @@ def main(cfg: DictConfig):
     print("Configuration: ")
     print(OmegaConf.to_yaml(cfg))
 
-
-    folder_path = "models/7/"
-    for root, dirs, files in os.walk(folder_path):
-        files = sorted(files)
-        for file in files:
-            # Construct the full file path
-            if file.endswith('.pt'):
-                file_path = os.path.join(root, file)
-                fp = FirePredict(cfg, file_path)
-                fp.test()
+    #   CODE FOR TESTING
+    # folder_path = "models/80by20"
+    # for root, dirs, files in os.walk(folder_path):
+    #     files = sorted(files)
+    #     for file in files:
+    #         # Construct the full file path
+    #         if file.endswith('.pt'):
+    #             file_path = os.path.join(root, file)
+    #             fp = FirePredict(cfg, file_path)
+    #             fp.test()
 
     
-    # fp = FirePredict(cfg)
-    # fp.train()
-    
+    # CODE FOR TRAINING
+    fp = FirePredict(cfg)
+    fp.train()
+
+
 if __name__ == "__main__":
+    init_seeds()
     main()

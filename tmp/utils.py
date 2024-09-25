@@ -1,5 +1,6 @@
 import numpy as np
 import torch
+import random
 
 def eval_image(predict,label,num_classes):
     """
@@ -21,3 +22,14 @@ def eval_image(predict,label,num_classes):
         FN[i] = np.sum(label[np.where(predict!=i)]==i)        
     
     return TP,FP,TN,FN,len(label)
+
+
+def init_seeds(seed=1234):
+    """
+    Copiado de Sen2Fire/Train.py
+    """
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed) 
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed) 

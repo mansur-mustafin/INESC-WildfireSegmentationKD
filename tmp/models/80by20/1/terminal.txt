@@ -1,0 +1,112 @@
+(venv) mansur@g14:~/Desktop/NewSpace/tmp$ python3 test.py 
+Configuration: 
+model:
+  name: lraspp
+path:
+  data: ./../datasets/Sen2Fire/
+  scene1: ./../datasets/Sen2Fire/scene1
+  scene2: ./../datasets/Sen2Fire/scene2
+  scene3: ./../datasets/Sen2Fire/scene3
+  scene4: ./../datasets/Sen2Fire/scene4
+  output_model: models/
+const:
+  lr: 0.0001
+  num_epochs: 20
+  batch_size: 8
+  num_input_channels: 13
+  num_classes: 2
+
+Created dataloaders with 80/20 training/validaion datasets.
+Epoch 1/20: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 197/197 [00:40<00:00,  4.84it/s]
+Epoch 1/20 Training loss: 0.2076
+Validation Loss: 0.250, Precision: 0.039, Recall: 0.004, F1 Score: 0.008, IoU: 0.004, Acc: 0.969
+Saved model to: models/lraspp_0_val_0.25_f1_0.01.pt
+Epoch 2/20: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 197/197 [00:40<00:00,  4.87it/s]
+Epoch 2/20 Training loss: 0.1014
+Validation Loss: 0.253, Precision: 0.077, Recall: 0.151, F1 Score: 0.102, IoU: 0.054, Acc: 0.925
+Epoch 3/20: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 197/197 [00:40<00:00,  4.84it/s]
+Epoch 3/20 Training loss: 0.0858
+Validation Loss: 0.088, Precision: 0.482, Recall: 0.456, F1 Score: 0.469, IoU: 0.306, Acc: 0.971
+Saved model to: models/lraspp_2_val_0.09_f1_0.47.pt
+Epoch 4/20: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 197/197 [00:40<00:00,  4.84it/s]
+Epoch 4/20 Training loss: 0.0755
+Validation Loss: 0.101, Precision: 0.357, Recall: 0.599, F1 Score: 0.447, IoU: 0.288, Acc: 0.958
+Epoch 5/20: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 197/197 [00:41<00:00,  4.80it/s]
+Epoch 5/20 Training loss: 0.0699
+Validation Loss: 0.094, Precision: 0.401, Recall: 0.546, F1 Score: 0.462, IoU: 0.301, Acc: 0.964
+Epoch 6/20: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 197/197 [00:40<00:00,  4.82it/s]
+Epoch 6/20 Training loss: 0.0672
+Validation Loss: 0.092, Precision: 0.426, Recall: 0.561, F1 Score: 0.484, IoU: 0.319, Acc: 0.966
+Epoch 7/20: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 197/197 [00:40<00:00,  4.81it/s]
+Epoch 7/20 Training loss: 0.0637
+Validation Loss: 0.098, Precision: 0.407, Recall: 0.577, F1 Score: 0.477, IoU: 0.313, Acc: 0.964
+Epoch 8/20: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 197/197 [00:41<00:00,  4.80it/s]
+Epoch 8/20 Training loss: 0.0567
+Validation Loss: 0.077, Precision: 0.492, Recall: 0.511, F1 Score: 0.501, IoU: 0.334, Acc: 0.971
+Saved model to: models/lraspp_7_val_0.08_f1_0.50.pt
+Epoch 9/20: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 197/197 [00:41<00:00,  4.79it/s]
+Epoch 9/20 Training loss: 0.0539
+Validation Loss: 0.079, Precision: 0.488, Recall: 0.405, F1 Score: 0.442, IoU: 0.284, Acc: 0.971
+Epoch 10/20: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 197/197 [00:41<00:00,  4.79it/s]
+Epoch 10/20 Training loss: 0.0489
+Validation Loss: 0.083, Precision: 0.421, Recall: 0.562, F1 Score: 0.481, IoU: 0.317, Acc: 0.966
+Epoch 11/20: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 197/197 [00:40<00:00,  4.81it/s]
+Epoch 11/20 Training loss: 0.0483
+Validation Loss: 0.076, Precision: 0.561, Recall: 0.369, F1 Score: 0.445, IoU: 0.286, Acc: 0.974
+Saved model to: models/lraspp_10_val_0.08_f1_0.45.pt
+Epoch 12/20: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 197/197 [00:41<00:00,  4.78it/s]
+Epoch 12/20 Training loss: 0.0420
+Validation Loss: 0.087, Precision: 0.447, Recall: 0.612, F1 Score: 0.517, IoU: 0.348, Acc: 0.968
+Epoch 13/20: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 197/197 [00:41<00:00,  4.80it/s]
+Epoch 13/20 Training loss: 0.0432
+Validation Loss: 0.128, Precision: 0.275, Recall: 0.565, F1 Score: 0.370, IoU: 0.227, Acc: 0.946
+Epoch 14/20: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 197/197 [00:41<00:00,  4.80it/s]
+Epoch 14/20 Training loss: 0.0379
+Validation Loss: 0.096, Precision: 0.425, Recall: 0.587, F1 Score: 0.493, IoU: 0.327, Acc: 0.966
+Epoch 15/20: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 197/197 [00:41<00:00,  4.78it/s]
+Epoch 15/20 Training loss: 0.0340
+Validation Loss: 0.072, Precision: 0.576, Recall: 0.490, F1 Score: 0.530, IoU: 0.360, Acc: 0.975
+Saved model to: models/lraspp_14_val_0.07_f1_0.53.pt
+Epoch 16/20: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 197/197 [00:41<00:00,  4.80it/s]
+Epoch 16/20 Training loss: 0.0342
+Validation Loss: 0.078, Precision: 0.519, Recall: 0.430, F1 Score: 0.470, IoU: 0.307, Acc: 0.973
+Epoch 17/20: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 197/197 [00:41<00:00,  4.79it/s]
+Epoch 17/20 Training loss: 0.0322
+Validation Loss: 0.105, Precision: 0.453, Recall: 0.533, F1 Score: 0.490, IoU: 0.324, Acc: 0.969
+Epoch 18/20: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 197/197 [00:41<00:00,  4.80it/s]
+Epoch 18/20 Training loss: 0.0572
+Validation Loss: 0.094, Precision: 0.458, Recall: 0.562, F1 Score: 0.505, IoU: 0.337, Acc: 0.969
+Epoch 19/20: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 197/197 [00:41<00:00,  4.78it/s]
+Epoch 19/20 Training loss: 0.0312
+Validation Loss: 0.079, Precision: 0.564, Recall: 0.474, F1 Score: 0.515, IoU: 0.347, Acc: 0.975
+Epoch 20/20: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 197/197 [00:41<00:00,  4.78it/s]
+Epoch 20/20 Training loss: 0.0277
+Validation Loss: 0.075, Precision: 0.619, Recall: 0.524, F1 Score: 0.567, IoU: 0.396, Acc: 0.977
+(venv) mansur@g14:~/Desktop/NewSpace/tmp$ python3 test.py 
+Configuration: 
+model:
+  name: lraspp
+path:
+  data: ./../datasets/Sen2Fire/
+  scene1: ./../datasets/Sen2Fire/scene1
+  scene2: ./../datasets/Sen2Fire/scene2
+  scene3: ./../datasets/Sen2Fire/scene3
+  scene4: ./../datasets/Sen2Fire/scene4
+  output_model: models/
+const:
+  lr: 0.0001
+  num_epochs: 20
+  batch_size: 8
+  num_input_channels: 13
+  num_classes: 2
+
+Created dataloaders with 80/20 training/validaion datasets.
+models/test80by20/lraspp_0_val_0.25_f1_0.01.pt   - Precision: 0.040, Recall: 0.002, F1 Score: 0.004, IoU: 0.002, Accuracy: 0.940
+Created dataloaders with 80/20 training/validaion datasets.
+models/test80by20/lraspp_2_val_0.09_f1_0.47.pt   - Precision: 0.241, Recall: 0.176, F1 Score: 0.204, IoU: 0.113, Accuracy: 0.920
+Created dataloaders with 80/20 training/validaion datasets.
+models/test80by20/lraspp_7_val_0.08_f1_0.50.pt   - Precision: 0.432, Recall: 0.145, F1 Score: 0.218, IoU: 0.122, Accuracy: 0.940
+Created dataloaders with 80/20 training/validaion datasets.
+models/test80by20/lraspp_10_val_0.08_f1_0.45.pt  - Precision: 0.391, Recall: 0.105, F1 Score: 0.166, IoU: 0.091, Accuracy: 0.939
+Created dataloaders with 80/20 training/validaion datasets.
+models/test80by20/lraspp_14_val_0.07_f1_0.53.pt  - Precision: 0.381, Recall: 0.176, F1 Score: 0.241, IoU: 0.137, Accuracy: 0.936

@@ -28,7 +28,7 @@ def get_arguments():
     parser = argparse.ArgumentParser()
     
     #dataset
-    parser.add_argument("--data_dir", type=str, default='./Sen2Fire',
+    parser.add_argument("--data_dir", type=str, default='./../datasets/Sen2Fire',
                         help="dataset path.")
     parser.add_argument("--train_list", type=str, default='./dataset/train.txt',
                         help="training list file.")
