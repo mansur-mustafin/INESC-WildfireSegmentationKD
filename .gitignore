@@ -1,5 +1,5 @@
 # Main
-Sen2Fire_baseline/Sen2Fire/
+datasets/
 *.pt
 
 # Byte-compiled / optimized / DLL files
