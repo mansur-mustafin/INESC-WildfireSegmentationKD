@@ -268,8 +268,8 @@ class FirePredict():
         epsilon = 1e-14
 
         with torch.no_grad():
-            for images, labels in tqdm(test_dataloader):
-            # for images, labels in test_dataloader:
+            # for images, labels in tqdm(test_dataloader):
+            for images, labels in test_dataloader:
                 images, labels = images.to(device), labels.to(device)
                 outputs = self.model(images)['out']
 
@@ -297,20 +297,20 @@ def main(cfg: DictConfig):
     print(OmegaConf.to_yaml(cfg))
 
     #   CODE FOR TESTING
-    # folder_path = "models/80by20"
-    # for root, dirs, files in os.walk(folder_path):
-    #     files = sorted(files)
-    #     for file in files:
-    #         # Construct the full file path
-    #         if file.endswith('.pt'):
-    #             file_path = os.path.join(root, file)
-    #             fp = FirePredict(cfg, file_path)
-    #             fp.test()
+    folder_path = "models/80by20/2"
+    for root, dirs, files in os.walk(folder_path):
+        files = sorted(files)
+        for file in files:
+            # Construct the full file path
+            if file.endswith('.pt'):
+                file_path = os.path.join(root, file)
+                fp = FirePredict(cfg, file_path)
+                fp.test()
 
     
     # CODE FOR TRAINING
-    fp = FirePredict(cfg)
-    fp.train()
+    # fp = FirePredict(cfg)
+    # fp.train()
 
 
 if __name__ == "__main__":

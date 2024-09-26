@@ -82,31 +82,3 @@ Validation Loss: 0.079, Precision: 0.564, Recall: 0.474, F1 Score: 0.515, IoU: 0
 Epoch 20/20: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 197/197 [00:41<00:00,  4.78it/s]
 Epoch 20/20 Training loss: 0.0277
 Validation Loss: 0.075, Precision: 0.619, Recall: 0.524, F1 Score: 0.567, IoU: 0.396, Acc: 0.977
-(venv) mansur@g14:~/Desktop/NewSpace/tmp$ python3 test.py 
-Configuration: 
-model:
-  name: lraspp
-path:
-  data: ./../datasets/Sen2Fire/
-  scene1: ./../datasets/Sen2Fire/scene1
-  scene2: ./../datasets/Sen2Fire/scene2
-  scene3: ./../datasets/Sen2Fire/scene3
-  scene4: ./../datasets/Sen2Fire/scene4
-  output_model: models/
-const:
-  lr: 0.0001
-  num_epochs: 20
-  batch_size: 8
-  num_input_channels: 13
-  num_classes: 2
-
-Created dataloaders with 80/20 training/validaion datasets.
-models/test80by20/lraspp_0_val_0.25_f1_0.01.pt   - Precision: 0.040, Recall: 0.002, F1 Score: 0.004, IoU: 0.002, Accuracy: 0.940
-Created dataloaders with 80/20 training/validaion datasets.
-models/test80by20/lraspp_2_val_0.09_f1_0.47.pt   - Precision: 0.241, Recall: 0.176, F1 Score: 0.204, IoU: 0.113, Accuracy: 0.920
-Created dataloaders with 80/20 training/validaion datasets.
-models/test80by20/lraspp_7_val_0.08_f1_0.50.pt   - Precision: 0.432, Recall: 0.145, F1 Score: 0.218, IoU: 0.122, Accuracy: 0.940
-Created dataloaders with 80/20 training/validaion datasets.
-models/test80by20/lraspp_10_val_0.08_f1_0.45.pt  - Precision: 0.391, Recall: 0.105, F1 Score: 0.166, IoU: 0.091, Accuracy: 0.939
-Created dataloaders with 80/20 training/validaion datasets.
-models/test80by20/lraspp_14_val_0.07_f1_0.53.pt  - Precision: 0.381, Recall: 0.176, F1 Score: 0.241, IoU: 0.137, Accuracy: 0.936

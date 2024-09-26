@@ -1,0 +1,26 @@
+Configuration: 
+model:
+  name: fcn_resnet50
+path:
+  data: ./../datasets/Sen2Fire/
+  scene1: ./../datasets/Sen2Fire/scene1
+  scene2: ./../datasets/Sen2Fire/scene2
+  scene3: ./../datasets/Sen2Fire/scene3
+  scene4: ./../datasets/Sen2Fire/scene4
+  output_model: models/80by20/
+const:
+  lr: 0.0001
+  num_epochs: 30
+  batch_size: 8
+  num_input_channels: 13
+  num_classes: 2
+
+models/80by20/2/fcn_resnet50_0_val_0.16_f1_0.34.pt	 - Precision: 0.101, Recall: 0.096, F1 Score: 0.098, IoU: 0.052, Accuracy: 0.898
+models/80by20/2/fcn_resnet50_1_val_0.08_f1_0.52.pt	 - Precision: 0.372, Recall: 0.229, F1 Score: 0.284, IoU: 0.165, Accuracy: 0.933
+models/80by20/2/fcn_resnet50_4_val_0.08_f1_0.42.pt	 - Precision: 0.423, Recall: 0.156, F1 Score: 0.228, IoU: 0.129, Accuracy: 0.939
+models/80by20/2/fcn_resnet50_6_val_0.07_f1_0.50.pt	 - Precision: 0.394, Recall: 0.146, F1 Score: 0.213, IoU: 0.119, Accuracy: 0.938
+models/80by20/2/fcn_resnet50_9_val_0.07_f1_0.51.pt	 - Precision: 0.380, Recall: 0.164, F1 Score: 0.229, IoU: 0.129, Accuracy: 0.936
+models/80by20/2/fcn_resnet50_10_val_0.06_f1_0.49.pt	 - Precision: 0.391, Recall: 0.105, F1 Score: 0.165, IoU: 0.090, Accuracy: 0.939
+models/80by20/2/fcn_resnet50_14_val_0.06_f1_0.63.pt	 - Precision: 0.298, Recall: 0.179, F1 Score: 0.224, IoU: 0.126, Accuracy: 0.928
+models/80by20/2/fcn_resnet50_17_val_0.05_f1_0.69.pt	 - Precision: 0.294, Recall: 0.270, F1 Score: 0.282, IoU: 0.164, Accuracy: 0.920
+models/80by20/2/fcn_resnet50_19_val_0.05_f1_0.66.pt	 - Precision: 0.388, Recall: 0.185, F1 Score: 0.251, IoU: 0.143, Accuracy: 0.936
