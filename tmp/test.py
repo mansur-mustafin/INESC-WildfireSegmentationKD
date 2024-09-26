@@ -179,8 +179,8 @@ class FirePredict():
 
         train_data, val_dataset = random_split(combined_dataset, [train_len, val_len])
 
-        self.train_dataloader = DataLoader(train_data, batch_size = self.cfg.const.batch_size, shuffle=True, num_workers=4)
-        self.val_dataloader = DataLoader(val_dataset, batch_size = self.cfg.const.batch_size, shuffle=False, num_workers=4)
+        self.train_dataloader = DataLoader(train_data, batch_size = self.cfg.const.batch_size, shuffle=True, num_workers=4, drop_last=True)
+        self.val_dataloader = DataLoader(val_dataset, batch_size = self.cfg.const.batch_size, shuffle=False, num_workers=4, drop_last=True)
 
 
     def train(self):
@@ -255,7 +255,7 @@ class FirePredict():
 
     def test(self):
         test_dataset = Sen2FireDataset(self.cfg.path.scene4)
-        test_dataloader = DataLoader(test_dataset, batch_size=self.cfg.const.batch_size, shuffle=False, num_workers=4)
+        test_dataloader = DataLoader(test_dataset, batch_size=self.cfg.const.batch_size, shuffle=False, num_workers=4, drop_last=True)
         
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.model = self.model.to(device)
@@ -268,8 +268,8 @@ class FirePredict():
         epsilon = 1e-14
 
         with torch.no_grad():
-            # for images, labels in tqdm(test_dataloader):
-            for images, labels in test_dataloader:
+            for images, labels in tqdm(test_dataloader):
+            # for images, labels in test_dataloader:
                 images, labels = images.to(device), labels.to(device)
                 outputs = self.model(images)['out']
 
