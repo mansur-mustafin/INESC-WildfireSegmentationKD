@@ -1,8 +1,9 @@
 import os
+
 import numpy as np
 import torch
-
 from torch.utils.data import Dataset, DataLoader
+
 
 class Sen2FireDataset(Dataset):
 

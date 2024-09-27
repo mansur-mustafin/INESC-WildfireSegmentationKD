@@ -27,7 +27,7 @@ from torchvision.models.segmentation import (
 )
 
 from Sen2FireLoader import Sen2FireDataset
-from utils import eval_image, init_seeds
+from utils import *
 
 
 class FirePredict():
@@ -171,6 +171,7 @@ class FirePredict():
         train_data.add_data_dir(self.cfg.path.scene2)
         val_dataset = Sen2FireDataset(self.cfg.path.scene3)
 
+        # 80by20 code start
         combined_dataset = ConcatDataset([train_data, val_dataset])
 
         total_len = len(combined_dataset)
@@ -178,6 +179,7 @@ class FirePredict():
         val_len = total_len - train_len
 
         train_data, val_dataset = random_split(combined_dataset, [train_len, val_len])
+        # 80by20 code ends
 
         self.train_dataloader = DataLoader(train_data, batch_size = self.cfg.const.batch_size, shuffle=True, num_workers=4, drop_last=True)
         self.val_dataloader = DataLoader(val_dataset, batch_size = self.cfg.const.batch_size, shuffle=False, num_workers=4, drop_last=True)
@@ -297,17 +299,10 @@ def main(cfg: DictConfig):
     print(OmegaConf.to_yaml(cfg))
 
     #   CODE FOR TESTING
-    folder_path = "models/80by20/2"
-    for root, dirs, files in os.walk(folder_path):
-        files = sorted(files)
-        for file in files:
-            # Construct the full file path
-            if file.endswith('.pt'):
-                file_path = os.path.join(root, file)
-                fp = FirePredict(cfg, file_path)
-                fp.test()
+    for weight_path in get_model_paths(cfg.path.weights_test):
+        fp = FirePredict(cfg, weight_path)
+        fp.test()
 
-    
     # CODE FOR TRAINING
     # fp = FirePredict(cfg)
     # fp.train()

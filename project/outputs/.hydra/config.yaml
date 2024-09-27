@@ -1,5 +1,5 @@
 model:
-  name: fcn_resnet50
+  name: lraspp
 path:
   data: ./../datasets/Sen2Fire/
   scene1: ./../datasets/Sen2Fire/scene1
@@ -7,6 +7,7 @@ path:
   scene3: ./../datasets/Sen2Fire/scene3
   scene4: ./../datasets/Sen2Fire/scene4
   output_model: models/80by20/
+  weights_test: models/80by20/1
 const:
   lr: 0.0001
   num_epochs: 30

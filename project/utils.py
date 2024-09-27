@@ -1,6 +1,8 @@
+import os
+import random
+
 import numpy as np
 import torch
-import random
 
 def eval_image(predict,label,num_classes):
     """
@@ -33,3 +35,16 @@ def init_seeds(seed=1234):
     torch.manual_seed(seed) 
     torch.cuda.manual_seed(seed)
     torch.cuda.manual_seed_all(seed) 
+
+
+def get_model_paths(dir):
+    """
+    Returns all model paths ordered by epoch number
+    """
+    paths = [
+            os.path.join(root, file) 
+            for root, _, files in os.walk(dir) 
+            for file in files if file.endswith('.pt')
+        ]
+
+    return sorted(paths, key=lambda name: int(name.split('_')[1]))
