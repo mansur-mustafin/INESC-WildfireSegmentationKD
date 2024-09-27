@@ -39,7 +39,10 @@ class FirePredict():
         if path is not None:
             self._load_weights(path)
         self.criterion = nn.CrossEntropyLoss()
-        self.optimizer = optim.Adam(self.model.parameters(), lr=self.cfg.const.lr)
+        self.optimizer = optim.Adam(
+            self.model.parameters(), 
+            lr=self.cfg.const.lr,
+            weight_decay=self.cfg.const.weight_decay)
 
 
     def _setup_model(self):
@@ -172,13 +175,13 @@ class FirePredict():
         val_dataset = Sen2FireDataset(self.cfg.path.scene3)
 
         # 80by20 code start
-        combined_dataset = ConcatDataset([train_data, val_dataset])
+        # combined_dataset = ConcatDataset([train_data, val_dataset])
 
-        total_len = len(combined_dataset)
-        train_len = int(0.8 * total_len)
-        val_len = total_len - train_len
+        # total_len = len(combined_dataset)
+        # train_len = int(0.8 * total_len)
+        # val_len = total_len - train_len
 
-        train_data, val_dataset = random_split(combined_dataset, [train_len, val_len])
+        # train_data, val_dataset = random_split(combined_dataset, [train_len, val_len])
         # 80by20 code ends
 
         self.train_dataloader = DataLoader(train_data, batch_size = self.cfg.const.batch_size, shuffle=True, num_workers=4, drop_last=True)
@@ -196,8 +199,8 @@ class FirePredict():
         for epoch in range(num_epochs):
             self.model.train()
             running_loss = 0.0
-            for images, labels in tqdm(self.train_dataloader, desc=f"Epoch {epoch+1}/{num_epochs}"):
-            # for images, labels in self.train_dataloader:
+            # for images, labels in tqdm(self.train_dataloader, desc=f"Epoch {epoch+1}/{num_epochs}"):
+            for images, labels in self.train_dataloader:
                 images, labels = images.to(device), labels.to(device)
                 
                 self.optimizer.zero_grad()
@@ -298,14 +301,16 @@ def main(cfg: DictConfig):
     print("Configuration: ")
     print(OmegaConf.to_yaml(cfg))
 
-    #   CODE FOR TESTING
+    # CODE FOR TRAINING
+    fp = FirePredict(cfg)
+    fp.train()
+
+    print("\nTesting...\n")
+
+    # CODE FOR TESTING
     for weight_path in get_model_paths(cfg.path.weights_test):
         fp = FirePredict(cfg, weight_path)
         fp.test()
-
-    # CODE FOR TRAINING
-    # fp = FirePredict(cfg)
-    # fp.train()
 
 
 if __name__ == "__main__":
