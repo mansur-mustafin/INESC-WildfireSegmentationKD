@@ -1,0 +1,98 @@
+Configuration: 
+model:
+  name: deeplabv3_resnet50
+path:
+  data: ./../datasets/Sen2Fire/
+  scene1: ./../datasets/Sen2Fire/scene1
+  scene2: ./../datasets/Sen2Fire/scene2
+  scene3: ./../datasets/Sen2Fire/scene3
+  scene4: ./../datasets/Sen2Fire/scene4
+  output_model: models/l2reg/4/
+  weights_test: models/l2reg/4/
+const:
+  lr: 0.0001
+  num_epochs: 30
+  batch_size: 8
+  num_input_channels: 13
+  num_classes: 2
+  weight_decay: 0.0001
+
+Epoch 1/30 Training loss: 0.3094
+Validation Loss: 0.944, Precision: 0.093, Recall: 0.510, F1 Score: 0.157, IoU: 0.085, Acc: 0.805
+Saved model to: models/l2reg/4/deeplabv3_resnet50_0_val_0.94_f1_0.16.pt
+Epoch 2/30 Training loss: 0.1297
+Validation Loss: 0.185, Precision: 0.273, Recall: 0.530, F1 Score: 0.360, IoU: 0.220, Acc: 0.933
+Saved model to: models/l2reg/4/deeplabv3_resnet50_1_val_0.19_f1_0.36.pt
+Epoch 3/30 Training loss: 0.1012
+Validation Loss: 0.140, Precision: 0.332, Recall: 0.516, F1 Score: 0.404, IoU: 0.253, Acc: 0.946
+Saved model to: models/l2reg/4/deeplabv3_resnet50_2_val_0.14_f1_0.40.pt
+Epoch 4/30 Training loss: 0.0925
+Validation Loss: 0.130, Precision: 0.525, Recall: 0.359, F1 Score: 0.426, IoU: 0.271, Acc: 0.966
+Saved model to: models/l2reg/4/deeplabv3_resnet50_3_val_0.13_f1_0.43.pt
+Epoch 5/30 Training loss: 0.0829
+Validation Loss: 0.170, Precision: 0.436, Recall: 0.333, F1 Score: 0.377, IoU: 0.233, Acc: 0.961
+Epoch 6/30 Training loss: 0.0794
+Validation Loss: 0.123, Precision: 0.469, Recall: 0.410, F1 Score: 0.438, IoU: 0.280, Acc: 0.963
+Saved model to: models/l2reg/4/deeplabv3_resnet50_5_val_0.12_f1_0.44.pt
+Epoch 7/30 Training loss: 0.0789
+Validation Loss: 0.122, Precision: 0.384, Recall: 0.520, F1 Score: 0.442, IoU: 0.284, Acc: 0.953
+Saved model to: models/l2reg/4/deeplabv3_resnet50_6_val_0.12_f1_0.44.pt
+Epoch 8/30 Training loss: 0.0801
+Validation Loss: 0.114, Precision: 0.536, Recall: 0.364, F1 Score: 0.434, IoU: 0.277, Acc: 0.966
+Saved model to: models/l2reg/4/deeplabv3_resnet50_7_val_0.11_f1_0.43.pt
+Epoch 9/30 Training loss: 0.0706
+Validation Loss: 0.098, Precision: 0.625, Recall: 0.034, F1 Score: 0.065, IoU: 0.033, Acc: 0.965
+Saved model to: models/l2reg/4/deeplabv3_resnet50_8_val_0.10_f1_0.06.pt
+Epoch 10/30 Training loss: 0.0784
+Validation Loss: 0.118, Precision: 0.624, Recall: 0.157, F1 Score: 0.251, IoU: 0.144, Acc: 0.967
+Epoch 11/30 Training loss: 0.0743
+Validation Loss: 0.099, Precision: 0.580, Recall: 0.307, F1 Score: 0.401, IoU: 0.251, Acc: 0.967
+Epoch 12/30 Training loss: 0.0693
+Validation Loss: 0.256, Precision: 0.148, Recall: 0.669, F1 Score: 0.242, IoU: 0.138, Acc: 0.851
+Epoch 13/30 Training loss: 0.0680
+Validation Loss: 0.123, Precision: 0.398, Recall: 0.409, F1 Score: 0.403, IoU: 0.252, Acc: 0.957
+Epoch 14/30 Training loss: 0.0619
+Validation Loss: 0.163, Precision: 0.218, Recall: 0.490, F1 Score: 0.302, IoU: 0.178, Acc: 0.920
+Epoch 15/30 Training loss: 0.0680
+Validation Loss: 0.126, Precision: 0.591, Recall: 0.247, F1 Score: 0.348, IoU: 0.211, Acc: 0.967
+Epoch 16/30 Training loss: 0.0690
+Validation Loss: 0.107, Precision: 0.445, Recall: 0.466, F1 Score: 0.455, IoU: 0.295, Acc: 0.960
+Epoch 17/30 Training loss: 0.0584
+Validation Loss: 0.203, Precision: 0.164, Recall: 0.444, F1 Score: 0.240, IoU: 0.136, Acc: 0.900
+Epoch 18/30 Training loss: 0.0541
+Validation Loss: 0.119, Precision: 0.403, Recall: 0.445, F1 Score: 0.423, IoU: 0.268, Acc: 0.957
+Epoch 19/30 Training loss: 0.0569
+Validation Loss: 0.159, Precision: 0.401, Recall: 0.422, F1 Score: 0.412, IoU: 0.259, Acc: 0.957
+Epoch 20/30 Training loss: 0.0551
+Validation Loss: 0.130, Precision: 0.319, Recall: 0.482, F1 Score: 0.384, IoU: 0.237, Acc: 0.945
+Epoch 21/30 Training loss: 0.0578
+Validation Loss: 0.121, Precision: 0.527, Recall: 0.174, F1 Score: 0.262, IoU: 0.151, Acc: 0.965
+Epoch 22/30 Training loss: 0.0526
+Validation Loss: 0.132, Precision: 0.640, Recall: 0.144, F1 Score: 0.236, IoU: 0.134, Acc: 0.967
+Epoch 23/30 Training loss: 0.0460
+Validation Loss: 0.204, Precision: 0.178, Recall: 0.482, F1 Score: 0.260, IoU: 0.150, Acc: 0.903
+Epoch 24/30 Training loss: 0.0544
+Validation Loss: 0.112, Precision: 0.520, Recall: 0.313, F1 Score: 0.391, IoU: 0.243, Acc: 0.965
+Epoch 25/30 Training loss: 0.0555
+Validation Loss: 0.118, Precision: 0.459, Recall: 0.326, F1 Score: 0.381, IoU: 0.236, Acc: 0.962
+Epoch 26/30 Training loss: 0.0544
+Validation Loss: 0.108, Precision: 0.549, Recall: 0.220, F1 Score: 0.314, IoU: 0.186, Acc: 0.966
+Epoch 27/30 Training loss: 0.0448
+Validation Loss: 0.112, Precision: 0.694, Recall: 0.118, F1 Score: 0.202, IoU: 0.113, Acc: 0.967
+Epoch 28/30 Training loss: 0.0443
+Validation Loss: 0.107, Precision: 0.662, Recall: 0.119, F1 Score: 0.202, IoU: 0.113, Acc: 0.967
+Epoch 29/30 Training loss: 0.0406
+Validation Loss: 0.251, Precision: 0.171, Recall: 0.672, F1 Score: 0.272, IoU: 0.158, Acc: 0.872
+Epoch 30/30 Training loss: 0.0468
+Validation Loss: 0.109, Precision: 0.476, Recall: 0.305, F1 Score: 0.372, IoU: 0.228, Acc: 0.963
+
+Testing...
+
+models/l2reg/4/deeplabv3_resnet50_0_val_0.94_f1_0.16.pt	 - Precision: 0.122, Recall: 0.115, F1 Score: 0.119, IoU: 0.063, Accuracy: 0.901
+models/l2reg/4/deeplabv3_resnet50_1_val_0.19_f1_0.36.pt	 - Precision: 0.170, Recall: 0.350, F1 Score: 0.229, IoU: 0.129, Accuracy: 0.864
+models/l2reg/4/deeplabv3_resnet50_2_val_0.14_f1_0.40.pt	 - Precision: 0.330, Recall: 0.293, F1 Score: 0.310, IoU: 0.184, Accuracy: 0.925
+models/l2reg/4/deeplabv3_resnet50_3_val_0.13_f1_0.43.pt	 - Precision: 0.391, Recall: 0.200, F1 Score: 0.265, IoU: 0.153, Accuracy: 0.936
+models/l2reg/4/deeplabv3_resnet50_5_val_0.12_f1_0.44.pt	 - Precision: 0.375, Recall: 0.213, F1 Score: 0.271, IoU: 0.157, Accuracy: 0.934
+models/l2reg/4/deeplabv3_resnet50_6_val_0.12_f1_0.44.pt	 - Precision: 0.183, Recall: 0.223, F1 Score: 0.201, IoU: 0.112, Accuracy: 0.898
+models/l2reg/4/deeplabv3_resnet50_7_val_0.11_f1_0.43.pt	 - Precision: 0.397, Recall: 0.165, F1 Score: 0.233, IoU: 0.132, Accuracy: 0.937
+models/l2reg/4/deeplabv3_resnet50_8_val_0.10_f1_0.06.pt	 - Precision: 0.490, Recall: 0.017, F1 Score: 0.032, IoU: 0.016, Accuracy: 0.942

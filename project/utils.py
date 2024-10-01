@@ -37,7 +37,7 @@ def init_seeds(seed=1234):
     torch.cuda.manual_seed_all(seed) 
 
 
-def get_model_paths(dir):
+def get_model_paths(dir, model_name):
     """
     Returns all model paths ordered by epoch number
     """
@@ -46,5 +46,5 @@ def get_model_paths(dir):
             for root, _, files in os.walk(dir) 
             for file in files if file.endswith('.pt')
         ]
-
-    return sorted(paths, key=lambda name: int(name.split('_')[1]))
+    
+    return sorted(paths, key=lambda name: int(os.path.basename(name)[len(model_name):].split('_')[1]))

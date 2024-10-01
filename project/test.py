@@ -170,9 +170,9 @@ class FirePredict():
 
 
     def _create_data_loaders(self):
-        train_data = Sen2FireDataset(self.cfg.path.scene1)
+        train_data = Sen2FireDataset(self.cfg.path.scene1, augment=True)
         train_data.add_data_dir(self.cfg.path.scene2)
-        val_dataset = Sen2FireDataset(self.cfg.path.scene3)
+        val_dataset = Sen2FireDataset(self.cfg.path.scene3, augment=False)
 
         # 80by20 code start
         # combined_dataset = ConcatDataset([train_data, val_dataset])
@@ -199,8 +199,8 @@ class FirePredict():
         for epoch in range(num_epochs):
             self.model.train()
             running_loss = 0.0
-            # for images, labels in tqdm(self.train_dataloader, desc=f"Epoch {epoch+1}/{num_epochs}"):
-            for images, labels in self.train_dataloader:
+            for images, labels in tqdm(self.train_dataloader, desc=f"Epoch {epoch+1}/{num_epochs}"):
+            # for images, labels in self.train_dataloader:
                 images, labels = images.to(device), labels.to(device)
                 
                 self.optimizer.zero_grad()
@@ -298,17 +298,17 @@ class FirePredict():
 
 @hydra.main(config_path="", config_name="config", version_base=None)
 def main(cfg: DictConfig):
-    print("Configuration: ")
-    print(OmegaConf.to_yaml(cfg))
+    # print("Configuration: ")
+    # print(OmegaConf.to_yaml(cfg))
 
-    # CODE FOR TRAINING
-    fp = FirePredict(cfg)
-    fp.train()
+    # # CODE FOR TRAINING
+    # fp = FirePredict(cfg)
+    # fp.train()
 
-    print("\nTesting...\n")
+    # print("\nTesting...\n")
 
     # CODE FOR TESTING
-    for weight_path in get_model_paths(cfg.path.weights_test):
+    for weight_path in get_model_paths(cfg.path.weights_test, cfg.model.name):
         fp = FirePredict(cfg, weight_path)
         fp.test()
 

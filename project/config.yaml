@@ -22,8 +22,8 @@ path:
   scene3: "./../datasets/Sen2Fire/scene3"
   scene4: "./../datasets/Sen2Fire/scene4"
 
-  output_model: "models/l2reg/1/"
-  weights_test: "models/l2reg/1/"           # folder which models to test
+  output_model: "models/data_augment/1/"
+  weights_test: "models/data_augment/1/"           # folder which models to test
 
 const:
   lr: 0.0001
