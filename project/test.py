@@ -39,7 +39,10 @@ class FirePredict():
         if path is not None:
             self._load_weights(path)
         self.criterion = nn.CrossEntropyLoss()
-        self.optimizer = optim.Adam(self.model.parameters(), lr=self.cfg.const.lr)
+        self.optimizer = optim.Adam(
+            self.model.parameters(), 
+            lr=self.cfg.const.lr,
+            weight_decay=self.cfg.const.weight_decay)
 
 
     def _setup_model(self):
@@ -167,9 +170,9 @@ class FirePredict():
 
 
     def _create_data_loaders(self):
-        train_data = Sen2FireDataset(self.cfg.path.scene1)
+        train_data = Sen2FireDataset(self.cfg.path.scene1, augment=True)
         train_data.add_data_dir(self.cfg.path.scene2)
-        val_dataset = Sen2FireDataset(self.cfg.path.scene3)
+        val_dataset = Sen2FireDataset(self.cfg.path.scene3, augment=False)
 
         # 80by20 code start
         combined_dataset = ConcatDataset([train_data, val_dataset])
@@ -298,14 +301,16 @@ def main(cfg: DictConfig):
     print("Configuration: ")
     print(OmegaConf.to_yaml(cfg))
 
-    #   CODE FOR TESTING
-    for weight_path in get_model_paths(cfg.path.weights_test):
+    # # CODE FOR TRAINING
+    fp = FirePredict(cfg)
+    fp.train()
+
+    print("\nTesting...\n")
+
+    # CODE FOR TESTING
+    for weight_path in get_model_paths(cfg.path.weights_test, cfg.model.name):
         fp = FirePredict(cfg, weight_path)
         fp.test()
-
-    # CODE FOR TRAINING
-    # fp = FirePredict(cfg)
-    # fp.train()
 
 
 if __name__ == "__main__":

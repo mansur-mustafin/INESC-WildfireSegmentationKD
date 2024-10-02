@@ -22,12 +22,13 @@ path:
   scene3: "./../datasets/Sen2Fire/scene3"
   scene4: "./../datasets/Sen2Fire/scene4"
 
-  output_model: "models/80by20/"
-  weights_test: "models/80by20/1"           # folder which models to test
+  output_model: "models/l2reg_with_80by20/1/"
+  weights_test: "models/l2reg_with_80by20/1/"           # folder which models to test
 
 const:
   lr: 0.0001
   num_epochs: 30
   batch_size: 8
-  num_input_channels: 13
-  num_classes: 2
+  num_input_channels: 13                    
+  num_classes: 2                            # 0 - no fire, 1 - fire 
+  weight_decay: 0.0001                      # L2 regularization.

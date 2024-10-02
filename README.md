@@ -49,3 +49,7 @@ The folder `project/models/` contains all models and records.
 
 * `normal` contains the default models from PyTorch.
 * `80by20` contains results using 80% for training and 20% for validation.
+
+
+## TODO
+* 80/20 + aug - l2
