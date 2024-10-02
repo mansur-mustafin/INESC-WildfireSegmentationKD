@@ -1,7 +1,7 @@
 numpy==2.0.1
 torch==2.3.1
 tqdm==4.66.4
-matplotlib
+matplotlib==3.9.2
 hydra-core==1.3.2
-torchvision
-scikit-learn
+torchvision==0.18.1
+scikit-learn==1.5.1
