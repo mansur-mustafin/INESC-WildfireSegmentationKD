@@ -1,4 +1,5 @@
 import os
+import random
 
 import numpy as np
 import albumentations as A
@@ -10,6 +11,9 @@ class Sen2FireDataset(Dataset):
 
     def __init__(self, data_dir, augment=False):
         self.file_list = [os.path.join(data_dir, filename) for filename in os.listdir(data_dir) if filename.endswith('.npz')]
+        self.seed = 1234
+
+        random.seed(self.seed)
 
         if augment:
             self.transform = A.Compose([
