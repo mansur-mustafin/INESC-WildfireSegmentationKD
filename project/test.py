@@ -193,14 +193,15 @@ class FirePredict():
         self.model = self.model.to(device)
 
         best_val_loss = float('inf')
+        best_f1 = 0
         epsilon = 1e-14
         num_epochs = self.cfg.const.num_epochs
         
         for epoch in range(num_epochs):
             self.model.train()
             running_loss = 0.0
-            for images, labels in tqdm(self.train_dataloader, desc=f"Epoch {epoch+1}/{num_epochs}"):
-            # for images, labels in self.train_dataloader:
+            # for images, labels in tqdm(self.train_dataloader, desc=f"Epoch {epoch+1}/{num_epochs}"):
+            for images, labels in self.train_dataloader:
                 images, labels = images.to(device), labels.to(device)
                 
                 self.optimizer.zero_grad()
@@ -251,8 +252,18 @@ class FirePredict():
 
             print(f'Validation Loss: {val_loss:.3f}, Precision: {precision[0]:.3f}, Recall: {recall[0]:.3f}, F1 Score: {f1[0]:.3f}, IoU: {iou[0]:.3f}, Acc: {accuracy[0]:.3f}')
 
+
+            save_model = False
+
             if val_loss < best_val_loss:
                 best_val_loss = val_loss
+                save_model = True
+
+            if f1[0] > best_f1:
+                best_f1 = f1[0]
+                save_model = True
+
+            if save_model:
                 path = self.cfg.path.output_model + f"{self.cfg.model.name}_{epoch}_val_{val_loss:.2f}_f1_{f1[0]:.2f}.pt"
                 torch.save(self.model.state_dict(), path)
                 print('Saved model to: ' + path)
@@ -301,7 +312,7 @@ def main(cfg: DictConfig):
     print("Configuration: ")
     print(OmegaConf.to_yaml(cfg))
 
-    # # CODE FOR TRAINING
+    # CODE FOR TRAINING
     fp = FirePredict(cfg)
     fp.train()
 
