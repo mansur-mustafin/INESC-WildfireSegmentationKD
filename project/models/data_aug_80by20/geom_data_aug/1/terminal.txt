@@ -1,0 +1,317 @@
+(venv) mansur@g14:~/Desktop/NewSpace/project$ python3 test.py 
+Configuration: 
+model:
+  name: lraspp
+path:
+  data: ./../datasets/Sen2Fire/
+  scene1: ./../datasets/Sen2Fire/scene1
+  scene2: ./../datasets/Sen2Fire/scene2
+  scene3: ./../datasets/Sen2Fire/scene3
+  scene4: ./../datasets/Sen2Fire/scene4
+  output_model: models/data_aug_80by20/another_data_aug/2/
+  weights_test: models/data_aug_80by20/another_data_aug/2/
+const:
+  lr: 0.0001
+  num_epochs: 100
+  batch_size: 8
+  num_input_channels: 13
+  num_classes: 2
+  weight_decay: 0
+
+Epoch 1/100 Training Loss: 0.2107, Precision: 0.025, Recall: 0.027, F1 Score: 0.026, IoU: 0.013, Acc: 0.944
+Validation Loss: 0.171, Precision: 0.027, Recall: 0.000, F1 Score: 0.001, IoU: 0.000, Acc: 0.971
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_0_val_0.17_f1_0.00_f1_train_0.03.pt
+Epoch 2/100 Training Loss: 0.1052, Precision: 0.533, Recall: 0.062, F1 Score: 0.112, IoU: 0.059, Acc: 0.972
+Validation Loss: 0.215, Precision: 0.077, Recall: 0.078, F1 Score: 0.078, IoU: 0.041, Acc: 0.948
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_1_val_0.21_f1_0.08_f1_train_0.11.pt
+Epoch 3/100 Training Loss: 0.0897, Precision: 0.577, Recall: 0.166, F1 Score: 0.258, IoU: 0.148, Acc: 0.973
+Validation Loss: 0.086, Precision: 0.550, Recall: 0.311, F1 Score: 0.398, IoU: 0.248, Acc: 0.973
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_2_val_0.09_f1_0.40_f1_train_0.26.pt
+Epoch 4/100 Training Loss: 0.0799, Precision: 0.590, Recall: 0.238, F1 Score: 0.339, IoU: 0.204, Acc: 0.974
+Validation Loss: 0.092, Precision: 0.425, Recall: 0.504, F1 Score: 0.461, IoU: 0.299, Acc: 0.966
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_3_val_0.09_f1_0.46_f1_train_0.34.pt
+Epoch 5/100 Training Loss: 0.0757, Precision: 0.577, Recall: 0.286, F1 Score: 0.383, IoU: 0.237, Acc: 0.975
+Validation Loss: 0.086, Precision: 0.427, Recall: 0.481, F1 Score: 0.452, IoU: 0.292, Acc: 0.967
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_4_val_0.09_f1_0.45_f1_train_0.38.pt
+Epoch 6/100 Training Loss: 0.0747, Precision: 0.638, Recall: 0.318, F1 Score: 0.425, IoU: 0.270, Acc: 0.976
+Validation Loss: 0.085, Precision: 0.404, Recall: 0.580, F1 Score: 0.476, IoU: 0.313, Acc: 0.964
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_5_val_0.09_f1_0.48_f1_train_0.42.pt
+Epoch 7/100 Training Loss: 0.0725, Precision: 0.653, Recall: 0.379, F1 Score: 0.480, IoU: 0.316, Acc: 0.977
+Validation Loss: 0.078, Precision: 0.443, Recall: 0.475, F1 Score: 0.458, IoU: 0.297, Acc: 0.968
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_6_val_0.08_f1_0.46_f1_train_0.48.pt
+Epoch 8/100 Training Loss: 0.0690, Precision: 0.671, Recall: 0.375, F1 Score: 0.481, IoU: 0.317, Acc: 0.978
+Validation Loss: 0.119, Precision: 0.264, Recall: 0.680, F1 Score: 0.380, IoU: 0.235, Acc: 0.937
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_7_val_0.12_f1_0.38_f1_train_0.48.pt
+Epoch 9/100 Training Loss: 0.0650, Precision: 0.687, Recall: 0.425, F1 Score: 0.526, IoU: 0.356, Acc: 0.979
+Validation Loss: 0.092, Precision: 0.376, Recall: 0.553, F1 Score: 0.448, IoU: 0.289, Acc: 0.961
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_8_val_0.09_f1_0.45_f1_train_0.53.pt
+Epoch 10/100 Training Loss: 0.0642, Precision: 0.673, Recall: 0.416, F1 Score: 0.514, IoU: 0.346, Acc: 0.978
+Validation Loss: 0.078, Precision: 0.477, Recall: 0.492, F1 Score: 0.484, IoU: 0.320, Acc: 0.970
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_9_val_0.08_f1_0.48_f1_train_0.51.pt
+Epoch 11/100 Training Loss: 0.0605, Precision: 0.687, Recall: 0.473, F1 Score: 0.560, IoU: 0.389, Acc: 0.980
+Validation Loss: 0.066, Precision: 0.606, Recall: 0.488, F1 Score: 0.541, IoU: 0.370, Acc: 0.976
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_10_val_0.07_f1_0.54_f1_train_0.56.pt
+Epoch 12/100 Training Loss: 0.0592, Precision: 0.728, Recall: 0.470, F1 Score: 0.571, IoU: 0.400, Acc: 0.981
+Validation Loss: 0.123, Precision: 0.346, Recall: 0.785, F1 Score: 0.480, IoU: 0.316, Acc: 0.952
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_11_val_0.12_f1_0.48_f1_train_0.57.pt
+Epoch 13/100 Training Loss: 0.0586, Precision: 0.678, Recall: 0.459, F1 Score: 0.548, IoU: 0.377, Acc: 0.979
+Validation Loss: 0.130, Precision: 0.244, Recall: 0.625, F1 Score: 0.351, IoU: 0.213, Acc: 0.935
+Epoch 14/100 Training Loss: 0.0626, Precision: 0.656, Recall: 0.440, F1 Score: 0.527, IoU: 0.358, Acc: 0.978
+Validation Loss: 0.078, Precision: 0.467, Recall: 0.622, F1 Score: 0.533, IoU: 0.364, Acc: 0.969
+Epoch 15/100 Training Loss: 0.0580, Precision: 0.678, Recall: 0.484, F1 Score: 0.565, IoU: 0.393, Acc: 0.979
+Validation Loss: 0.066, Precision: 0.618, Recall: 0.497, F1 Score: 0.551, IoU: 0.380, Acc: 0.977
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_14_val_0.07_f1_0.55_f1_train_0.56.pt
+Epoch 16/100 Training Loss: 0.0550, Precision: 0.720, Recall: 0.502, F1 Score: 0.592, IoU: 0.420, Acc: 0.981
+Validation Loss: 0.085, Precision: 0.368, Recall: 0.514, F1 Score: 0.429, IoU: 0.273, Acc: 0.962
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_15_val_0.09_f1_0.43_f1_train_0.59.pt
+Epoch 17/100 Training Loss: 0.0504, Precision: 0.747, Recall: 0.557, F1 Score: 0.638, IoU: 0.468, Acc: 0.983
+Validation Loss: 0.071, Precision: 0.532, Recall: 0.430, F1 Score: 0.476, IoU: 0.312, Acc: 0.973
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_16_val_0.07_f1_0.48_f1_train_0.64.pt
+Epoch 18/100 Training Loss: 0.0465, Precision: 0.751, Recall: 0.574, F1 Score: 0.651, IoU: 0.483, Acc: 0.983
+Validation Loss: 0.123, Precision: 0.282, Recall: 0.678, F1 Score: 0.398, IoU: 0.248, Acc: 0.943
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_17_val_0.12_f1_0.40_f1_train_0.65.pt
+Epoch 19/100 Training Loss: 0.0543, Precision: 0.708, Recall: 0.518, F1 Score: 0.598, IoU: 0.427, Acc: 0.981
+Validation Loss: 0.070, Precision: 0.599, Recall: 0.483, F1 Score: 0.535, IoU: 0.365, Acc: 0.976
+Epoch 20/100 Training Loss: 0.0500, Precision: 0.770, Recall: 0.549, F1 Score: 0.641, IoU: 0.472, Acc: 0.983
+Validation Loss: 0.073, Precision: 0.533, Recall: 0.526, F1 Score: 0.530, IoU: 0.360, Acc: 0.974
+Epoch 21/100 Training Loss: 0.0521, Precision: 0.739, Recall: 0.519, F1 Score: 0.610, IoU: 0.439, Acc: 0.982
+Validation Loss: 0.064, Precision: 0.584, Recall: 0.551, F1 Score: 0.567, IoU: 0.396, Acc: 0.976
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_20_val_0.06_f1_0.57_f1_train_0.61.pt
+Epoch 22/100 Training Loss: 0.0478, Precision: 0.773, Recall: 0.597, F1 Score: 0.674, IoU: 0.508, Acc: 0.984
+Validation Loss: 0.070, Precision: 0.557, Recall: 0.518, F1 Score: 0.537, IoU: 0.367, Acc: 0.975
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_21_val_0.07_f1_0.54_f1_train_0.67.pt
+Epoch 23/100 Training Loss: 0.0454, Precision: 0.792, Recall: 0.571, F1 Score: 0.664, IoU: 0.497, Acc: 0.984
+Validation Loss: 0.067, Precision: 0.646, Recall: 0.526, F1 Score: 0.580, IoU: 0.408, Acc: 0.978
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_22_val_0.07_f1_0.58_f1_train_0.66.pt
+Epoch 24/100 Training Loss: 0.0460, Precision: 0.793, Recall: 0.587, F1 Score: 0.675, IoU: 0.509, Acc: 0.984
+Validation Loss: 0.085, Precision: 0.407, Recall: 0.655, F1 Score: 0.502, IoU: 0.335, Acc: 0.963
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_23_val_0.08_f1_0.50_f1_train_0.67.pt
+Epoch 25/100 Training Loss: 0.0425, Precision: 0.773, Recall: 0.613, F1 Score: 0.684, IoU: 0.519, Acc: 0.984
+Validation Loss: 0.071, Precision: 0.516, Recall: 0.508, F1 Score: 0.512, IoU: 0.344, Acc: 0.973
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_24_val_0.07_f1_0.51_f1_train_0.68.pt
+Epoch 26/100 Training Loss: 0.0479, Precision: 0.757, Recall: 0.550, F1 Score: 0.637, IoU: 0.468, Acc: 0.983
+Validation Loss: 0.079, Precision: 0.465, Recall: 0.595, F1 Score: 0.522, IoU: 0.353, Acc: 0.969
+Epoch 27/100 Training Loss: 0.0425, Precision: 0.773, Recall: 0.650, F1 Score: 0.706, IoU: 0.546, Acc: 0.985
+Validation Loss: 0.077, Precision: 0.470, Recall: 0.596, F1 Score: 0.526, IoU: 0.357, Acc: 0.969
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_26_val_0.08_f1_0.53_f1_train_0.71.pt
+Epoch 28/100 Training Loss: 0.0402, Precision: 0.779, Recall: 0.673, F1 Score: 0.722, IoU: 0.565, Acc: 0.986
+Validation Loss: 0.068, Precision: 0.549, Recall: 0.421, F1 Score: 0.477, IoU: 0.313, Acc: 0.974
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_27_val_0.07_f1_0.48_f1_train_0.72.pt
+Epoch 29/100 Training Loss: 0.0416, Precision: 0.780, Recall: 0.621, F1 Score: 0.692, IoU: 0.529, Acc: 0.985
+Validation Loss: 0.066, Precision: 0.589, Recall: 0.498, F1 Score: 0.540, IoU: 0.370, Acc: 0.976
+Epoch 30/100 Training Loss: 0.0381, Precision: 0.790, Recall: 0.666, F1 Score: 0.723, IoU: 0.566, Acc: 0.986
+Validation Loss: 0.074, Precision: 0.493, Recall: 0.703, F1 Score: 0.579, IoU: 0.408, Acc: 0.971
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_29_val_0.07_f1_0.58_f1_train_0.72.pt
+Epoch 31/100 Training Loss: 0.0338, Precision: 0.822, Recall: 0.712, F1 Score: 0.763, IoU: 0.617, Acc: 0.988
+Validation Loss: 0.069, Precision: 0.543, Recall: 0.658, F1 Score: 0.595, IoU: 0.423, Acc: 0.975
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_30_val_0.07_f1_0.59_f1_train_0.76.pt
+Epoch 32/100 Training Loss: 0.0356, Precision: 0.804, Recall: 0.700, F1 Score: 0.748, IoU: 0.598, Acc: 0.987
+Validation Loss: 0.077, Precision: 0.577, Recall: 0.659, F1 Score: 0.615, IoU: 0.444, Acc: 0.977
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_31_val_0.08_f1_0.61_f1_train_0.75.pt
+Epoch 33/100 Training Loss: 0.0352, Precision: 0.787, Recall: 0.685, F1 Score: 0.732, IoU: 0.577, Acc: 0.986
+Validation Loss: 0.067, Precision: 0.589, Recall: 0.600, F1 Score: 0.595, IoU: 0.423, Acc: 0.977
+Epoch 34/100 Training Loss: 0.0336, Precision: 0.808, Recall: 0.710, F1 Score: 0.756, IoU: 0.608, Acc: 0.987
+Validation Loss: 0.084, Precision: 0.506, Recall: 0.560, F1 Score: 0.532, IoU: 0.362, Acc: 0.972
+Epoch 35/100 Training Loss: 0.0335, Precision: 0.809, Recall: 0.719, F1 Score: 0.762, IoU: 0.615, Acc: 0.988
+Validation Loss: 0.089, Precision: 0.495, Recall: 0.449, F1 Score: 0.471, IoU: 0.308, Acc: 0.971
+Epoch 36/100 Training Loss: 0.0336, Precision: 0.820, Recall: 0.697, F1 Score: 0.753, IoU: 0.604, Acc: 0.987
+Validation Loss: 0.077, Precision: 0.472, Recall: 0.593, F1 Score: 0.525, IoU: 0.356, Acc: 0.970
+Epoch 37/100 Training Loss: 0.0357, Precision: 0.787, Recall: 0.696, F1 Score: 0.739, IoU: 0.586, Acc: 0.986
+Validation Loss: 0.075, Precision: 0.491, Recall: 0.589, F1 Score: 0.536, IoU: 0.366, Acc: 0.971
+Epoch 38/100 Training Loss: 0.0326, Precision: 0.808, Recall: 0.746, F1 Score: 0.776, IoU: 0.634, Acc: 0.988
+Validation Loss: 0.075, Precision: 0.536, Recall: 0.537, F1 Score: 0.536, IoU: 0.366, Acc: 0.974
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_37_val_0.07_f1_0.54_f1_train_0.78.pt
+Epoch 39/100 Training Loss: 0.0317, Precision: 0.820, Recall: 0.732, F1 Score: 0.774, IoU: 0.631, Acc: 0.988
+Validation Loss: 0.074, Precision: 0.528, Recall: 0.605, F1 Score: 0.564, IoU: 0.393, Acc: 0.974
+Epoch 40/100 Training Loss: 0.0297, Precision: 0.811, Recall: 0.749, F1 Score: 0.779, IoU: 0.637, Acc: 0.988
+Validation Loss: 0.067, Precision: 0.527, Recall: 0.627, F1 Score: 0.572, IoU: 0.401, Acc: 0.973
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_39_val_0.07_f1_0.57_f1_train_0.78.pt
+Epoch 41/100 Training Loss: 0.0309, Precision: 0.805, Recall: 0.749, F1 Score: 0.776, IoU: 0.634, Acc: 0.988
+Validation Loss: 0.074, Precision: 0.612, Recall: 0.554, F1 Score: 0.582, IoU: 0.410, Acc: 0.977
+Epoch 42/100 Training Loss: 0.0306, Precision: 0.819, Recall: 0.752, F1 Score: 0.784, IoU: 0.645, Acc: 0.988
+Validation Loss: 0.078, Precision: 0.566, Recall: 0.603, F1 Score: 0.584, IoU: 0.412, Acc: 0.976
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_41_val_0.08_f1_0.58_f1_train_0.78.pt
+Epoch 43/100 Training Loss: 0.0315, Precision: 0.808, Recall: 0.755, F1 Score: 0.781, IoU: 0.640, Acc: 0.988
+Validation Loss: 0.072, Precision: 0.565, Recall: 0.559, F1 Score: 0.562, IoU: 0.390, Acc: 0.975
+Epoch 44/100 Training Loss: 0.0347, Precision: 0.786, Recall: 0.726, F1 Score: 0.755, IoU: 0.606, Acc: 0.987
+Validation Loss: 0.065, Precision: 0.572, Recall: 0.608, F1 Score: 0.590, IoU: 0.418, Acc: 0.976
+Epoch 45/100 Training Loss: 0.0318, Precision: 0.822, Recall: 0.740, F1 Score: 0.779, IoU: 0.637, Acc: 0.988
+Validation Loss: 0.070, Precision: 0.534, Recall: 0.575, F1 Score: 0.554, IoU: 0.383, Acc: 0.974
+Epoch 46/100 Training Loss: 0.0272, Precision: 0.843, Recall: 0.767, F1 Score: 0.803, IoU: 0.671, Acc: 0.990
+Validation Loss: 0.078, Precision: 0.532, Recall: 0.591, F1 Score: 0.560, IoU: 0.389, Acc: 0.974
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_45_val_0.08_f1_0.56_f1_train_0.80.pt
+Epoch 47/100 Training Loss: 0.0276, Precision: 0.826, Recall: 0.779, F1 Score: 0.801, IoU: 0.669, Acc: 0.989
+Validation Loss: 0.069, Precision: 0.640, Recall: 0.578, F1 Score: 0.608, IoU: 0.436, Acc: 0.978
+Epoch 48/100 Training Loss: 0.0293, Precision: 0.822, Recall: 0.748, F1 Score: 0.783, IoU: 0.644, Acc: 0.989
+Validation Loss: 0.067, Precision: 0.632, Recall: 0.537, F1 Score: 0.581, IoU: 0.409, Acc: 0.978
+Epoch 49/100 Training Loss: 0.0247, Precision: 0.847, Recall: 0.804, F1 Score: 0.825, IoU: 0.702, Acc: 0.991
+Validation Loss: 0.074, Precision: 0.680, Recall: 0.462, F1 Score: 0.550, IoU: 0.379, Acc: 0.979
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_48_val_0.07_f1_0.55_f1_train_0.82.pt
+Epoch 50/100 Training Loss: 0.0264, Precision: 0.836, Recall: 0.790, F1 Score: 0.812, IoU: 0.684, Acc: 0.990
+Validation Loss: 0.071, Precision: 0.651, Recall: 0.496, F1 Score: 0.563, IoU: 0.392, Acc: 0.978
+Epoch 51/100 Training Loss: 0.0235, Precision: 0.857, Recall: 0.813, F1 Score: 0.834, IoU: 0.716, Acc: 0.991
+Validation Loss: 0.072, Precision: 0.662, Recall: 0.495, F1 Score: 0.567, IoU: 0.396, Acc: 0.979
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_50_val_0.07_f1_0.57_f1_train_0.83.pt
+Epoch 52/100 Training Loss: 0.0229, Precision: 0.860, Recall: 0.817, F1 Score: 0.838, IoU: 0.722, Acc: 0.991
+Validation Loss: 0.070, Precision: 0.671, Recall: 0.493, F1 Score: 0.569, IoU: 0.397, Acc: 0.979
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_51_val_0.07_f1_0.57_f1_train_0.84.pt
+Epoch 53/100 Training Loss: 0.0221, Precision: 0.856, Recall: 0.824, F1 Score: 0.840, IoU: 0.724, Acc: 0.991
+Validation Loss: 0.083, Precision: 0.584, Recall: 0.604, F1 Score: 0.594, IoU: 0.422, Acc: 0.977
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_52_val_0.08_f1_0.59_f1_train_0.84.pt
+Epoch 54/100 Training Loss: 0.0236, Precision: 0.847, Recall: 0.812, F1 Score: 0.829, IoU: 0.708, Acc: 0.991
+Validation Loss: 0.078, Precision: 0.588, Recall: 0.543, F1 Score: 0.565, IoU: 0.394, Acc: 0.977
+Epoch 55/100 Training Loss: 0.0256, Precision: 0.842, Recall: 0.804, F1 Score: 0.823, IoU: 0.699, Acc: 0.990
+Validation Loss: 0.082, Precision: 0.518, Recall: 0.564, F1 Score: 0.540, IoU: 0.370, Acc: 0.973
+Epoch 56/100 Training Loss: 0.0246, Precision: 0.849, Recall: 0.809, F1 Score: 0.828, IoU: 0.707, Acc: 0.991
+Validation Loss: 0.076, Precision: 0.530, Recall: 0.647, F1 Score: 0.583, IoU: 0.411, Acc: 0.974
+Epoch 57/100 Training Loss: 0.0236, Precision: 0.848, Recall: 0.814, F1 Score: 0.831, IoU: 0.710, Acc: 0.991
+Validation Loss: 0.073, Precision: 0.549, Recall: 0.600, F1 Score: 0.573, IoU: 0.402, Acc: 0.975
+Epoch 58/100 Training Loss: 0.0220, Precision: 0.855, Recall: 0.819, F1 Score: 0.837, IoU: 0.719, Acc: 0.991
+Validation Loss: 0.079, Precision: 0.569, Recall: 0.506, F1 Score: 0.536, IoU: 0.366, Acc: 0.975
+Epoch 59/100 Training Loss: 0.0312, Precision: 0.820, Recall: 0.757, F1 Score: 0.787, IoU: 0.649, Acc: 0.989
+Validation Loss: 0.065, Precision: 0.617, Recall: 0.572, F1 Score: 0.594, IoU: 0.422, Acc: 0.978
+Epoch 60/100 Training Loss: 0.0212, Precision: 0.867, Recall: 0.829, F1 Score: 0.848, IoU: 0.736, Acc: 0.992
+Validation Loss: 0.069, Precision: 0.618, Recall: 0.614, F1 Score: 0.616, IoU: 0.445, Acc: 0.978
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_59_val_0.07_f1_0.62_f1_train_0.85.pt
+Epoch 61/100 Training Loss: 0.0214, Precision: 0.862, Recall: 0.829, F1 Score: 0.845, IoU: 0.732, Acc: 0.992
+Validation Loss: 0.069, Precision: 0.638, Recall: 0.440, F1 Score: 0.521, IoU: 0.352, Acc: 0.977
+Epoch 62/100 Training Loss: 0.0222, Precision: 0.871, Recall: 0.812, F1 Score: 0.840, IoU: 0.725, Acc: 0.991
+Validation Loss: 0.081, Precision: 0.579, Recall: 0.600, F1 Score: 0.589, IoU: 0.418, Acc: 0.977
+Epoch 63/100 Training Loss: 0.0227, Precision: 0.851, Recall: 0.818, F1 Score: 0.834, IoU: 0.715, Acc: 0.991
+Validation Loss: 0.072, Precision: 0.641, Recall: 0.555, F1 Score: 0.595, IoU: 0.423, Acc: 0.978
+Epoch 64/100 Training Loss: 0.0212, Precision: 0.868, Recall: 0.830, F1 Score: 0.848, IoU: 0.737, Acc: 0.992
+Validation Loss: 0.071, Precision: 0.623, Recall: 0.550, F1 Score: 0.585, IoU: 0.413, Acc: 0.978
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_63_val_0.07_f1_0.58_f1_train_0.85.pt
+Epoch 65/100 Training Loss: 0.0194, Precision: 0.875, Recall: 0.850, F1 Score: 0.862, IoU: 0.758, Acc: 0.992
+Validation Loss: 0.090, Precision: 0.602, Recall: 0.497, F1 Score: 0.545, IoU: 0.374, Acc: 0.977
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_64_val_0.09_f1_0.54_f1_train_0.86.pt
+Epoch 66/100 Training Loss: 0.0214, Precision: 0.872, Recall: 0.825, F1 Score: 0.848, IoU: 0.735, Acc: 0.992
+Validation Loss: 0.100, Precision: 0.448, Recall: 0.686, F1 Score: 0.542, IoU: 0.371, Acc: 0.967
+Epoch 67/100 Training Loss: 0.0235, Precision: 0.841, Recall: 0.820, F1 Score: 0.830, IoU: 0.710, Acc: 0.991
+Validation Loss: 0.074, Precision: 0.657, Recall: 0.518, F1 Score: 0.579, IoU: 0.408, Acc: 0.979
+Epoch 68/100 Training Loss: 0.0186, Precision: 0.877, Recall: 0.845, F1 Score: 0.861, IoU: 0.755, Acc: 0.992
+Validation Loss: 0.074, Precision: 0.617, Recall: 0.564, F1 Score: 0.589, IoU: 0.418, Acc: 0.978
+Epoch 69/100 Training Loss: 0.0197, Precision: 0.865, Recall: 0.848, F1 Score: 0.857, IoU: 0.749, Acc: 0.992
+Validation Loss: 0.096, Precision: 0.546, Recall: 0.642, F1 Score: 0.590, IoU: 0.418, Acc: 0.975
+Epoch 70/100 Training Loss: 0.0186, Precision: 0.883, Recall: 0.861, F1 Score: 0.872, IoU: 0.773, Acc: 0.993
+Validation Loss: 0.091, Precision: 0.616, Recall: 0.540, F1 Score: 0.576, IoU: 0.404, Acc: 0.977
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_69_val_0.09_f1_0.58_f1_train_0.87.pt
+Epoch 71/100 Training Loss: 0.0191, Precision: 0.877, Recall: 0.856, F1 Score: 0.866, IoU: 0.764, Acc: 0.993
+Validation Loss: 0.083, Precision: 0.589, Recall: 0.580, F1 Score: 0.584, IoU: 0.413, Acc: 0.977
+Epoch 72/100 Training Loss: 0.0186, Precision: 0.873, Recall: 0.860, F1 Score: 0.867, IoU: 0.765, Acc: 0.993
+Validation Loss: 0.087, Precision: 0.602, Recall: 0.607, F1 Score: 0.605, IoU: 0.433, Acc: 0.977
+Epoch 73/100 Training Loss: 0.0170, Precision: 0.885, Recall: 0.866, F1 Score: 0.875, IoU: 0.778, Acc: 0.993
+Validation Loss: 0.078, Precision: 0.628, Recall: 0.649, F1 Score: 0.638, IoU: 0.468, Acc: 0.979
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_72_val_0.08_f1_0.64_f1_train_0.88.pt
+Epoch 74/100 Training Loss: 0.0220, Precision: 0.857, Recall: 0.842, F1 Score: 0.849, IoU: 0.738, Acc: 0.992
+Validation Loss: 0.080, Precision: 0.633, Recall: 0.467, F1 Score: 0.537, IoU: 0.367, Acc: 0.977
+Epoch 75/100 Training Loss: 0.0197, Precision: 0.879, Recall: 0.835, F1 Score: 0.857, IoU: 0.749, Acc: 0.992
+Validation Loss: 0.076, Precision: 0.643, Recall: 0.604, F1 Score: 0.623, IoU: 0.452, Acc: 0.980
+Epoch 76/100 Training Loss: 0.0252, Precision: 0.864, Recall: 0.806, F1 Score: 0.834, IoU: 0.716, Acc: 0.991
+Validation Loss: 0.087, Precision: 0.646, Recall: 0.550, F1 Score: 0.594, IoU: 0.422, Acc: 0.979
+Epoch 77/100 Training Loss: 0.0199, Precision: 0.874, Recall: 0.839, F1 Score: 0.856, IoU: 0.748, Acc: 0.992
+Validation Loss: 0.085, Precision: 0.634, Recall: 0.585, F1 Score: 0.609, IoU: 0.437, Acc: 0.979
+Epoch 78/100 Training Loss: 0.0176, Precision: 0.881, Recall: 0.863, F1 Score: 0.872, IoU: 0.772, Acc: 0.993
+Validation Loss: 0.089, Precision: 0.677, Recall: 0.495, F1 Score: 0.572, IoU: 0.400, Acc: 0.979
+Epoch 79/100 Training Loss: 0.0160, Precision: 0.893, Recall: 0.874, F1 Score: 0.883, IoU: 0.791, Acc: 0.994
+Validation Loss: 0.088, Precision: 0.639, Recall: 0.572, F1 Score: 0.604, IoU: 0.433, Acc: 0.979
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_78_val_0.09_f1_0.60_f1_train_0.88.pt
+Epoch 80/100 Training Loss: 0.0161, Precision: 0.891, Recall: 0.876, F1 Score: 0.883, IoU: 0.791, Acc: 0.994
+Validation Loss: 0.100, Precision: 0.616, Recall: 0.653, F1 Score: 0.634, IoU: 0.464, Acc: 0.979
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_79_val_0.10_f1_0.63_f1_train_0.88.pt
+Epoch 81/100 Training Loss: 0.0187, Precision: 0.884, Recall: 0.851, F1 Score: 0.867, IoU: 0.766, Acc: 0.993
+Validation Loss: 0.082, Precision: 0.633, Recall: 0.639, F1 Score: 0.636, IoU: 0.466, Acc: 0.980
+Epoch 82/100 Training Loss: 0.0159, Precision: 0.891, Recall: 0.878, F1 Score: 0.885, IoU: 0.793, Acc: 0.994
+Validation Loss: 0.087, Precision: 0.657, Recall: 0.577, F1 Score: 0.614, IoU: 0.444, Acc: 0.980
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_81_val_0.09_f1_0.61_f1_train_0.88.pt
+Epoch 83/100 Training Loss: 0.0150, Precision: 0.900, Recall: 0.882, F1 Score: 0.891, IoU: 0.803, Acc: 0.994
+Validation Loss: 0.093, Precision: 0.625, Recall: 0.597, F1 Score: 0.611, IoU: 0.439, Acc: 0.979
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_82_val_0.09_f1_0.61_f1_train_0.89.pt
+Epoch 84/100 Training Loss: 0.0148, Precision: 0.899, Recall: 0.882, F1 Score: 0.891, IoU: 0.803, Acc: 0.994
+Validation Loss: 0.091, Precision: 0.663, Recall: 0.519, F1 Score: 0.582, IoU: 0.411, Acc: 0.979
+Epoch 85/100 Training Loss: 0.0166, Precision: 0.897, Recall: 0.877, F1 Score: 0.887, IoU: 0.797, Acc: 0.994
+Validation Loss: 0.088, Precision: 0.631, Recall: 0.536, F1 Score: 0.580, IoU: 0.408, Acc: 0.978
+Epoch 86/100 Training Loss: 0.0172, Precision: 0.892, Recall: 0.860, F1 Score: 0.876, IoU: 0.779, Acc: 0.993
+Validation Loss: 0.085, Precision: 0.536, Recall: 0.578, F1 Score: 0.556, IoU: 0.385, Acc: 0.974
+Epoch 87/100 Training Loss: 0.0171, Precision: 0.875, Recall: 0.866, F1 Score: 0.871, IoU: 0.771, Acc: 0.993
+Validation Loss: 0.077, Precision: 0.593, Recall: 0.599, F1 Score: 0.596, IoU: 0.425, Acc: 0.977
+Epoch 88/100 Training Loss: 0.0156, Precision: 0.897, Recall: 0.876, F1 Score: 0.886, IoU: 0.796, Acc: 0.994
+Validation Loss: 0.083, Precision: 0.645, Recall: 0.604, F1 Score: 0.624, IoU: 0.453, Acc: 0.980
+Epoch 89/100 Training Loss: 0.0151, Precision: 0.896, Recall: 0.886, F1 Score: 0.891, IoU: 0.803, Acc: 0.994
+Validation Loss: 0.093, Precision: 0.662, Recall: 0.545, F1 Score: 0.598, IoU: 0.427, Acc: 0.979
+Epoch 90/100 Training Loss: 0.0145, Precision: 0.902, Recall: 0.884, F1 Score: 0.893, IoU: 0.807, Acc: 0.994
+Validation Loss: 0.095, Precision: 0.664, Recall: 0.487, F1 Score: 0.562, IoU: 0.390, Acc: 0.979
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_89_val_0.10_f1_0.56_f1_train_0.89.pt
+Epoch 91/100 Training Loss: 0.0162, Precision: 0.895, Recall: 0.874, F1 Score: 0.884, IoU: 0.792, Acc: 0.994
+Validation Loss: 0.090, Precision: 0.630, Recall: 0.599, F1 Score: 0.614, IoU: 0.443, Acc: 0.979
+Epoch 92/100 Training Loss: 0.0146, Precision: 0.902, Recall: 0.879, F1 Score: 0.891, IoU: 0.803, Acc: 0.994
+Validation Loss: 0.098, Precision: 0.647, Recall: 0.593, F1 Score: 0.619, IoU: 0.448, Acc: 0.979
+Epoch 93/100 Training Loss: 0.0148, Precision: 0.891, Recall: 0.891, F1 Score: 0.891, IoU: 0.803, Acc: 0.994
+Validation Loss: 0.092, Precision: 0.635, Recall: 0.613, F1 Score: 0.624, IoU: 0.453, Acc: 0.979
+Epoch 94/100 Training Loss: 0.0148, Precision: 0.901, Recall: 0.884, F1 Score: 0.892, IoU: 0.806, Acc: 0.994
+Validation Loss: 0.089, Precision: 0.680, Recall: 0.566, F1 Score: 0.618, IoU: 0.447, Acc: 0.980
+Epoch 95/100 Training Loss: 0.0144, Precision: 0.903, Recall: 0.884, F1 Score: 0.893, IoU: 0.807, Acc: 0.994
+Validation Loss: 0.086, Precision: 0.636, Recall: 0.647, F1 Score: 0.641, IoU: 0.472, Acc: 0.980
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_94_val_0.09_f1_0.64_f1_train_0.89.pt
+Epoch 96/100 Training Loss: 0.0172, Precision: 0.881, Recall: 0.860, F1 Score: 0.871, IoU: 0.771, Acc: 0.993
+Validation Loss: 0.082, Precision: 0.541, Recall: 0.492, F1 Score: 0.515, IoU: 0.347, Acc: 0.974
+Epoch 97/100 Training Loss: 0.0252, Precision: 0.849, Recall: 0.784, F1 Score: 0.815, IoU: 0.688, Acc: 0.990
+Validation Loss: 0.076, Precision: 0.669, Recall: 0.566, F1 Score: 0.613, IoU: 0.442, Acc: 0.979
+Epoch 98/100 Training Loss: 0.0162, Precision: 0.898, Recall: 0.876, F1 Score: 0.887, IoU: 0.797, Acc: 0.994
+Validation Loss: 0.075, Precision: 0.678, Recall: 0.607, F1 Score: 0.640, IoU: 0.471, Acc: 0.981
+Epoch 99/100 Training Loss: 0.0142, Precision: 0.908, Recall: 0.892, F1 Score: 0.900, IoU: 0.818, Acc: 0.995
+Validation Loss: 0.077, Precision: 0.692, Recall: 0.546, F1 Score: 0.610, IoU: 0.439, Acc: 0.981
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_98_val_0.08_f1_0.61_f1_train_0.90.pt
+Epoch 100/100 Training Loss: 0.0145, Precision: 0.897, Recall: 0.889, F1 Score: 0.893, IoU: 0.807, Acc: 0.994
+Validation Loss: 0.086, Precision: 0.672, Recall: 0.624, F1 Score: 0.647, IoU: 0.478, Acc: 0.981
+Saved model to: models/data_aug_80by20/another_data_aug/2/lraspp_99_val_0.09_f1_0.65_f1_train_0.89.pt
+
+Testing...
+
+models/data_aug_80by20/another_data_aug/2/lraspp_0_val_0.17_f1_0.00_f1_train_0.03.pt	 - Precision: 0.114, Recall: 0.001, F1 Score: 0.002, IoU: 0.001, Accuracy: 0.942
+models/data_aug_80by20/another_data_aug/2/lraspp_1_val_0.21_f1_0.08_f1_train_0.11.pt	 - Precision: 0.307, Recall: 0.013, F1 Score: 0.025, IoU: 0.013, Accuracy: 0.941
+models/data_aug_80by20/another_data_aug/2/lraspp_2_val_0.09_f1_0.40_f1_train_0.26.pt	 - Precision: 0.370, Recall: 0.131, F1 Score: 0.194, IoU: 0.107, Accuracy: 0.937
+models/data_aug_80by20/another_data_aug/2/lraspp_3_val_0.09_f1_0.46_f1_train_0.34.pt	 - Precision: 0.331, Recall: 0.226, F1 Score: 0.269, IoU: 0.155, Accuracy: 0.929
+models/data_aug_80by20/another_data_aug/2/lraspp_4_val_0.09_f1_0.45_f1_train_0.38.pt	 - Precision: 0.230, Recall: 0.239, F1 Score: 0.234, IoU: 0.133, Accuracy: 0.910
+models/data_aug_80by20/another_data_aug/2/lraspp_5_val_0.09_f1_0.48_f1_train_0.42.pt	 - Precision: 0.303, Recall: 0.263, F1 Score: 0.281, IoU: 0.164, Accuracy: 0.922
+models/data_aug_80by20/another_data_aug/2/lraspp_6_val_0.08_f1_0.46_f1_train_0.48.pt	 - Precision: 0.341, Recall: 0.204, F1 Score: 0.255, IoU: 0.146, Accuracy: 0.931
+models/data_aug_80by20/another_data_aug/2/lraspp_7_val_0.12_f1_0.38_f1_train_0.48.pt	 - Precision: 0.177, Recall: 0.170, F1 Score: 0.174, IoU: 0.095, Accuracy: 0.906
+models/data_aug_80by20/another_data_aug/2/lraspp_8_val_0.09_f1_0.45_f1_train_0.53.pt	 - Precision: 0.272, Recall: 0.197, F1 Score: 0.228, IoU: 0.129, Accuracy: 0.923
+models/data_aug_80by20/another_data_aug/2/lraspp_9_val_0.08_f1_0.48_f1_train_0.51.pt	 - Precision: 0.386, Recall: 0.201, F1 Score: 0.265, IoU: 0.153, Accuracy: 0.935
+models/data_aug_80by20/another_data_aug/2/lraspp_10_val_0.07_f1_0.54_f1_train_0.56.pt	 - Precision: 0.470, Recall: 0.223, F1 Score: 0.302, IoU: 0.178, Accuracy: 0.941
+models/data_aug_80by20/another_data_aug/2/lraspp_11_val_0.12_f1_0.48_f1_train_0.57.pt	 - Precision: 0.238, Recall: 0.446, F1 Score: 0.311, IoU: 0.184, Accuracy: 0.886
+models/data_aug_80by20/another_data_aug/2/lraspp_14_val_0.07_f1_0.55_f1_train_0.56.pt	 - Precision: 0.428, Recall: 0.190, F1 Score: 0.263, IoU: 0.151, Accuracy: 0.939
+models/data_aug_80by20/another_data_aug/2/lraspp_15_val_0.09_f1_0.43_f1_train_0.59.pt	 - Precision: 0.431, Recall: 0.176, F1 Score: 0.250, IoU: 0.143, Accuracy: 0.939
+models/data_aug_80by20/another_data_aug/2/lraspp_16_val_0.07_f1_0.48_f1_train_0.64.pt	 - Precision: 0.485, Recall: 0.174, F1 Score: 0.257, IoU: 0.147, Accuracy: 0.942
+models/data_aug_80by20/another_data_aug/2/lraspp_17_val_0.12_f1_0.40_f1_train_0.65.pt	 - Precision: 0.219, Recall: 0.189, F1 Score: 0.203, IoU: 0.113, Accuracy: 0.914
+models/data_aug_80by20/another_data_aug/2/lraspp_20_val_0.06_f1_0.57_f1_train_0.61.pt	 - Precision: 0.419, Recall: 0.204, F1 Score: 0.274, IoU: 0.159, Accuracy: 0.938
+models/data_aug_80by20/another_data_aug/2/lraspp_21_val_0.07_f1_0.54_f1_train_0.67.pt	 - Precision: 0.409, Recall: 0.199, F1 Score: 0.268, IoU: 0.155, Accuracy: 0.937
+models/data_aug_80by20/another_data_aug/2/lraspp_22_val_0.07_f1_0.58_f1_train_0.66.pt	 - Precision: 0.372, Recall: 0.205, F1 Score: 0.264, IoU: 0.152, Accuracy: 0.934
+models/data_aug_80by20/another_data_aug/2/lraspp_23_val_0.08_f1_0.50_f1_train_0.67.pt	 - Precision: 0.353, Recall: 0.288, F1 Score: 0.317, IoU: 0.188, Accuracy: 0.928
+models/data_aug_80by20/another_data_aug/2/lraspp_24_val_0.07_f1_0.51_f1_train_0.68.pt	 - Precision: 0.423, Recall: 0.192, F1 Score: 0.264, IoU: 0.152, Accuracy: 0.938
+models/data_aug_80by20/another_data_aug/2/lraspp_26_val_0.08_f1_0.53_f1_train_0.71.pt	 - Precision: 0.427, Recall: 0.241, F1 Score: 0.308, IoU: 0.182, Accuracy: 0.937
+models/data_aug_80by20/another_data_aug/2/lraspp_27_val_0.07_f1_0.48_f1_train_0.72.pt	 - Precision: 0.482, Recall: 0.121, F1 Score: 0.194, IoU: 0.107, Accuracy: 0.942
+models/data_aug_80by20/another_data_aug/2/lraspp_29_val_0.07_f1_0.58_f1_train_0.72.pt	 - Precision: 0.328, Recall: 0.292, F1 Score: 0.309, IoU: 0.183, Accuracy: 0.924
+models/data_aug_80by20/another_data_aug/2/lraspp_30_val_0.07_f1_0.59_f1_train_0.76.pt	 - Precision: 0.375, Recall: 0.231, F1 Score: 0.286, IoU: 0.167, Accuracy: 0.933
+models/data_aug_80by20/another_data_aug/2/lraspp_31_val_0.08_f1_0.61_f1_train_0.75.pt	 - Precision: 0.388, Recall: 0.217, F1 Score: 0.278, IoU: 0.162, Accuracy: 0.935
+models/data_aug_80by20/another_data_aug/2/lraspp_37_val_0.07_f1_0.54_f1_train_0.78.pt	 - Precision: 0.407, Recall: 0.221, F1 Score: 0.286, IoU: 0.167, Accuracy: 0.936
+models/data_aug_80by20/another_data_aug/2/lraspp_39_val_0.07_f1_0.57_f1_train_0.78.pt	 - Precision: 0.355, Recall: 0.197, F1 Score: 0.254, IoU: 0.145, Accuracy: 0.933
+models/data_aug_80by20/another_data_aug/2/lraspp_41_val_0.08_f1_0.58_f1_train_0.78.pt	 - Precision: 0.445, Recall: 0.176, F1 Score: 0.252, IoU: 0.144, Accuracy: 0.940
+models/data_aug_80by20/another_data_aug/2/lraspp_45_val_0.08_f1_0.56_f1_train_0.80.pt	 - Precision: 0.318, Recall: 0.151, F1 Score: 0.205, IoU: 0.114, Accuracy: 0.932
+models/data_aug_80by20/another_data_aug/2/lraspp_48_val_0.07_f1_0.55_f1_train_0.82.pt	 - Precision: 0.476, Recall: 0.116, F1 Score: 0.187, IoU: 0.103, Accuracy: 0.942
+models/data_aug_80by20/another_data_aug/2/lraspp_50_val_0.07_f1_0.57_f1_train_0.83.pt	 - Precision: 0.433, Recall: 0.190, F1 Score: 0.264, IoU: 0.152, Accuracy: 0.939
+models/data_aug_80by20/another_data_aug/2/lraspp_51_val_0.07_f1_0.57_f1_train_0.84.pt	 - Precision: 0.439, Recall: 0.143, F1 Score: 0.216, IoU: 0.121, Accuracy: 0.940
+models/data_aug_80by20/another_data_aug/2/lraspp_52_val_0.08_f1_0.59_f1_train_0.84.pt	 - Precision: 0.418, Recall: 0.233, F1 Score: 0.299, IoU: 0.176, Accuracy: 0.937
+models/data_aug_80by20/another_data_aug/2/lraspp_59_val_0.07_f1_0.62_f1_train_0.85.pt	 - Precision: 0.441, Recall: 0.208, F1 Score: 0.283, IoU: 0.165, Accuracy: 0.939
+models/data_aug_80by20/another_data_aug/2/lraspp_63_val_0.07_f1_0.58_f1_train_0.85.pt	 - Precision: 0.277, Recall: 0.166, F1 Score: 0.207, IoU: 0.116, Accuracy: 0.927
+models/data_aug_80by20/another_data_aug/2/lraspp_64_val_0.09_f1_0.54_f1_train_0.86.pt	 - Precision: 0.425, Recall: 0.140, F1 Score: 0.211, IoU: 0.118, Accuracy: 0.939
+models/data_aug_80by20/another_data_aug/2/lraspp_69_val_0.09_f1_0.58_f1_train_0.87.pt	 - Precision: 0.392, Recall: 0.194, F1 Score: 0.259, IoU: 0.149, Accuracy: 0.936
+models/data_aug_80by20/another_data_aug/2/lraspp_72_val_0.08_f1_0.64_f1_train_0.88.pt	 - Precision: 0.366, Recall: 0.220, F1 Score: 0.275, IoU: 0.159, Accuracy: 0.933
+models/data_aug_80by20/another_data_aug/2/lraspp_78_val_0.09_f1_0.60_f1_train_0.88.pt	 - Precision: 0.447, Recall: 0.171, F1 Score: 0.247, IoU: 0.141, Accuracy: 0.940
+models/data_aug_80by20/another_data_aug/2/lraspp_79_val_0.10_f1_0.63_f1_train_0.88.pt	 - Precision: 0.400, Recall: 0.199, F1 Score: 0.266, IoU: 0.153, Accuracy: 0.936
+models/data_aug_80by20/another_data_aug/2/lraspp_81_val_0.09_f1_0.61_f1_train_0.88.pt	 - Precision: 0.409, Recall: 0.176, F1 Score: 0.247, IoU: 0.141, Accuracy: 0.938
+models/data_aug_80by20/another_data_aug/2/lraspp_82_val_0.09_f1_0.61_f1_train_0.89.pt	 - Precision: 0.422, Recall: 0.169, F1 Score: 0.241, IoU: 0.137, Accuracy: 0.939
+models/data_aug_80by20/another_data_aug/2/lraspp_89_val_0.10_f1_0.56_f1_train_0.89.pt	 - Precision: 0.415, Recall: 0.159, F1 Score: 0.230, IoU: 0.130, Accuracy: 0.938
+models/data_aug_80by20/another_data_aug/2/lraspp_94_val_0.09_f1_0.64_f1_train_0.89.pt	 - Precision: 0.396, Recall: 0.231, F1 Score: 0.291, IoU: 0.171, Accuracy: 0.935
+models/data_aug_80by20/another_data_aug/2/lraspp_98_val_0.08_f1_0.61_f1_train_0.90.pt	 - Precision: 0.417, Recall: 0.193, F1 Score: 0.264, IoU: 0.152, Accuracy: 0.938
+models/data_aug_80by20/another_data_aug/2/lraspp_99_val_0.09_f1_0.65_f1_train_0.89.pt	 - Precision: 0.394, Recall: 0.198, F1 Score: 0.264, IoU: 0.152, Accuracy: 0.936

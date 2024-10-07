@@ -1,1 +1,1 @@
-> This is the same as `normal`, but using L2 regularization and a 80% / 20% train/validation data separation.
+> This is the same as `normal`, but using L2 regularization and a 80%/20% train/validation data separation.
