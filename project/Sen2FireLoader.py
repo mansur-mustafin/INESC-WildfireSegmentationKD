@@ -14,6 +14,7 @@ class Sen2FireDataset(Dataset):
         self.seed = 1234
 
         random.seed(self.seed)
+        np.random.seed(self.seed)
 
         if augment:
             self.transform = A.Compose([

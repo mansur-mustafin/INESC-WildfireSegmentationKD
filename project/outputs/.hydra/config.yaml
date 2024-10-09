@@ -6,12 +6,12 @@ path:
   scene2: ./../datasets/Sen2Fire/scene2
   scene3: ./../datasets/Sen2Fire/scene3
   scene4: ./../datasets/Sen2Fire/scene4
-  output_model: models/data_aug_80by20/2/
-  weights_test: models/data_aug_80by20/2/
+  output_model: models/data_aug_80by20/another_data_aug/2/
+  weights_test: models/data_aug_80by20/another_data_aug/2/
 const:
   lr: 0.0001
-  num_epochs: 200
+  num_epochs: 500
   batch_size: 8
   num_input_channels: 13
   num_classes: 2
-  weight_decay: 0.0001
+  weight_decay: 0
