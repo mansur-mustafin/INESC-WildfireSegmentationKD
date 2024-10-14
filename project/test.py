@@ -193,20 +193,12 @@ class FirePredict():
         self.model = self.model.to(device)
 
         best_val_loss = float('inf')
-        best_f1 = 0
-        best_train_f1 = 0
         epsilon = 1e-14
         num_epochs = self.cfg.const.num_epochs
         
         for epoch in range(num_epochs):
             self.model.train()
             running_loss = 0.0
-
-            TP_all_train = np.zeros((2, 1))
-            FP_all_train = np.zeros((2, 1))
-            TN_all_train = np.zeros((2, 1))
-            FN_all_train = np.zeros((2, 1))
-            n_valid_sample_all_train = 0
 
             # for images, labels in tqdm(self.train_dataloader, desc=f"Epoch {epoch+1}/{num_epochs}"):
             for images, labels in self.train_dataloader:
@@ -219,29 +211,11 @@ class FirePredict():
                 self.optimizer.step()
                 
                 running_loss += loss.item()
-
-                preds = torch.argmax(outputs, dim=1).cpu().numpy().flatten()
-                labels_np = labels.cpu().numpy().flatten()
-                
-                TP, FP, TN, FN, n_valid_sample = eval_image(preds, labels_np, 2)
-                TP_all_train += TP
-                FP_all_train += FP
-                TN_all_train += TN
-                FN_all_train += FN
-                n_valid_sample_all_train += n_valid_sample
             
             epoch_loss = running_loss / len(self.train_dataloader)
-
-            accuracy_train = (TP_all_train[1] + TN_all_train[1]) / (TP_all_train[1] + TN_all_train[1] + FP_all_train[1] + FN_all_train[1] + epsilon)
-            precision_train = TP_all_train[1] / (TP_all_train[1] + FP_all_train[1] + epsilon)
-            recall_train = TP_all_train[1] / (TP_all_train[1] + FN_all_train[1] + epsilon)
-            f1_train = 2 * precision_train * recall_train / (precision_train + recall_train + epsilon)
-            iou_train = TP_all_train[1] / (TP_all_train[1] + FP_all_train[1] + FN_all_train[1] + epsilon)
             
-            print(  f'Epoch {epoch+1}/{num_epochs} Training Loss: {epoch_loss:.4f}, '
-                    f'Precision: {precision_train[0]:.3f}, Recall: {recall_train[0]:.3f}, '
-                    f'F1 Score: {f1_train[0]:.3f}, IoU: {iou_train[0]:.3f}, '
-                    f'Acc: {accuracy_train[0]:.3f}')
+            print(f'Epoch {epoch+1}/{num_epochs} Training loss: {epoch_loss:.4f}')
+
             
             # Validation
             self.model.eval()
@@ -287,16 +261,8 @@ class FirePredict():
                 best_val_loss = val_loss
                 save_model = True
 
-            if f1[0] > best_f1:
-                best_f1 = f1[0]
-                save_model = True
-
-            if f1_train[0] > best_train_f1:
-                best_train_f1 = f1_train[0]
-                save_model = True
-
             if save_model:
-                path = self.cfg.path.output_model + f"{self.cfg.model.name}_{epoch}_val_{val_loss:.2f}_f1_{f1[0]:.2f}_f1_train_{f1_train[0]:.2f}.pt"
+                path = self.cfg.path.output_model + f"{self.cfg.model.name}_{epoch}_val_{val_loss:.2f}_f1_{f1[0]:.2f}.pt"
                 torch.save(self.model.state_dict(), path)
                 print('Saved model to: ' + path)
 
