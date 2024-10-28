@@ -3,6 +3,7 @@ import numpy as np
 from omegaconf import DictConfig, OmegaConf
 import torch
 import torch.nn as nn
+from torch.nn import MSELoss
 import torch.optim as optim
 from torch.utils.data import DataLoader, ConcatDataset, random_split
 from torchvision.models.segmentation import (
@@ -28,12 +29,15 @@ from utils import *
 
 class FirePredict():
 
-    def __init__(self, cfg: DictConfig, teacher_path) -> None:
+    def __init__(self, cfg: DictConfig, teacher_path, path = None) -> None:
         self.cfg = cfg
         self._create_data_loaders()
         self._setup_models()
         
-        self._load_weights(teacher_path)
+        self._load_weights(path=teacher_path, is_model=False)
+
+        if path is not None:
+            self._load_weights(path=path, is_model=True)
 
         self.criterion = nn.CrossEntropyLoss()
         self.criterion_KD = MSELoss()
@@ -87,16 +91,20 @@ class FirePredict():
             raise ValueError(f"Model '{teacher_name}' not found.")
     
 
-    def _load_weights(self, teacher_path):
+    def _load_weights(self, path, is_model=False):
         """
         Function to load model weights from a given path.
         """
+    
         try:
-            self.teacher.load_state_dict(torch.load(teacher_path))
-            print(teacher_path, end="\t")
+            if is_model:
+                self.model.load_state_dict(torch.load(path))
+            else:
+                self.teacher.load_state_dict(torch.load(path))
+            print(path, end="\t")
             # print(f"Model weights loaded from {path}")
         except FileNotFoundError:
-            print(f"Path {teacher_path} does not exist. Try again.")
+            print(f"Path {path} does not exist. Try again.")
             exit()
 
 
@@ -215,11 +223,9 @@ class FirePredict():
         self.teacher = self.teacher.to(device)
 
         best_val_loss = float('inf')
-        best_f1 = 0
-        best_train_f1 = 0
         epsilon = 1e-14
         num_epochs = self.cfg.const.num_epochs
-        lbd = self.cfg.lbd
+        lbd = self.cfg.const.lbd
         
         self.teacher.eval()
 
@@ -242,9 +248,11 @@ class FirePredict():
                 self.optimizer.zero_grad()
 
                 outputs = self.model(images)['out']
-                print(features.size())
-                features = self.model.backbone(images)
-                teacher_fts = self.teacher.backbone(images)
+                
+                features = self.model.backbone(images)['aux']
+                # print(features.size())
+                teacher_fts = self.teacher.backbone(images)['aux']
+                # print(teacher_fts.size())
 
                 loss_KD = lbd*self.criterion_KD(teacher_fts, features)
                 loss_CEL = self.criterion(outputs, labels)
@@ -269,6 +277,8 @@ class FirePredict():
                 n_valid_sample_all_train += n_valid_sample
             
             epoch_loss = running_loss / len(self.train_dataloader)
+            epoch_CEL_loss = running_loss_CEL / len(self.train_dataloader)
+            epoch_KD_loss = running_loss_lbdKD / len(self.train_dataloader)
 
             accuracy_train = (TP_all_train[1] + TN_all_train[1]) / (TP_all_train[1] + TN_all_train[1] + FP_all_train[1] + FN_all_train[1] + epsilon)
             precision_train = TP_all_train[1] / (TP_all_train[1] + FP_all_train[1] + epsilon)
@@ -277,6 +287,7 @@ class FirePredict():
             iou_train = TP_all_train[1] / (TP_all_train[1] + FP_all_train[1] + FN_all_train[1] + epsilon)
             
             print(  f'Epoch {epoch+1}/{num_epochs} Training Loss: {epoch_loss:.4f}, '
+                    f'CEL Loss: {epoch_CEL_loss:.4f} KD Loss: {epoch_KD_loss:.4f}, '
                     f'Precision: {precision_train[0]:.3f}, Recall: {recall_train[0]:.3f}, '
                     f'F1 Score: {f1_train[0]:.3f}, IoU: {iou_train[0]:.3f}, '
                     f'Acc: {accuracy_train[0]:.3f}')
@@ -325,16 +336,12 @@ class FirePredict():
                 best_val_loss = val_loss
                 save_model = True
 
-            if f1[0] > best_f1:
-                best_f1 = f1[0]
-                save_model = True
-
-            if f1_train[0] > best_train_f1:
-                best_train_f1 = f1_train[0]
-                save_model = True
-
             if save_model:
-                path = self.cfg.path.output_model +"KD/"+ f"{self.cfg.model.name}_{epoch}_val_{val_loss:.2f}_f1_{f1[0]:.2f}_f1_train_{f1_train[0]:.2f}.pt"
+                path = self.cfg.path.output_model +"KD/lbd_"+str(self.cfg.const.lbd)+"/teacher_"+self.cfg.teacher.name+"/"+f"{self.cfg.model.name}.pt"
+                
+                if not os.path.exists(self.cfg.path.output_model +"KD/lbd_"+str(self.cfg.const.lbd)+"/teacher_"+self.cfg.teacher.name+"/"):
+                    os.makedirs(self.cfg.path.output_model +"KD/lbd_"+str(self.cfg.const.lbd)+"/teacher_"+self.cfg.teacher.name+"/")
+                
                 torch.save(self.model.state_dict(), path)
                 print('Saved model to: ' + path)
 
@@ -382,17 +389,18 @@ def main(cfg: DictConfig):
     print("Configuration: ")
     print(OmegaConf.to_yaml(cfg))
 
+    teacher_path= "original_models/" + cfg.teacher.name + ".pt"
+
     # CODE FOR TRAINING
-    fp = FirePredict(cfg)
+    fp = FirePredict(cfg, teacher_path=teacher_path)
     fp.train()
 
     print("\nTesting...\n")
 
     # CODE FOR TESTING
-    for weight_path in get_model_paths(cfg.path.weights_test, cfg.model.name):
-        fp = FirePredict(cfg, weight_path)
-        fp.test()
-
+    weight_path=cfg.path.weights_test+"KD/lbd_"+str(cfg.const.lbd)+"/teacher_"+cfg.teacher.name+"/"+cfg.model.name+".pt"
+    fp = FirePredict(cfg, teacher_path=teacher_path, path=weight_path)
+    fp.test()
 
 if __name__ == "__main__":
     init_seeds()
