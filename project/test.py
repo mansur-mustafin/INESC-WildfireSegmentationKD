@@ -36,34 +36,31 @@ class CustomLoss(nn.Module):
     def __init__(self, alpha=1.0):
         super(CustomLoss, self).__init__()
         self.alpha = alpha
-        self.N = 512 * 512
         self.epsilon = 10e-6
         
     def forward(self, outputs, labels):
         
-        log_probs = F.log_softmax(outputs, dim=1)                            # (N, C, H, W) = [8, 2, 512, 512]
+        N, C, H, W = outputs.shape
 
-        loss_per_pixel = -log_probs.gather(dim=1, index=labels.unsqueeze(1)) # (N, 1, H, W) = [8, 1, 512, 512]
-        loss_per_pixel = loss_per_pixel.squeeze(1)                           # (N, H, W) = [8, 512, 512]
-        total_loss = torch.tensor(0.0, device=outputs.device)
-        
-        for image_idx in range(labels.shape[0]):    # for each image in a batch:
-            labels_i = labels[image_idx]
-            loss_per_pixel_i = loss_per_pixel[image_idx]
+        log_probs = F.log_softmax(outputs, dim=1)
 
-            loss_per_image = torch.tensor(0.0, device=outputs.device)
+        loss_per_pixel = -log_probs.gather(dim=1, index=labels.unsqueeze(1)).squeeze(1)
 
-            for class_number in range(2):
+        loss_per_pixel_flat = loss_per_pixel.view(N, -1)
+        labels_flat = labels.view(N, -1)
 
-                mask_c = (labels_i == class_number)
+        labels_one_hot = F.one_hot(labels, num_classes=C)
+        counts = labels_one_hot.view(N, -1, C).sum(dim=1).float() + self.epsilon
 
-                n_pixels_c = mask_c.sum().float() + self.epsilon
+        N_i = H * W
 
-                L_c = (loss_per_pixel_i * mask_c.float()).sum() / (n_pixels_c + self.epsilon)
+        weights_c = N_i / counts
 
-                loss_per_image += (self.N / n_pixels_c) * L_c
+        per_pixel_weights = weights_c.gather(1, labels_flat)
 
-        loss = total_loss / labels.shape[0]
+        weighted_loss_per_pixel = loss_per_pixel_flat * per_pixel_weights
+
+        loss = self.alpha * weighted_loss_per_pixel.mean()
 
         return loss
 
@@ -239,8 +236,8 @@ class FirePredict():
             self.model.train()
             running_loss = 0.0
 
-            # for images, labels in tqdm(self.train_dataloader, desc=f"Epoch {epoch+1}/{num_epochs}"):
-            for images, labels in self.train_dataloader:
+            for images, labels in tqdm(self.train_dataloader, desc=f"Epoch {epoch+1}/{num_epochs}"):
+            # for images, labels in self.train_dataloader:
                 images, labels = images.to(device), labels.to(device)
                 
                 self.optimizer.zero_grad()
