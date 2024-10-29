@@ -32,12 +32,40 @@ from utils import *
 
 
 class CustomLoss(nn.Module):
+    
     def __init__(self, alpha=1.0):
         super(CustomLoss, self).__init__()
         self.alpha = alpha
-    
+        self.N = 512 * 512
+        self.epsilon = 10e-6
+        
     def forward(self, outputs, labels):
-        pass
+        
+        log_probs = F.log_softmax(outputs, dim=1)                            # (N, C, H, W) = [8, 2, 512, 512]
+
+        loss_per_pixel = -log_probs.gather(dim=1, index=labels.unsqueeze(1)) # (N, 1, H, W) = [8, 1, 512, 512]
+        loss_per_pixel = loss_per_pixel.squeeze(1)                           # (N, H, W) = [8, 512, 512]
+        total_loss = torch.tensor(0.0, device=outputs.device)
+        
+        for image_idx in range(labels.shape[0]):    # for each image in a batch:
+            labels_i = labels[image_idx]
+            loss_per_pixel_i = loss_per_pixel[image_idx]
+
+            loss_per_image = torch.tensor(0.0, device=outputs.device)
+
+            for class_number in range(2):
+
+                mask_c = (labels_i == class_number)
+
+                n_pixels_c = mask_c.sum().float() + self.epsilon
+
+                L_c = (loss_per_pixel_i * mask_c.float()).sum() / (n_pixels_c + self.epsilon)
+
+                loss_per_image += (self.N / n_pixels_c) * L_c
+
+        loss = total_loss / labels.shape[0]
+
+        return loss
 
 
 class FirePredict():
