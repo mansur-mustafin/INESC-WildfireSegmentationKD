@@ -36,29 +36,26 @@ class CustomLoss(nn.Module):
     def __init__(self, alpha=1.0):
         super(CustomLoss, self).__init__()
         self.alpha = alpha
+        self.N_i = 512 * 512
         self.epsilon = 10e-6
-        
+
     def forward(self, outputs, labels):
         
-        N, C, H, W = outputs.shape
+        N = outputs.shape[0] # batch_size
 
         log_probs = F.log_softmax(outputs, dim=1)
 
         loss_per_pixel = -log_probs.gather(dim=1, index=labels.unsqueeze(1)).squeeze(1)
 
-        loss_per_pixel_flat = loss_per_pixel.view(N, -1)
-        labels_flat = labels.view(N, -1)
+        counts_class1 = labels.view(N, -1).sum(dim=1).float()
+        counts_class0 = self.N_i - counts_class1
+        counts = torch.stack([counts_class0, counts_class1], dim=1) + self.epsilon
 
-        labels_one_hot = F.one_hot(labels, num_classes=C)
-        counts = labels_one_hot.view(N, -1, C).sum(dim=1).float() + self.epsilon
+        weights_c = self.N_i / counts
 
-        N_i = H * W
+        per_pixel_weights = weights_c.gather(1, labels.view(N, -1))
 
-        weights_c = N_i / counts
-
-        per_pixel_weights = weights_c.gather(1, labels_flat)
-
-        weighted_loss_per_pixel = loss_per_pixel_flat * per_pixel_weights
+        weighted_loss_per_pixel = loss_per_pixel.view(N, -1) * per_pixel_weights
 
         loss = self.alpha * weighted_loss_per_pixel.mean()
 
