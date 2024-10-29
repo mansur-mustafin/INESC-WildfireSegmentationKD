@@ -7,6 +7,7 @@ from omegaconf import DictConfig, OmegaConf
 from tqdm import tqdm
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 import torch.optim as optim
 from torch.utils.data import DataLoader, ConcatDataset, random_split
 from torchvision.models.segmentation import (
@@ -30,6 +31,15 @@ from Sen2FireLoader import Sen2FireDataset
 from utils import *
 
 
+class CustomLoss(nn.Module):
+    def __init__(self, alpha=1.0):
+        super(CustomLoss, self).__init__()
+        self.alpha = alpha
+    
+    def forward(self, outputs, labels):
+        pass
+
+
 class FirePredict():
 
     def __init__(self, cfg: DictConfig, path = None) -> None:
@@ -38,7 +48,8 @@ class FirePredict():
         self._setup_model()
         if path is not None:
             self._load_weights(path)
-        self.criterion = nn.CrossEntropyLoss()
+        # self.criterion = nn.CrossEntropyLoss()
+        self.criterion = CustomLoss(alpha=self.cfg.const.loss_alpha)
         self.optimizer = optim.Adam(
             self.model.parameters(), 
             lr=self.cfg.const.lr,
