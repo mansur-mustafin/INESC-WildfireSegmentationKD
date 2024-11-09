@@ -40,4 +40,4 @@ const:
   num_input_channels: 13                    
   num_classes: 2                            # 0 - no fire, 1 - fire 
   weight_decay: 0                           # L2 regularization.
-  lbd: 500
+  lbd: 300
