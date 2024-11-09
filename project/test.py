@@ -33,9 +33,8 @@ from utils import *
 
 class CustomLoss(nn.Module):
     
-    def __init__(self, alpha):
+    def __init__(self):
         super(CustomLoss, self).__init__()
-        self.alpha = alpha
         self.N_i = 512 * 512
         self.epsilon = 1
 
@@ -57,7 +56,7 @@ class CustomLoss(nn.Module):
 
         weighted_loss_per_pixel = loss_per_pixel.view(N, -1) * per_pixel_weights
 
-        loss = self.alpha * weighted_loss_per_pixel.mean()
+        loss = weighted_loss_per_pixel.mean()
 
         return loss
 
@@ -71,7 +70,7 @@ class FirePredict():
         if path is not None:
             self._load_weights(path)
         # self.criterion = nn.CrossEntropyLoss()
-        self.criterion = CustomLoss(alpha=self.cfg.const.loss_alpha)
+        self.criterion = CustomLoss()
         self.optimizer = optim.Adam(
             self.model.parameters(), 
             lr=self.cfg.const.lr,
@@ -233,8 +232,8 @@ class FirePredict():
             self.model.train()
             running_loss = 0.0
 
-            for images, labels in tqdm(self.train_dataloader, desc=f"Epoch {epoch+1}/{num_epochs}"):
-            # for images, labels in self.train_dataloader:
+            # for images, labels in tqdm(self.train_dataloader, desc=f"Epoch {epoch+1}/{num_epochs}"):
+            for images, labels in self.train_dataloader:
                 images, labels = images.to(device), labels.to(device)
                 
                 self.optimizer.zero_grad()

@@ -8,12 +8,12 @@ hydra:
     dir: outputs/
 
 model:
-  name: "lraspp"
+  # name: "lraspp"
   # name: "fcn_resnet50"
   # name: "fcn_resnet101"
   # name: "deeplabv3_resnet50"
   # name: "deeplabv3_resnet101"
-  # name: "deeplabv3_mobilenet_v3_large"
+  name: "deeplabv3_mobilenet_v3_large"
 
 teacher:
   # name: "lraspp"
@@ -30,15 +30,14 @@ path:
   scene3: "./../datasets/Sen2Fire/scene3"
   scene4: "./../datasets/Sen2Fire/scene4"
 
-  output_model: "models/test/"
-  weights_test: "models/test/"           # folder which models to test
+  output_model: "models/new_loss/6/"
+  weights_test: "models/new_loss/6/"           # folder which models to test
 
 const:
   lr: 0.0001
-  num_epochs: 5
-  batch_size: 1
+  num_epochs: 350
+  batch_size: 8
   num_input_channels: 13                    
   num_classes: 2                            # 0 - no fire, 1 - fire 
   weight_decay: 0                           # L2 regularization.
   lbd: 500
-  loss_alpha: 1.0
