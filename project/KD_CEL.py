@@ -389,7 +389,10 @@ def main(cfg: DictConfig):
     print("Configuration: ")
     print(OmegaConf.to_yaml(cfg))
 
-    teacher_path= "original_models/" + cfg.teacher.name + ".pt"
+    if cfg.const.is_weighted_loss:
+        teacher_path= "original_models/weighted_loss/" + cfg.teacher.name + ".pt"
+    else:   
+        teacher_path= "original_models/" + cfg.teacher.name + ".pt"
 
     # CODE FOR TRAINING
     fp = FirePredict(cfg, teacher_path=teacher_path)

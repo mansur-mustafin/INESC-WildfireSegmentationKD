@@ -41,3 +41,4 @@ const:
   num_classes: 2                            # 0 - no fire, 1 - fire 
   weight_decay: 0                           # L2 regularization.
   lbd: 300
+  is_weighted_loss: True
