@@ -48,9 +48,9 @@ class CustomLoss(nn.Module):
 
         counts_class1 = labels.view(N, -1).sum(dim=1).float()
         counts_class0 = self.N_i - counts_class1
-        counts = torch.stack([counts_class0, counts_class1], dim=1) + self.epsilon
+        counts = torch.stack([counts_class1, counts_class0], dim=1) + self.epsilon
 
-        weights_c = self.N_i / counts
+        weights_c = counts / self.N_i
 
         per_pixel_weights = weights_c.gather(1, labels.view(N, -1)) # weight for each pixel
 
