@@ -30,35 +30,40 @@ from torchvision.models.segmentation import (
 from Sen2FireLoader import Sen2FireDataset
 from utils import *
 
+class DiceLoss(nn.Module):
 
-class CustomLoss(nn.Module):
-    
-    def __init__(self):
-        super(CustomLoss, self).__init__()
-        self.N_i = 512 * 512
-        self.epsilon = 1
+    def __init__(self, smooth = 1e-6, gama=2):
+        super(DiceLoss, self).__init__()
+        self.smooth = smooth
+        self.gama = gama
 
     def forward(self, outputs, labels):
+        
+        # print(outputs.shape)  torch.Size([8, 2, 512, 512])
+        # print(labels.shape)   torch.Size([8, 512, 512])
 
-        N = outputs.shape[0] # batch_size
+        outputs = F.softmax(outputs, dim=1)
 
-        log_probs = F.log_softmax(outputs, dim=1)
+        outputs = outputs.contiguous().view(-1, 2)
+        labels = labels.view(-1)
 
-        loss_per_pixel = -log_probs.gather(dim=1, index=labels.unsqueeze(1)).squeeze(1) # Contains loss for each pixel
+        labels_one_hot = F.one_hot(labels, num_classes=2)
+        labels_one_hot = labels_one_hot.float()
 
-        counts_class1 = labels.view(N, -1).sum(dim=1).float()
-        counts_class0 = self.N_i - counts_class1
-        counts = torch.stack([counts_class1, counts_class0], dim=1) + self.epsilon
+        dice = 0
+        for c in range(2):
+            output_c = outputs[:, c]
+            target_c = labels_one_hot[:, c]
 
-        weights_c = counts / self.N_i
+            intersection = (output_c * target_c).sum()
+            union = output_c.sum() + target_c.sum()
 
-        per_pixel_weights = weights_c.gather(1, labels.view(N, -1)) # weight for each pixel
+            dice_c = (2 * intersection + self.smooth) / (union + self.smooth)
+            dice += dice_c
 
-        weighted_loss_per_pixel = loss_per_pixel.view(N, -1) * per_pixel_weights
-
-        loss = weighted_loss_per_pixel.mean()
-
-        return loss
+        dice_loss = 1 - dice / 2
+        return dice_loss
+        
 
 
 class FirePredict():
@@ -69,8 +74,7 @@ class FirePredict():
         self._setup_model()
         if path is not None:
             self._load_weights(path)
-        # self.criterion = nn.CrossEntropyLoss()
-        self.criterion = CustomLoss()
+        self.criterion = DiceLoss(  )
         self.optimizer = optim.Adam(
             self.model.parameters(), 
             lr=self.cfg.const.lr,
@@ -232,8 +236,8 @@ class FirePredict():
             self.model.train()
             running_loss = 0.0
 
-            # for images, labels in tqdm(self.train_dataloader, desc=f"Epoch {epoch+1}/{num_epochs}"):
-            for images, labels in self.train_dataloader:
+            for images, labels in tqdm(self.train_dataloader, desc=f"Epoch {epoch+1}/{num_epochs}"):
+            # for images, labels in self.train_dataloader:
                 images, labels = images.to(device), labels.to(device)
                 
                 self.optimizer.zero_grad()
