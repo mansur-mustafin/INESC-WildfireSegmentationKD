@@ -62,9 +62,21 @@ class DiceLoss(nn.Module):
             dice += dice_c
 
         dice_loss = 1 - dice / 2
-        return torch.log(torch.cosh(dice_loss))
-        
+        return dice_loss
 
+class CombinedLoss(nn.Module):
+    def __init__(self, weight_dice=0.5, weight_ce=0.5):
+        super(CombinedLoss, self).__init__()
+        self.dice_loss = DiceLoss()
+        self.ce_loss = nn.CrossEntropyLoss()
+        self.weight_dice = weight_dice
+        self.weight_ce = weight_ce
+
+    def forward(self, outputs, targets):
+        dice = self.dice_loss(outputs, targets)
+        ce = self.ce_loss(outputs, targets)
+        combined_loss = self.weight_dice * dice + self.weight_ce * ce
+        return combined_loss
 
 class FirePredict():
 
@@ -74,7 +86,7 @@ class FirePredict():
         self._setup_model()
         if path is not None:
             self._load_weights(path)
-        self.criterion = DiceLoss(  )
+        self.criterion = CombinedLoss(weight_dice = 0.3, weight_ce = 0.7)
         self.optimizer = optim.Adam(
             self.model.parameters(), 
             lr=self.cfg.const.lr,

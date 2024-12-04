@@ -1,0 +1,253 @@
+Configuration: 
+model:
+  name: lraspp
+teacher: null
+path:
+  data: ./../datasets/Sen2Fire/
+  scene1: ./../datasets/Sen2Fire/scene1
+  scene2: ./../datasets/Sen2Fire/scene2
+  scene3: ./../datasets/Sen2Fire/scene3
+  scene4: ./../datasets/Sen2Fire/scene4
+  output_model: models/test/3/
+  weights_test: models/test/3/
+const:
+  lr: 0.0001
+  num_epochs: 350
+  batch_size: 8
+  num_input_channels: 13
+  num_classes: 2
+  weight_decay: 0
+  lbd: 500
+
+Epoch 1/350 Training loss: 0.4323
+Validation Loss: 0.406, Precision: 0.000, Recall: 0.000, F1 Score: 0.000, IoU: 0.000, Acc: 0.971
+Saved model to: models/test/3/lraspp_0_val_0.41_f1_0.00.pt
+Epoch 2/350 Training loss: 0.3845
+Validation Loss: 0.379, Precision: 0.355, Recall: 0.001, F1 Score: 0.002, IoU: 0.001, Acc: 0.971
+Saved model to: models/test/3/lraspp_1_val_0.38_f1_0.00.pt
+Epoch 3/350 Training loss: 0.3775
+Validation Loss: 0.370, Precision: 0.706, Recall: 0.058, F1 Score: 0.107, IoU: 0.057, Acc: 0.972
+Saved model to: models/test/3/lraspp_2_val_0.37_f1_0.11.pt
+Epoch 4/350 Training loss: 0.3739
+Validation Loss: 0.363, Precision: 0.703, Recall: 0.231, F1 Score: 0.348, IoU: 0.210, Acc: 0.975
+Saved model to: models/test/3/lraspp_3_val_0.36_f1_0.35.pt
+Epoch 5/350 Training loss: 0.3725
+Validation Loss: 0.370, Precision: 0.703, Recall: 0.167, F1 Score: 0.269, IoU: 0.156, Acc: 0.974
+Epoch 6/350 Training loss: 0.3690
+Validation Loss: 0.376, Precision: 0.564, Recall: 0.292, F1 Score: 0.385, IoU: 0.238, Acc: 0.973
+Epoch 7/350 Training loss: 0.3718
+Validation Loss: 0.371, Precision: 0.574, Recall: 0.122, F1 Score: 0.201, IoU: 0.112, Acc: 0.972
+Epoch 8/350 Training loss: 0.3672
+Validation Loss: 0.369, Precision: 0.682, Recall: 0.166, F1 Score: 0.267, IoU: 0.154, Acc: 0.974
+Epoch 9/350 Training loss: 0.3661
+Validation Loss: 0.378, Precision: 0.424, Recall: 0.290, F1 Score: 0.344, IoU: 0.208, Acc: 0.968
+Epoch 10/350 Training loss: 0.3690
+Validation Loss: 0.370, Precision: 0.640, Recall: 0.145, F1 Score: 0.236, IoU: 0.134, Acc: 0.973
+Epoch 11/350 Training loss: 0.3693
+Validation Loss: 0.368, Precision: 0.653, Recall: 0.121, F1 Score: 0.204, IoU: 0.114, Acc: 0.973
+Epoch 12/350 Training loss: 0.3690
+Validation Loss: 0.365, Precision: 0.714, Recall: 0.219, F1 Score: 0.335, IoU: 0.201, Acc: 0.975
+Epoch 13/350 Training loss: 0.3653
+Validation Loss: 0.364, Precision: 0.655, Recall: 0.180, F1 Score: 0.283, IoU: 0.165, Acc: 0.974
+Epoch 14/350 Training loss: 0.3669
+Validation Loss: 0.371, Precision: 0.667, Recall: 0.172, F1 Score: 0.274, IoU: 0.159, Acc: 0.974
+Epoch 15/350 Training loss: 0.3661
+Validation Loss: 0.366, Precision: 0.636, Recall: 0.369, F1 Score: 0.467, IoU: 0.305, Acc: 0.976
+Epoch 16/350 Training loss: 0.3644
+Validation Loss: 0.366, Precision: 0.586, Recall: 0.366, F1 Score: 0.451, IoU: 0.291, Acc: 0.974
+Epoch 17/350 Training loss: 0.3613
+Validation Loss: 0.374, Precision: 0.499, Recall: 0.297, F1 Score: 0.372, IoU: 0.229, Acc: 0.971
+Epoch 18/350 Training loss: 0.3626
+Validation Loss: 0.375, Precision: 0.733, Recall: 0.140, F1 Score: 0.235, IoU: 0.133, Acc: 0.974
+Epoch 19/350 Training loss: 0.3607
+Validation Loss: 0.363, Precision: 0.499, Recall: 0.485, F1 Score: 0.492, IoU: 0.326, Acc: 0.971
+Epoch 20/350 Training loss: 0.3632
+Validation Loss: 0.367, Precision: 0.596, Recall: 0.322, F1 Score: 0.418, IoU: 0.264, Acc: 0.974
+Epoch 21/350 Training loss: 0.3637
+Validation Loss: 0.371, Precision: 0.624, Recall: 0.335, F1 Score: 0.436, IoU: 0.279, Acc: 0.975
+Epoch 22/350 Training loss: 0.3628
+Validation Loss: 0.364, Precision: 0.671, Recall: 0.274, F1 Score: 0.389, IoU: 0.241, Acc: 0.975
+Epoch 23/350 Training loss: 0.3628
+Validation Loss: 0.374, Precision: 0.649, Recall: 0.360, F1 Score: 0.463, IoU: 0.301, Acc: 0.976
+Epoch 24/350 Training loss: 0.3606
+Validation Loss: 0.376, Precision: 0.477, Recall: 0.379, F1 Score: 0.422, IoU: 0.267, Acc: 0.970
+Epoch 25/350 Training loss: 0.3580
+Validation Loss: 0.366, Precision: 0.677, Recall: 0.235, F1 Score: 0.348, IoU: 0.211, Acc: 0.975
+Epoch 26/350 Training loss: 0.3579
+Validation Loss: 0.367, Precision: 0.515, Recall: 0.469, F1 Score: 0.491, IoU: 0.326, Acc: 0.972
+Epoch 27/350 Training loss: 0.3587
+Validation Loss: 0.362, Precision: 0.576, Recall: 0.530, F1 Score: 0.552, IoU: 0.381, Acc: 0.975
+Saved model to: models/test/3/lraspp_26_val_0.36_f1_0.55.pt
+Epoch 28/350 Training loss: 0.3608
+Validation Loss: 0.366, Precision: 0.680, Recall: 0.316, F1 Score: 0.432, IoU: 0.275, Acc: 0.976
+Epoch 29/350 Training loss: 0.3572
+Validation Loss: 0.377, Precision: 0.505, Recall: 0.230, F1 Score: 0.316, IoU: 0.188, Acc: 0.971
+Epoch 30/350 Training loss: 0.3572
+Validation Loss: 0.367, Precision: 0.569, Recall: 0.311, F1 Score: 0.402, IoU: 0.252, Acc: 0.973
+Epoch 31/350 Training loss: 0.3565
+Validation Loss: 0.360, Precision: 0.577, Recall: 0.573, F1 Score: 0.575, IoU: 0.403, Acc: 0.976
+Saved model to: models/test/3/lraspp_30_val_0.36_f1_0.57.pt
+Epoch 32/350 Training loss: 0.3574
+Validation Loss: 0.372, Precision: 0.490, Recall: 0.259, F1 Score: 0.339, IoU: 0.204, Acc: 0.971
+Epoch 33/350 Training loss: 0.3576
+Validation Loss: 0.367, Precision: 0.672, Recall: 0.376, F1 Score: 0.483, IoU: 0.318, Acc: 0.977
+Epoch 34/350 Training loss: 0.3575
+Validation Loss: 0.381, Precision: 0.532, Recall: 0.182, F1 Score: 0.271, IoU: 0.157, Acc: 0.972
+Epoch 35/350 Training loss: 0.3569
+Validation Loss: 0.367, Precision: 0.587, Recall: 0.394, F1 Score: 0.472, IoU: 0.309, Acc: 0.975
+Epoch 36/350 Training loss: 0.3570
+Validation Loss: 0.365, Precision: 0.714, Recall: 0.343, F1 Score: 0.463, IoU: 0.302, Acc: 0.977
+Epoch 37/350 Training loss: 0.3569
+Validation Loss: 0.376, Precision: 0.609, Recall: 0.261, F1 Score: 0.365, IoU: 0.223, Acc: 0.974
+Epoch 38/350 Training loss: 0.3581
+Validation Loss: 0.369, Precision: 0.721, Recall: 0.287, F1 Score: 0.411, IoU: 0.259, Acc: 0.976
+Epoch 39/350 Training loss: 0.3542
+Validation Loss: 0.361, Precision: 0.678, Recall: 0.372, F1 Score: 0.480, IoU: 0.316, Acc: 0.977
+Epoch 40/350 Training loss: 0.3540
+Validation Loss: 0.366, Precision: 0.572, Recall: 0.444, F1 Score: 0.500, IoU: 0.333, Acc: 0.974
+Epoch 41/350 Training loss: 0.3545
+Validation Loss: 0.366, Precision: 0.682, Recall: 0.321, F1 Score: 0.437, IoU: 0.279, Acc: 0.976
+Epoch 42/350 Training loss: 0.3571
+Validation Loss: 0.361, Precision: 0.547, Recall: 0.493, F1 Score: 0.519, IoU: 0.350, Acc: 0.974
+Epoch 43/350 Training loss: 0.3511
+Validation Loss: 0.363, Precision: 0.573, Recall: 0.382, F1 Score: 0.458, IoU: 0.297, Acc: 0.974
+Epoch 44/350 Training loss: 0.3571
+Validation Loss: 0.364, Precision: 0.594, Recall: 0.393, F1 Score: 0.473, IoU: 0.310, Acc: 0.975
+Epoch 45/350 Training loss: 0.3551
+Validation Loss: 0.365, Precision: 0.633, Recall: 0.385, F1 Score: 0.479, IoU: 0.315, Acc: 0.976
+Epoch 46/350 Training loss: 0.3532
+Validation Loss: 0.393, Precision: 0.419, Recall: 0.424, F1 Score: 0.422, IoU: 0.267, Acc: 0.967
+Epoch 47/350 Training loss: 0.3549
+Validation Loss: 0.368, Precision: 0.637, Recall: 0.387, F1 Score: 0.482, IoU: 0.317, Acc: 0.976
+Epoch 48/350 Training loss: 0.3524
+Validation Loss: 0.374, Precision: 0.457, Recall: 0.477, F1 Score: 0.467, IoU: 0.304, Acc: 0.969
+Epoch 49/350 Training loss: 0.3525
+Validation Loss: 0.374, Precision: 0.476, Recall: 0.532, F1 Score: 0.503, IoU: 0.336, Acc: 0.970
+Epoch 50/350 Training loss: 0.3544
+Validation Loss: 0.367, Precision: 0.681, Recall: 0.284, F1 Score: 0.401, IoU: 0.251, Acc: 0.976
+Epoch 51/350 Training loss: 0.3528
+Validation Loss: 0.380, Precision: 0.592, Recall: 0.358, F1 Score: 0.446, IoU: 0.287, Acc: 0.974
+Epoch 52/350 Training loss: 0.3499
+Validation Loss: 0.370, Precision: 0.628, Recall: 0.305, F1 Score: 0.410, IoU: 0.258, Acc: 0.975
+Epoch 53/350 Training loss: 0.3532
+Validation Loss: 0.369, Precision: 0.596, Recall: 0.303, F1 Score: 0.402, IoU: 0.252, Acc: 0.974
+Epoch 54/350 Training loss: 0.3531
+Validation Loss: 0.367, Precision: 0.639, Recall: 0.357, F1 Score: 0.458, IoU: 0.297, Acc: 0.976
+Epoch 55/350 Training loss: 0.3523
+Validation Loss: 0.377, Precision: 0.407, Recall: 0.531, F1 Score: 0.461, IoU: 0.299, Acc: 0.964
+Epoch 56/350 Training loss: 0.3505
+Validation Loss: 0.366, Precision: 0.555, Recall: 0.510, F1 Score: 0.532, IoU: 0.362, Acc: 0.974
+Epoch 57/350 Training loss: 0.3515
+Validation Loss: 0.361, Precision: 0.659, Recall: 0.405, F1 Score: 0.502, IoU: 0.335, Acc: 0.977
+Epoch 58/350 Training loss: 0.3525
+Validation Loss: 0.371, Precision: 0.523, Recall: 0.558, F1 Score: 0.540, IoU: 0.370, Acc: 0.973
+Epoch 59/350 Training loss: 0.3496
+Validation Loss: 0.374, Precision: 0.563, Recall: 0.318, F1 Score: 0.406, IoU: 0.255, Acc: 0.973
+Epoch 60/350 Training loss: 0.3484
+Validation Loss: 0.366, Precision: 0.529, Recall: 0.444, F1 Score: 0.483, IoU: 0.318, Acc: 0.973
+Epoch 61/350 Training loss: 0.3468
+Validation Loss: 0.364, Precision: 0.571, Recall: 0.490, F1 Score: 0.527, IoU: 0.358, Acc: 0.975
+Epoch 62/350 Training loss: 0.3479
+Validation Loss: 0.374, Precision: 0.556, Recall: 0.393, F1 Score: 0.461, IoU: 0.299, Acc: 0.974
+Epoch 63/350 Training loss: 0.3505
+Validation Loss: 0.379, Precision: 0.486, Recall: 0.508, F1 Score: 0.496, IoU: 0.330, Acc: 0.970
+Epoch 64/350 Training loss: 0.3511
+Validation Loss: 0.380, Precision: 0.488, Recall: 0.508, F1 Score: 0.498, IoU: 0.331, Acc: 0.971
+Epoch 65/350 Training loss: 0.3493
+Validation Loss: 0.371, Precision: 0.601, Recall: 0.390, F1 Score: 0.473, IoU: 0.310, Acc: 0.975
+Epoch 66/350 Training loss: 0.3521
+Validation Loss: 0.370, Precision: 0.722, Recall: 0.303, F1 Score: 0.427, IoU: 0.271, Acc: 0.977
+Epoch 67/350 Training loss: 0.3492
+Validation Loss: 0.367, Precision: 0.548, Recall: 0.578, F1 Score: 0.563, IoU: 0.392, Acc: 0.974
+Epoch 68/350 Training loss: 0.3491
+Validation Loss: 0.359, Precision: 0.700, Recall: 0.460, F1 Score: 0.555, IoU: 0.384, Acc: 0.979
+Saved model to: models/test/3/lraspp_67_val_0.36_f1_0.56.pt
+Epoch 69/350 Training loss: 0.3506
+Validation Loss: 0.363, Precision: 0.605, Recall: 0.568, F1 Score: 0.586, IoU: 0.414, Acc: 0.977
+Epoch 70/350 Training loss: 0.3491
+Validation Loss: 0.367, Precision: 0.577, Recall: 0.504, F1 Score: 0.538, IoU: 0.368, Acc: 0.975
+Epoch 71/350 Training loss: 0.3463
+Validation Loss: 0.373, Precision: 0.599, Recall: 0.277, F1 Score: 0.379, IoU: 0.234, Acc: 0.974
+Epoch 72/350 Training loss: 0.3500
+Validation Loss: 0.376, Precision: 0.572, Recall: 0.259, F1 Score: 0.356, IoU: 0.217, Acc: 0.973
+Epoch 73/350 Training loss: 0.3461
+Validation Loss: 0.359, Precision: 0.739, Recall: 0.459, F1 Score: 0.566, IoU: 0.395, Acc: 0.980
+Epoch 74/350 Training loss: 0.3465
+Validation Loss: 0.366, Precision: 0.715, Recall: 0.359, F1 Score: 0.478, IoU: 0.314, Acc: 0.977
+Epoch 75/350 Training loss: 0.3495
+Validation Loss: 0.373, Precision: 0.553, Recall: 0.335, F1 Score: 0.417, IoU: 0.264, Acc: 0.973
+Epoch 76/350 Training loss: 0.3463
+Validation Loss: 0.375, Precision: 0.593, Recall: 0.434, F1 Score: 0.501, IoU: 0.334, Acc: 0.975
+Epoch 77/350 Training loss: 0.3453
+Validation Loss: 0.371, Precision: 0.590, Recall: 0.410, F1 Score: 0.484, IoU: 0.319, Acc: 0.975
+Epoch 78/350 Training loss: 0.3468
+Validation Loss: 0.370, Precision: 0.581, Recall: 0.570, F1 Score: 0.575, IoU: 0.404, Acc: 0.976
+Epoch 79/350 Training loss: 0.3450
+Validation Loss: 0.369, Precision: 0.656, Recall: 0.290, F1 Score: 0.402, IoU: 0.252, Acc: 0.975
+Epoch 80/350 Training loss: 0.3498
+Validation Loss: 0.368, Precision: 0.620, Recall: 0.424, F1 Score: 0.503, IoU: 0.336, Acc: 0.976
+Epoch 81/350 Training loss: 0.3498
+Validation Loss: 0.364, Precision: 0.565, Recall: 0.522, F1 Score: 0.543, IoU: 0.373, Acc: 0.975
+Epoch 82/350 Training loss: 0.3476
+Validation Loss: 0.376, Precision: 0.579, Recall: 0.430, F1 Score: 0.494, IoU: 0.328, Acc: 0.975
+Epoch 83/350 Training loss: 0.3486
+Validation Loss: 0.364, Precision: 0.715, Recall: 0.350, F1 Score: 0.470, IoU: 0.307, Acc: 0.977
+Epoch 84/350 Training loss: 0.3444
+Validation Loss: 0.370, Precision: 0.585, Recall: 0.459, F1 Score: 0.515, IoU: 0.346, Acc: 0.975
+Epoch 85/350 Training loss: 0.3495
+Validation Loss: 0.373, Precision: 0.558, Recall: 0.422, F1 Score: 0.480, IoU: 0.316, Acc: 0.974
+Epoch 86/350 Training loss: 0.3466
+Validation Loss: 0.379, Precision: 0.507, Recall: 0.448, F1 Score: 0.476, IoU: 0.312, Acc: 0.972
+Epoch 87/350 Training loss: 0.3477
+Validation Loss: 0.380, Precision: 0.586, Recall: 0.244, F1 Score: 0.344, IoU: 0.208, Acc: 0.973
+Epoch 88/350 Training loss: 0.3478
+Validation Loss: 0.369, Precision: 0.544, Recall: 0.493, F1 Score: 0.517, IoU: 0.349, Acc: 0.974
+Epoch 89/350 Training loss: 0.3451
+Validation Loss: 0.379, Precision: 0.527, Recall: 0.416, F1 Score: 0.465, IoU: 0.303, Acc: 0.972
+Epoch 90/350 Training loss: 0.3479
+Validation Loss: 0.371, Precision: 0.576, Recall: 0.427, F1 Score: 0.491, IoU: 0.325, Acc: 0.975
+Epoch 91/350 Training loss: 0.3464
+Validation Loss: 0.375, Precision: 0.499, Recall: 0.348, F1 Score: 0.410, IoU: 0.258, Acc: 0.971
+Epoch 92/350 Training loss: 0.3475
+Validation Loss: 0.376, Precision: 0.467, Recall: 0.416, F1 Score: 0.440, IoU: 0.282, Acc: 0.970
+Epoch 93/350 Training loss: 0.3491
+Validation Loss: 0.374, Precision: 0.493, Recall: 0.525, F1 Score: 0.509, IoU: 0.341, Acc: 0.971
+Epoch 94/350 Training loss: 0.3460
+Validation Loss: 0.368, Precision: 0.556, Recall: 0.459, F1 Score: 0.503, IoU: 0.336, Acc: 0.974
+Epoch 95/350 Training loss: 0.3446
+Validation Loss: 0.384, Precision: 0.511, Recall: 0.469, F1 Score: 0.489, IoU: 0.324, Acc: 0.972
+Epoch 96/350 Training loss: 0.3441
+Validation Loss: 0.358, Precision: 0.669, Recall: 0.571, F1 Score: 0.616, IoU: 0.445, Acc: 0.980
+Saved model to: models/test/3/lraspp_95_val_0.36_f1_0.62.pt
+Epoch 97/350 Training loss: 0.3436
+Validation Loss: 0.369, Precision: 0.623, Recall: 0.431, F1 Score: 0.509, IoU: 0.342, Acc: 0.976
+Epoch 98/350 Training loss: 0.3460
+Validation Loss: 0.374, Precision: 0.569, Recall: 0.464, F1 Score: 0.511, IoU: 0.343, Acc: 0.974
+Epoch 99/350 Training loss: 0.3424
+Validation Loss: 0.369, Precision: 0.583, Recall: 0.544, F1 Score: 0.563, IoU: 0.392, Acc: 0.976
+Epoch 100/350 Training loss: 0.3451
+Validation Loss: 0.373, Precision: 0.608, Recall: 0.369, F1 Score: 0.459, IoU: 0.298, Acc: 0.975
+Epoch 101/350 Training loss: 0.3463
+Validation Loss: 0.368, Precision: 0.603, Recall: 0.287, F1 Score: 0.389, IoU: 0.241, Acc: 0.974
+Epoch 102/350 Training loss: 0.3447
+Validation Loss: 0.380, Precision: 0.588, Recall: 0.339, F1 Score: 0.430, IoU: 0.274, Acc: 0.974
+Epoch 103/350 Training loss: 0.3447
+Validation Loss: 0.375, Precision: 0.532, Recall: 0.242, F1 Score: 0.333, IoU: 0.200, Acc: 0.972
+Epoch 104/350 Training loss: 0.3455
+Validation Loss: 0.374, Precision: 0.541, Recall: 0.397, F1 Score: 0.458, IoU: 0.297, Acc: 0.973
+Epoch 105/350 Training loss: 0.3433
+Validation Loss: 0.375, Precision: 0.576, Recall: 0.405, F1 Score: 0.475, IoU: 0.312, Acc: 0.974
+Epoch 106/350 Training loss: 0.3423
+Validation Loss: 0.374, Precision: 0.614, Recall: 0.466, F1 Score: 0.530, IoU: 0.361, Acc: 0.976
+Epoch 107/350 Training loss: 0.3439
+Validation Loss: 0.383, Precision: 0.501, Recall: 0.527, F1 Score: 0.513, IoU: 0.345, Acc: 0.971
+Epoch 108/350 Training loss: 0.3431
+Validation Loss: 0.372, Precision: 0.486, Recall: 0.439, F1 Score: 0.461, IoU: 0.300, Acc: 0.971
+Epoch 109/350 Training loss: 0.3460
+Validation Loss: 0.373, Precision: 0.577, Recall: 0.317, F1 Score: 0.409, IoU: 0.257, Acc: 0.974
+Epoch 110/350 Training loss: 0.3453
+Validation Loss: 0.370, Precision: 0.617, Recall: 0.321, F1 Score: 0.422, IoU: 0.268, Acc: 0.975
+Epoch 111/350 Training loss: 0.3419
+Validation Loss: 0.368, Precision: 0.697, Recall: 0.293, F1 Score: 0.412, IoU: 0.260, Acc: 0.976
+Epoch 112/350 Training loss: 0.3435
+Validation Loss: 0.390, Precision: 0.415, Recall: 0.346, F1 Score: 0.377, IoU: 0.232, Acc: 0.967
