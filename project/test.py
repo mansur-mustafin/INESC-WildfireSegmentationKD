@@ -41,7 +41,7 @@ class DiceLoss(nn.Module):
         
         # print(outputs.shape)  torch.Size([8, 2, 512, 512])
         # print(labels.shape)   torch.Size([8, 512, 512])
-
+        
         outputs = F.softmax(outputs, dim=1)
 
         outputs = outputs.contiguous().view(-1, 2)
@@ -62,7 +62,7 @@ class DiceLoss(nn.Module):
             dice += dice_c
 
         dice_loss = 1 - dice / 2
-        return dice_loss
+        return torch.log(torch.cosh(dice_loss))
         
 
 

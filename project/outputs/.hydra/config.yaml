@@ -7,8 +7,8 @@ path:
   scene2: ./../datasets/Sen2Fire/scene2
   scene3: ./../datasets/Sen2Fire/scene3
   scene4: ./../datasets/Sen2Fire/scene4
-  output_model: models/new_loss_dice/1/
-  weights_test: models/new_loss_dice/1/
+  output_model: models/test/
+  weights_test: models/test/
 const:
   lr: 0.0001
   num_epochs: 350

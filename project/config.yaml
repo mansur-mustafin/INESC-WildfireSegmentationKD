@@ -30,8 +30,8 @@ path:
   scene3: "./../datasets/Sen2Fire/scene3"
   scene4: "./../datasets/Sen2Fire/scene4"
 
-  output_model: "models/new_loss_dice/1/"
-  weights_test: "models/new_loss_dice/1/"           # folder which models to test
+  output_model: "models/test/"
+  weights_test: "models/test/"           # folder which models to test
 
 const:
   lr: 0.0001
