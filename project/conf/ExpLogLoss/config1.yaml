@@ -1,0 +1,51 @@
+# Define some constants
+
+defaults:
+  - _self_
+
+hydra:
+  run:
+    dir: outputs/
+
+model:
+  name: "lraspp"
+  # name: "fcn_resnet50"
+  # name: "fcn_resnet101"
+  # name: "deeplabv3_resnet50"
+  # name: "deeplabv3_resnet101"
+  # name: "deeplabv3_mobilenet_v3_large"
+
+teacher:
+  # name: "lraspp"
+  # name: "fcn_resnet50"
+  # name: "fcn_resnet101"
+  # name: "deeplabv3_resnet50"
+  # name: "deeplabv3_resnet101"
+  # name: "deeplabv3_mobilenet_v3_large"
+
+path:
+  data: "./../datasets/Sen2Fire/"
+  scene1: "./../datasets/Sen2Fire/scene1"
+  scene2: "./../datasets/Sen2Fire/scene2"
+  scene3: "./../datasets/Sen2Fire/scene3"
+  scene4: "./../datasets/Sen2Fire/scene4"
+
+  output_model: "models/new_loss_ExpLog/1/"
+  weights_test: "models/new_loss_ExpLog/1/"           # folder which models to test
+
+const:
+  lr: 0.0001
+  num_epochs: 350
+  batch_size: 8
+  num_input_channels: 13                    
+  num_classes: 2                            # 0 - no fire, 1 - fire 
+  weight_decay: 0                           # L2 regularization.
+  lbd: 500
+
+  logexp:
+    name: ExpLogLoss
+    alpha: 0.5
+    beta: 0.5
+    gamma_dice: 1.5
+    gamma_wce: 1.5
+    class_weights: null

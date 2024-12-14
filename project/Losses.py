@@ -1,19 +1,13 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-
+from omegaconf import DictConfig, OmegaConf
 
 class DiceLoss(nn.Module):
 
-    def __init__(self, smooth = 1e-6, gama=2, write_log = False):
+    def __init__(self, smooth = 1e-6):
         super(DiceLoss, self).__init__()
         self.smooth = smooth
-        self.gama = gama
-        if write_log :
-            print(f"""Used DiceLoss: 
-    smooth = {smooth}
-    gama = {gama}
-            """)
 
     def forward(self, outputs, labels):
         
@@ -45,23 +39,15 @@ class DiceLoss(nn.Module):
 
 class ExpLogLoss(nn.Module):
     
-    def __init__(self, alpha=0.5, beta=0.5, gamma_dice=1.5, gamma_wce=1.5, class_weights=None, eps=1e-6, write_log = False):
+    def __init__(self, cfg: DictConfig, eps=1e-6):
         super(ExpLogLoss, self).__init__()
         self.dice_loss = DiceLoss()
-        self.alpha = alpha  # Dice
-        self.beta = beta    # WCE
-        self.gamma_dice = gamma_dice
-        self.gamma_wce = gamma_wce
-        self.class_weights = class_weights
+        self.alpha = cfg.get("alpha", 0.5)  # Dice
+        self.beta = cfg.get("beta", 0.5)    # WCE
+        self.gamma_dice = cfg.get("gamma_dice", 1.5)
+        self.gamma_wce = cfg.get("gamma_wce", 1.5)
+        self.class_weights = cfg.get("class_weights", None)
         self.eps = eps
-        if write_log :
-            print(f"""Used DiceLoss: 
-    alpha = {self.alpha}
-    beta = {self.beta}
-    gamma_dice = {self.gamma_dice}
-    gamma_wce = {self.gamma_wce}
-    class_weights = {self.class_weights}
-            """)
 
     def forward(self, outputs, labels):
         dice_loss = self.dice_loss(outputs, labels)
@@ -84,11 +70,6 @@ class CombinedLoss(nn.Module):
         self.ce_loss = nn.CrossEntropyLoss()
         self.weight_dice = weight_dice
         self.weight_ce = weight_ce
-        if write_log :
-            print(f"""Used CombinedLoss: 
-    weight_dice = {weight_dice}
-    weight_ce = {weight_ce}
-            """)
 
 
     def forward(self, outputs, targets):

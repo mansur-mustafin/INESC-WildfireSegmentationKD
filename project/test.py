@@ -1,5 +1,6 @@
 import os
 import time
+import sys
 
 import hydra
 import numpy as np
@@ -39,7 +40,7 @@ class FirePredict():
         self._setup_model()
         if path is not None:
             self._load_weights(path)
-        self.criterion = ExpLogLoss(write_log = True)
+        self.criterion = ExpLogLoss(cfg.const.logexp)
         self.optimizer = optim.Adam(
             self.model.parameters(), 
             lr=self.cfg.const.lr,
@@ -201,8 +202,8 @@ class FirePredict():
             self.model.train()
             running_loss = 0.0
 
-            for images, labels in tqdm(self.train_dataloader, desc=f"Epoch {epoch+1}/{num_epochs}"):
-            # for images, labels in self.train_dataloader:
+            # for images, labels in tqdm(self.train_dataloader, desc=f"Epoch {epoch+1}/{num_epochs}"):
+            for images, labels in self.train_dataloader:
                 images, labels = images.to(device), labels.to(device)
                 
                 self.optimizer.zero_grad()
@@ -306,7 +307,7 @@ class FirePredict():
         print(f' - Precision: {precision[0]:.3f}, Recall: {recall[0]:.3f}, F1 Score: {f1[0]:.3f}, IoU: {iou[0]:.3f}, Accuracy: {accuracy[0]:.3f}')
 
 
-@hydra.main(config_path="", config_name="config", version_base=None)
+@hydra.main(config_path=None, config_name=None, version_base=None)
 def main(cfg: DictConfig):
     print("Configuration: ")
     print(OmegaConf.to_yaml(cfg))
