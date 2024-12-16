@@ -42,16 +42,18 @@ class ExpLogLoss(nn.Module):
     def __init__(self, cfg: DictConfig, eps=1e-6):
         super(ExpLogLoss, self).__init__()
         self.dice_loss = DiceLoss()
+        self.wce_loss = nn.CrossEntropyLoss(weight=cfg.get("class_weights", None))
         self.alpha = cfg.get("alpha", 0.5)  # Dice
         self.beta = cfg.get("beta", 0.5)    # WCE
         self.gamma_dice = cfg.get("gamma_dice", 1.5)
         self.gamma_wce = cfg.get("gamma_wce", 1.5)
-        self.class_weights = cfg.get("class_weights", None)
         self.eps = eps
 
     def forward(self, outputs, labels):
         dice_loss = self.dice_loss(outputs, labels)
-        wce_loss = F.cross_entropy(outputs, labels, weight=self.class_weights, reduction='mean')
+        wce_loss = self.wce_loss(outputs, labels)
+
+        wce_loss = torch.exp(-wce_loss) # test
 
         dice_loss = torch.clamp(dice_loss, min=self.eps, max=1.0)
         wce_loss = torch.clamp(wce_loss, min=self.eps, max=1.0)
@@ -64,7 +66,7 @@ class ExpLogLoss(nn.Module):
 
 
 class CombinedLoss(nn.Module):
-    def __init__(self, weight_dice=0.5, weight_ce=0.5, write_log = False):
+    def __init__(self, weight_dice=0.5, weight_ce=0.5):
         super(CombinedLoss, self).__init__()
         self.dice_loss = DiceLoss()
         self.ce_loss = nn.CrossEntropyLoss()
@@ -76,4 +78,6 @@ class CombinedLoss(nn.Module):
         dice = self.dice_loss(outputs, targets)
         ce = self.ce_loss(outputs, targets)
         combined_loss = self.weight_dice * dice + self.weight_ce * ce
+
+        print(f"loss: {combined_loss}, dice: {dice}, wce: {ce}")
         return combined_loss
