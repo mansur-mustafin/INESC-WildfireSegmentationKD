@@ -7,6 +7,6 @@
 #SBATCH -e slurm_%x.%j.err       # File containing STDERR output. If ommited, use STDOUT.
 
 # Commands / scripts to run (e.g., python3 train.py)
-python3 test.py --config-path=conf/ExpLogLoss --config-name=config1
-python3 test.py --config-path=conf/ExpLogLoss --config-name=config2
-python3 test.py --config-path=conf/ExpLogLoss --config-name=config3
+python3 test.py --config-path=conf/UnifiedFocalLoss --config-name=config1
+python3 test.py --config-path=conf/UnifiedFocalLoss --config-name=config2
+python3 test.py --config-path=conf/UnifiedFocalLoss --config-name=config3

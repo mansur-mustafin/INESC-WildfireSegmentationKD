@@ -40,7 +40,7 @@ class FirePredict():
         self._setup_model()
         if path is not None:
             self._load_weights(path)
-        self.criterion = ExpLogLoss(cfg.const.logexp)
+        self.criterion = UnifiedFocalLoss(cfg.const.unifocal)
         self.optimizer = optim.Adam(
             self.model.parameters(), 
             lr=self.cfg.const.lr,
