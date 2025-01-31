@@ -4,14 +4,14 @@ teacher: null
 path:
   images_dir: ./../datasets/Landsat8-ActiveFire/images/patches
   masks_dir: ./../datasets/Landsat8-ActiveFire/masks/voting
-  output_model: models/landset8_default/1/
-  weights_test: models/landset8_default/1/
+  output_model: models/landset8_default/2/
+  weights_test: models/landset8_default/2/
 const:
-  lr: 0.0001
-  num_epochs: 50
-  batch_size: 8
+  lr: 0.001
+  num_epochs: 70
+  batch_size: 64
   num_input_channels: 10
-  num_classes: 2
+  num_classes: 1
   weight_decay: 0
   lbd: 500
   mask_postfix: _voting
