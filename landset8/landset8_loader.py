@@ -1,30 +1,31 @@
 import os
 import random
 
+import pickle
 import rasterio
 import numpy as np
 import pandas as pd
 import albumentations as A
 import torch
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset
 
 MAX_PIXEL_VALUE = 65535
 
 
 class Landset8Dataset(Dataset):
 
-    def __init__(self, images_csv, images_dir, masks_dir, mask_postfix, augment=False):
+    def __init__(self, images_csv, dataset_dir, mask, augment=False):
         """
         Args:
-            mask_postfix (str): Postfix added to image filenames to get mask filenames.
-            In this example: LC08_L1TP_119031_20200807_20200807_01_RT_p00273.tif,LC08_L1TP_119031_20200807_20200807_01_RT_Schroeder_p00273.tif
-            mask_postfix = _Schroeder
+            mask: Kumar, Schroeder, Murphy, intersections, voting
         """
         self.data = pd.read_csv(images_csv, skiprows=1, header=None)[0].tolist()
-        self.images_dir = images_dir
-        self.masks_dir = masks_dir
-        self.mask_postfix = mask_postfix
+        self.dataset_dir = dataset_dir
+        self.mask = mask
         self.seed = 1234
+        with open(dataset_dir+"dataset.pkl", "rb") as file:
+            data = pickle.load(file)
+        self.df = {fp.split('/')[-1]: row for fp, row in data.set_index('full_path').iterrows()}
 
         random.seed(self.seed)
         np.random.seed(self.seed)
@@ -46,10 +47,10 @@ class Landset8Dataset(Dataset):
 
     def __getitem__(self, index):
         image_filename = self.data[index].strip()
-        mask_filename = self._generate_mask_filename(image_filename)
+        image_path, mask_path = self._generate_path(image_filename)
 
-        image_path = os.path.join(self.images_dir, image_filename)
-        mask_path = os.path.join(self.masks_dir, mask_filename)
+        image_path = os.path.join(self.dataset_dir, image_path)
+        mask_path = os.path.join(self.dataset_dir, mask_path)
 
         with rasterio.open(image_path) as src:
             image = src.read().astype(np.float32) / MAX_PIXEL_VALUE
@@ -69,12 +70,10 @@ class Landset8Dataset(Dataset):
 
         return image, mask
 
-    def _generate_mask_filename(self, image_filename):
+    def _generate_path(self, image_filename):
         """
-        Generate mask filename by inserting the mask_postfix
-        before `_pXXXXX` in the image filename.
+        Generate mask filename by inserting the mask
         """
-        base_name, extension = image_filename.rsplit(".", 1)
-        parts = base_name.split("_p")  # Split before `_pXXXXX`
-        mask_filename = f"{parts[0]}{self.mask_postfix}_p{parts[1]}.{extension}"
-        return mask_filename
+        row = self.df.get(image_filename, "File not found")
+        column = 'masks_'+self.mask
+        return row.name, row[column]

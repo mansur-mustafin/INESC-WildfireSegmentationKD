@@ -25,21 +25,20 @@ teacher:
   # name: "deeplabv3_mobilenet_v3_large"
 
 path:
-  images_dir: "./../datasets/Landsat8-ActiveFire/images/patches"
-  masks_dir: "./../datasets/Landsat8-ActiveFire/masks/voting"
+  dataset: "./../datasets/Landsat8-ActiveFire/"
 
-  output_model: "weights/landset8_default/3/"
-  weights_test: "weights/landset8_default/3/"           # folder which models to test
+  output_model: "weights/landset8_default/4/"
+  weights_test: "weights/landset8_default/4/"           # folder which models to test
 
 const:
   lr: 0.001
   num_epochs: 100
-  batch_size: 32
+  batch_size: 64
   num_input_channels: 10                    
   num_classes: 1                            # 0 - no fire, 1 - fire 
   weight_decay: 0                           # L2 regularization.
   lbd: 500
-  mask_postfix: "_voting"
+  mask: "voting"                            # Kumar, Schroeder, Murphy, intersections, voting
   th_fire: 0.25
   dropout: 0.1
   n_filters: 16
