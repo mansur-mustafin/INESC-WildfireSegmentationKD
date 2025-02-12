@@ -1,20 +1,19 @@
 model:
-  name: lraspp
+  name: unet
 teacher: null
 path:
-  images_dir: ./../datasets/Landsat8-ActiveFire/images/patches
-  masks_dir: ./../datasets/Landsat8-ActiveFire/masks/voting
-  output_model: weights/landset8_default/3/
-  weights_test: weights/landset8_default/3/
+  dataset: ./../datasets/Landsat8-ActiveFire/
+  output_model: weights/landset8_default/5/
+  weights_test: weights/landset8_default/5/
 const:
   lr: 0.001
-  num_epochs: 100
+  num_epochs: 1
   batch_size: 32
   num_input_channels: 10
   num_classes: 1
   weight_decay: 0
   lbd: 500
-  mask_postfix: _voting
+  mask: voting
   th_fire: 0.25
   dropout: 0.1
   n_filters: 16

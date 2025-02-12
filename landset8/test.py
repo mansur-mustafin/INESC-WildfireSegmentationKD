@@ -12,7 +12,7 @@ import torch.nn.functional as F
 import torch.optim as optim
 from torch.utils.data import DataLoader, ConcatDataset, random_split
 
-from lendset8_loader import Landset8Dataset
+from landset8_loader import Landset8Dataset
 from model_manager import ModelManager
 from utils import *
 
@@ -45,17 +45,15 @@ class FirePredict():
     def _create_data_loaders(self):
         train_dataset = Landset8Dataset(
             images_csv="./split/images_train.csv",
-            images_dir=self.cfg.path.images_dir,
-            masks_dir=self.cfg.path.masks_dir,
-            mask_postfix=self.cfg.const.mask_postfix,
+            dataset_dir=self.cfg.path.dataset,
+            mask=self.cfg.const.mask,
             augment=False
         )
 
         val_dataset = Landset8Dataset(
             images_csv="./split/images_val.csv",
-            images_dir=self.cfg.path.images_dir,
-            masks_dir=self.cfg.path.masks_dir,
-            mask_postfix=self.cfg.const.mask_postfix,
+            dataset_dir=self.cfg.path.dataset,
+            mask=self.cfg.const.mask,
             augment=False
         )
 
@@ -168,9 +166,8 @@ class FirePredict():
     def test(self):
         test_dataset = Landset8Dataset(
             images_csv="./split/images_test.csv",
-            images_dir=self.cfg.path.images_dir,
-            masks_dir=self.cfg.path.masks_dir,
-            mask_postfix=self.cfg.const.mask_postfix,
+            dataset_dir=self.cfg.path.dataset,
+            mask=self.cfg.const.mask,
             augment=False
         )
         test_dataloader = DataLoader(test_dataset, batch_size=self.cfg.const.batch_size, shuffle=False, num_workers=8, drop_last=True)
