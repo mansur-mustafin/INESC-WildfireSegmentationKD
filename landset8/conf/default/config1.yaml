@@ -33,7 +33,7 @@ path:
 const:
   lr: 0.001
   num_epochs: 100
-  batch_size: 64
+  batch_size: 32
   num_input_channels: 10                    
   num_classes: 1                            # 0 - no fire, 1 - fire 
   weight_decay: 0                           # L2 regularization.
