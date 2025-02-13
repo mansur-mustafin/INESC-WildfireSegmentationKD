@@ -1,5 +1,5 @@
 model:
-  name: unet
+  name: lraspp
 teacher: null
 path:
   dataset: ./../datasets/Landsat8-ActiveFire/
@@ -7,7 +7,7 @@ path:
   weights_test: weights/landset8_default/5/
 const:
   lr: 0.001
-  num_epochs: 1
+  num_epochs: 100
   batch_size: 32
   num_input_channels: 10
   num_classes: 1
