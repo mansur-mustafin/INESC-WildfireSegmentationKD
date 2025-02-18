@@ -4,6 +4,7 @@ landset8/wandb_secret.json
 landset8/wandb/
 landset8/outputs/
 *.pt
+test/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
