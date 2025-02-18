@@ -8,8 +8,8 @@ hydra:
     dir: outputs/
 
 model:
-  # name: "unet"
-  name: "lraspp"
+  name: "unet"
+  # name: "lraspp"
   # name: "fcn_resnet50"
   # name: "fcn_resnet101"
   # name: "deeplabv3_resnet50"
@@ -34,7 +34,7 @@ const:
   lr: 0.001
   num_epochs: 100
   batch_size: 32
-  num_input_channels: 10                    
+  num_input_channels: 3                    
   num_classes: 1                            # 0 - no fire, 1 - fire 
   weight_decay: 0                           # L2 regularization.
   lbd: 500

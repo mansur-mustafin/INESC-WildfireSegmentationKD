@@ -53,7 +53,7 @@ class Landset8Dataset(Dataset):
         mask_path = os.path.join(self.dataset_dir, mask_path)
 
         with rasterio.open(image_path) as src:
-            image = src.read().astype(np.float32) / MAX_PIXEL_VALUE
+            image = src.read((7, 6, 2)).astype(np.float32) / MAX_PIXEL_VALUE
         with rasterio.open(mask_path) as src:
             mask = src.read(1).astype(np.float32)
 

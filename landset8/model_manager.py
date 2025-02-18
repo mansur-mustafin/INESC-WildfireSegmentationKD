@@ -1,6 +1,5 @@
 import torch
 import torch.nn as nn
-from torch.utils.data import DataLoader, ConcatDataset, random_split
 from torchvision.models.segmentation import (
     lraspp_mobilenet_v3_large,
     fcn_resnet50,
@@ -49,7 +48,7 @@ class ModelManager:
                 dropout=self.cfg.const.dropout,
                 n_channels=self.cfg.const.num_input_channels
             )
-        else:    
+        else:
             model = model_fn(weights=weights)
 
             modify_fn(
