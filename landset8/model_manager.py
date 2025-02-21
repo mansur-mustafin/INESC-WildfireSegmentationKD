@@ -8,14 +8,6 @@ from torchvision.models.segmentation import (
     deeplabv3_resnet101,
     deeplabv3_mobilenet_v3_large
 )
-from torchvision.models.segmentation import (
-    LRASPP_MobileNet_V3_Large_Weights,
-    FCN_ResNet50_Weights,
-    FCN_ResNet101_Weights,
-    DeepLabV3_ResNet50_Weights,
-    DeepLabV3_ResNet101_Weights,
-    DeepLabV3_MobileNet_V3_Large_Weights
-)
 
 from models.Unet import get_unet
 
@@ -25,12 +17,12 @@ class ModelManager:
         self.cfg = cfg
 
         self.model_mappings = {
-            "lraspp": (lraspp_mobilenet_v3_large, LRASPP_MobileNet_V3_Large_Weights.DEFAULT, self._modify_lraspp_model),
-            "fcn_resnet50": (fcn_resnet50, FCN_ResNet50_Weights.DEFAULT, self._modify_fcn_model),
-            "fcn_resnet101": (fcn_resnet101, FCN_ResNet101_Weights.DEFAULT, self._modify_fcn_model),
-            "deeplabv3_resnet50": (deeplabv3_resnet50, DeepLabV3_ResNet50_Weights.DEFAULT, self._modify_deeplab_model),
-            "deeplabv3_resnet101": (deeplabv3_resnet101, DeepLabV3_ResNet101_Weights.DEFAULT, self._modify_deeplab_model),
-            "deeplabv3_mobilenet_v3_large": (deeplabv3_mobilenet_v3_large, DeepLabV3_MobileNet_V3_Large_Weights.DEFAULT, self._modify_deeplab_mobilenet_model),
+            "lraspp": (lraspp_mobilenet_v3_large, None, self._modify_lraspp_model),
+            "fcn_resnet50": (fcn_resnet50, None, self._modify_fcn_model),
+            "fcn_resnet101": (fcn_resnet101, None, self._modify_fcn_model),
+            "deeplabv3_resnet50": (deeplabv3_resnet50, None, self._modify_deeplab_model),
+            "deeplabv3_resnet101": (deeplabv3_resnet101, None, self._modify_deeplab_model),
+            "deeplabv3_mobilenet_v3_large": (deeplabv3_mobilenet_v3_large, None, self._modify_deeplab_mobilenet_model),
             "unet": (get_unet, None, self._no_op),
         }
 

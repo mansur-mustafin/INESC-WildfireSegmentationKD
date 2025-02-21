@@ -6,6 +6,9 @@ landset8/outputs/
 *.pt
 test/
 
+.DS_Store
+landset8/.DS_Store
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

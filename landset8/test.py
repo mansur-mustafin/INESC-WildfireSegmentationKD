@@ -1,6 +1,4 @@
-import time
-
-import wandb
+# import wandb
 import json
 import hydra
 import numpy as np
@@ -8,18 +6,17 @@ from omegaconf import DictConfig, OmegaConf
 from tqdm import tqdm
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 import torch.optim as optim
-from torch.utils.data import DataLoader, ConcatDataset, random_split
+from torch.utils.data import DataLoader
 
 from landset8_loader import Landset8Dataset
 from model_manager import ModelManager
 from utils import *
 
 # Login WANDD
-with open("wandb_secret.json", "r") as f:
-    secrets = json.load(f)
-wandb.login(key=secrets["WANDB_API_KEY"])
+# with open("wandb_secret.json", "r") as f:
+#     secrets = json.load(f)
+# wandb.login(key=secrets["WANDB_API_KEY"])
 
 
 class FirePredict():
@@ -66,14 +63,14 @@ class FirePredict():
         )
 
     def train(self):
-        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        device = torch.device('cuda' if torch.cuda.is_available() else 'mps')
         self.model = self.model.to(device)
 
         best_val_loss = float('inf')
         epsilon = 1e-14
         num_epochs = self.cfg.const.num_epochs
 
-        wandb.watch(self.model, log="all", log_freq=100)
+        # wandb.watch(self.model, log="all", log_freq=100)
 
         for epoch in range(num_epochs):
             self.model.train()
@@ -97,7 +94,7 @@ class FirePredict():
 
             print(f'Epoch {epoch+1}/{num_epochs} Training loss: {epoch_loss:.4f}')
 
-            wandb.log({"train_loss": epoch_loss})
+            # wandb.log({"train_loss": epoch_loss})
 
             # Validation
             self.model.eval()
@@ -144,13 +141,13 @@ class FirePredict():
 
             print(f'Validation Loss: {val_loss:.5f}, Precision: {precision[0]:.3f}, Recall: {recall[0]:.3f}, F1 Score: {f1[0]:.3f}, IoU: {iou[0]:.3f}, Acc: {accuracy[0]:.3f}')
 
-            wandb.log({
-                "val_loss": val_loss,
-                "val_acc": accuracy[0],
-                "val_precision": precision[0],
-                "val_recall": recall[0],
-                "val_f1": f1[0]
-            })
+            # wandb.log({
+            #     "val_loss": val_loss,
+            #     "val_acc": accuracy[0],
+            #     "val_precision": precision[0],
+            #     "val_recall": recall[0],
+            #     "val_f1": f1[0]
+            # })
 
             save_model = False
 
@@ -211,14 +208,14 @@ class FirePredict():
 
 @hydra.main(config_path=None, config_name=None, version_base=None)
 def main(cfg: DictConfig):
-    wandb.init(project="FirePrediction", config=OmegaConf.to_container(cfg, resolve=True), name=f"Run_{time.strftime('%Y%m%d-%H%M%S')}")
+    # wandb.init(project="FirePrediction", config=OmegaConf.to_container(cfg, resolve=True), name=f"Run_{time.strftime('%Y%m%d-%H%M%S')}")
     print("Configuration: ")
     print(OmegaConf.to_yaml(cfg))
 
     # TRAINING
     fp = FirePredict(cfg)
     fp.train()
-    wandb.finish()
+    # wandb.finish()
 
     print("\nTesting...\n")
 

@@ -3,12 +3,12 @@ model:
 teacher: null
 path:
   dataset: ./../datasets/Landsat8-ActiveFire/
-  output_model: weights/landset8_default/4/
-  weights_test: weights/landset8_default/4/
+  output_model: weights/landset8_default/test/
+  weights_test: weights/landset8_default/test/
 const:
   lr: 0.001
   num_epochs: 100
-  batch_size: 32
+  batch_size: 64
   num_input_channels: 3
   num_classes: 1
   weight_decay: 0
