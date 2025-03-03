@@ -1,5 +1,5 @@
 model:
-  name: unet
+  name: enet
 teacher: null
 path:
   dataset: ./../datasets/Landsat8-ActiveFire/

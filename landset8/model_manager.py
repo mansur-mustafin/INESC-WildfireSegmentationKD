@@ -9,7 +9,8 @@ from torchvision.models.segmentation import (
     deeplabv3_mobilenet_v3_large
 )
 
-from models.Unet import get_unet
+from models.UNet import UNet
+from models.ENet import ENet
 
 
 class ModelManager:
@@ -23,7 +24,8 @@ class ModelManager:
             "deeplabv3_resnet50": (deeplabv3_resnet50, None, self._modify_deeplab_model),
             "deeplabv3_resnet101": (deeplabv3_resnet101, None, self._modify_deeplab_model),
             "deeplabv3_mobilenet_v3_large": (deeplabv3_mobilenet_v3_large, None, self._modify_deeplab_mobilenet_model),
-            "unet": (get_unet, None, self._no_op),
+            "unet": (self._no_op, None, self._no_op),
+            "enet": (self._no_op, None, self._no_op)
         }
 
     def create_model(self):
@@ -32,13 +34,21 @@ class ModelManager:
             raise ValueError(f"Model '{model_name}' not found.")
 
         model_fn, weights, modify_fn = self.model_mappings[model_name]
-
+        
+        model = None
+        
         if model_name == "unet":
-            model = model_fn(
-                nClasses=self.cfg.const.num_classes,
+            model = UNet(
+                n_classes=self.cfg.const.num_classes,
                 n_filters=self.cfg.const.n_filters,
                 dropout=self.cfg.const.dropout,
                 n_channels=self.cfg.const.num_input_channels
+            )
+        if model_name == "enet":
+            model = ENet(
+                num_classes=self.cfg.const.num_classes,
+                encoder_relu=False,
+                decoder_relu=True
             )
         else:
             model = model_fn(weights=weights)
@@ -79,9 +89,12 @@ class ModelManager:
             padding=original_conv.padding,
             bias=False
         )
-        new_conv.weight.data[:, :original_conv.in_channels] = original_conv.weight.data.clone()  # TODO: initial weights in this case?
+        # TODO: initial weights in this case?
+        new_conv.weight.data[:,
+                             :original_conv.in_channels] = original_conv.weight.data.clone()
 
-        new_bn = nn.BatchNorm2d(original_conv.out_channels, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        new_bn = nn.BatchNorm2d(original_conv.out_channels, eps=0.001,
+                                momentum=0.01, affine=True, track_running_stats=True)
         new_activation = nn.Hardswish()
 
         model.backbone['0'] = nn.Sequential(new_conv, new_bn, new_activation)
@@ -100,14 +113,17 @@ class ModelManager:
         '''
         # Input
         original_first_layer = model.backbone.conv1
-        model.backbone.conv1 = nn.Conv2d(num_input_channels, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+        model.backbone.conv1 = nn.Conv2d(num_input_channels, 64, kernel_size=(
+            7, 7), stride=(2, 2), padding=(3, 3), bias=False)
 
-        model.backbone.conv1.weight.data[:, 1:4] = original_first_layer.weight.data.clone()
+        model.backbone.conv1.weight.data[:,
+                                         1:4] = original_first_layer.weight.data.clone()
         model.backbone.conv1.weight.data[:, 0:0].zero_()
         model.backbone.conv1.weight.data[:, 5:].zero_()
 
         # Classifier
-        model.classifier[4] = nn.Conv2d(512, num_classes, kernel_size=(1, 1), stride=(1, 1))
+        model.classifier[4] = nn.Conv2d(
+            512, num_classes, kernel_size=(1, 1), stride=(1, 1))
 
     def _modify_deeplab_model(self, model, num_input_channels, num_classes=2):
         '''
@@ -115,14 +131,17 @@ class ModelManager:
         '''
         # Input
         original_first_layer = model.backbone.conv1
-        model.backbone.conv1 = nn.Conv2d(num_input_channels, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+        model.backbone.conv1 = nn.Conv2d(num_input_channels, 64, kernel_size=(
+            7, 7), stride=(2, 2), padding=(3, 3), bias=False)
 
-        model.backbone.conv1.weight.data[:, 1:4] = original_first_layer.weight.data.clone()
+        model.backbone.conv1.weight.data[:,
+                                         1:4] = original_first_layer.weight.data.clone()
         model.backbone.conv1.weight.data[:, 0:0].zero_()
         model.backbone.conv1.weight.data[:, 5:].zero_()
 
         # Classifier
-        model.classifier[4] = nn.Conv2d(256, num_classes, kernel_size=(1, 1), stride=(1, 1))
+        model.classifier[4] = nn.Conv2d(
+            256, num_classes, kernel_size=(1, 1), stride=(1, 1))
 
     def _modify_deeplab_mobilenet_model(self, model, num_input_channels, num_classes=2):
         '''
@@ -140,11 +159,14 @@ class ModelManager:
             padding=original_conv.padding,
             bias=False
         )
-        new_conv.weight.data[:, :original_conv.in_channels] = original_conv.weight.data.clone()
-        new_bn = nn.BatchNorm2d(16, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        new_conv.weight.data[:,
+                             :original_conv.in_channels] = original_conv.weight.data.clone()
+        new_bn = nn.BatchNorm2d(
+            16, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
         new_activation = nn.Hardswish()
 
         model.backbone['0'] = nn.Sequential(new_conv, new_bn, new_activation)
 
         # Classifier
-        model.classifier[4] = nn.Conv2d(256, num_classes, kernel_size=(1, 1), stride=(1, 1))
+        model.classifier[4] = nn.Conv2d(
+            256, num_classes, kernel_size=(1, 1), stride=(1, 1))
