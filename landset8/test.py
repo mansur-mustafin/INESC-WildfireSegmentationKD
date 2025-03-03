@@ -114,6 +114,7 @@ class FirePredict():
                     # Metrics
                     if self.cfg.const.num_classes == 1:
                         preds = (outputs[:, 0, :, :] > self.cfg.const.th_fire).cpu().numpy().astype(np.uint8).flatten()
+                        print("Min:", preds.min(), "Mean:", preds.mean(), "Max:", preds.max())
                     else:
                         preds = torch.argmax(outputs, dim=1).cpu().numpy().flatten()
 

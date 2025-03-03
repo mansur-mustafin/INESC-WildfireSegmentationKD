@@ -107,6 +107,7 @@ class UNet(nn.Module):
         c9 = self.c9(u9)
 
         out = self.out_conv(c9)
+        # out = self.sigmoid(out) In case of BCEWithLogitsLoss.
         return {"out": out}
 
 
