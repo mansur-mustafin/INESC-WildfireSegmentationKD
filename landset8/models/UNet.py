@@ -109,14 +109,3 @@ class UNet(nn.Module):
         out = self.out_conv(c9)
         # out = self.sigmoid(out) In case of BCEWithLogitsLoss.
         return {"out": out}
-
-
-def get_unet(nClasses=1, input_height=256, input_width=256, n_filters=16, dropout=0.1, batchnorm=True, n_channels=10):
-    model = UNet(
-        n_classes=nClasses,
-        n_filters=n_filters,
-        dropout=dropout,
-        batchnorm=batchnorm,
-        n_channels=n_channels
-    )
-    return model

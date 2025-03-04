@@ -11,7 +11,8 @@ from torchvision.models.segmentation import (
 
 from models.UNet import UNet
 from models.ENet import ENet
-
+from models.FDDWNet import FDDWNet
+from models.CGNet import CGNet
 
 class ModelManager:
     def __init__(self, cfg):
@@ -25,7 +26,9 @@ class ModelManager:
             "deeplabv3_resnet101": (deeplabv3_resnet101, None, self._modify_deeplab_model),
             "deeplabv3_mobilenet_v3_large": (deeplabv3_mobilenet_v3_large, None, self._modify_deeplab_mobilenet_model),
             "unet": (self._no_op, None, self._no_op),
-            "enet": (self._no_op, None, self._no_op)
+            "enet": (self._no_op, None, self._no_op),
+            "fddwnet": (self._no_op, None, self._no_op),
+            "cgnet": (self._no_op, None, self._no_op),
         }
 
     def create_model(self):
@@ -34,9 +37,9 @@ class ModelManager:
             raise ValueError(f"Model '{model_name}' not found.")
 
         model_fn, weights, modify_fn = self.model_mappings[model_name]
-        
+
         model = None
-        
+
         if model_name == "unet":
             model = UNet(
                 n_classes=self.cfg.const.num_classes,
@@ -44,11 +47,19 @@ class ModelManager:
                 dropout=self.cfg.const.dropout,
                 n_channels=self.cfg.const.num_input_channels
             )
-        if model_name == "enet":
+        elif model_name == "enet":
             model = ENet(
                 num_classes=self.cfg.const.num_classes,
                 encoder_relu=False,
                 decoder_relu=True
+            )
+        elif model_name == "fddwnet":
+            model = FDDWNet(
+                classes=self.cfg.const.num_classes
+            )
+        elif model_name == "cgnet":
+            model = CGNet(
+                classes=self.cfg.const.num_classes
             )
         else:
             model = model_fn(weights=weights)
