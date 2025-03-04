@@ -1,3 +1,4 @@
+# TODO: This works with 3 channels
 # Source: https://github.com/davidtvs/PyTorch-ENet/blob/master/models/enet.py
 
 import torch.nn as nn

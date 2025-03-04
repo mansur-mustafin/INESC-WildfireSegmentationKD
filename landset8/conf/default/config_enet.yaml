@@ -8,6 +8,8 @@ hydra:
     dir: outputs/
 
 model:
+  # name: "cgnet"
+  # name: "fddwnet"
   name: "enet"
   # name: "unet"
   # name: "lraspp"
@@ -28,13 +30,13 @@ teacher:
 path:
   dataset: "./../datasets/Landsat8-ActiveFire/"
 
-  output_model: "weights/landset8_default/test/"
-  weights_test: "weights/landset8_default/test/"           # folder which models to test
+  output_model: "weights/landset8_default/6/"
+  weights_test: "weights/landset8_default/6/"           # folder which models to test
 
 const:
   lr: 0.001
   num_epochs: 100
-  batch_size: 64
+  batch_size: 16
   num_input_channels: 3                    
   num_classes: 1                            # 0 - no fire, 1 - fire 
   weight_decay: 0                           # L2 regularization.

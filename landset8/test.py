@@ -1,4 +1,5 @@
-# import wandb
+import wandb
+import time
 import json
 import hydra
 import numpy as np
@@ -14,9 +15,9 @@ from model_manager import ModelManager
 from utils import *
 
 # Login WANDD
-# with open("wandb_secret.json", "r") as f:
-#     secrets = json.load(f)
-# wandb.login(key=secrets["WANDB_API_KEY"])
+with open("wandb_secret.json", "r") as f:
+    secrets = json.load(f)
+wandb.login(key=secrets["WANDB_API_KEY"])
 
 
 class FirePredict():
@@ -70,7 +71,7 @@ class FirePredict():
         epsilon = 1e-14
         num_epochs = self.cfg.const.num_epochs
 
-        # wandb.watch(self.model, log="all", log_freq=100)
+        wandb.watch(self.model, log="all", log_freq=100)
 
         for epoch in range(num_epochs):
             self.model.train()
@@ -94,7 +95,7 @@ class FirePredict():
 
             print(f'Epoch {epoch+1}/{num_epochs} Training loss: {epoch_loss:.4f}')
 
-            # wandb.log({"train_loss": epoch_loss})
+            wandb.log({"train_loss": epoch_loss})
 
             # Validation
             self.model.eval()
@@ -114,7 +115,6 @@ class FirePredict():
                     # Metrics
                     if self.cfg.const.num_classes == 1:
                         preds = (outputs[:, 0, :, :] > self.cfg.const.th_fire).cpu().numpy().astype(np.uint8).flatten()
-                        print("Min:", preds.min(), "Mean:", preds.mean(), "Max:", preds.max())
                     else:
                         preds = torch.argmax(outputs, dim=1).cpu().numpy().flatten()
 
@@ -142,13 +142,13 @@ class FirePredict():
 
             print(f'Validation Loss: {val_loss:.5f}, Precision: {precision[0]:.3f}, Recall: {recall[0]:.3f}, F1 Score: {f1[0]:.3f}, IoU: {iou[0]:.3f}, Acc: {accuracy[0]:.3f}')
 
-            # wandb.log({
-            #     "val_loss": val_loss,
-            #     "val_acc": accuracy[0],
-            #     "val_precision": precision[0],
-            #     "val_recall": recall[0],
-            #     "val_f1": f1[0]
-            # })
+            wandb.log({
+                "val_loss": val_loss,
+                "val_acc": accuracy[0],
+                "val_precision": precision[0],
+                "val_recall": recall[0],
+                "val_f1": f1[0]
+            })
 
             save_model = False
 
@@ -209,14 +209,14 @@ class FirePredict():
 
 @hydra.main(config_path=None, config_name=None, version_base=None)
 def main(cfg: DictConfig):
-    # wandb.init(project="FirePrediction", config=OmegaConf.to_container(cfg, resolve=True), name=f"Run_{time.strftime('%Y%m%d-%H%M%S')}")
+    wandb.init(project="FirePrediction", config=OmegaConf.to_container(cfg, resolve=True), name=f"Run_{time.strftime('%Y%m%d-%H%M%S')}")
     print("Configuration: ")
     print(OmegaConf.to_yaml(cfg))
 
     # TRAINING
     fp = FirePredict(cfg)
     fp.train()
-    # wandb.finish()
+    wandb.finish()
 
     print("\nTesting...\n")
 
