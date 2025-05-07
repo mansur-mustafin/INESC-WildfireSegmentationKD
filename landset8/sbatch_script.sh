@@ -7,6 +7,4 @@
 #SBATCH -e slurm_%x.%j.err       # File containing STDERR output. If ommited, use STDOUT.
 
 # Commands / scripts to run (e.g., python3 train.py)
-python3 test.py --config-path=conf/default --config-name=config_cgnet
-python3 test.py --config-path=conf/default --config-name=config_enet
-python3 test.py --config-path=conf/default --config-name=config_fddwnet
+python3 kd-train.py --config-path=conf --config-name=default

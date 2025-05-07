@@ -26,16 +26,21 @@ teacher:
   # name: "deeplabv3_resnet50"
   # name: "deeplabv3_resnet101"
   # name: "deeplabv3_mobilenet_v3_large"
+  name: "unet"
+
 
 path:
+  teacher_model: "./weights/landset8_default/4/unet_66_val_0.00_f1_0.91.pt"
+
   dataset: "./../datasets/Landsat8-ActiveFire/"
 
-  output_model: "weights/landset8_default/6/"
-  weights_test: "weights/landset8_default/6/"           # folder which models to test
+  output_model: "weights/kd/2/"
+  weights_test: "weights/kd/2/"           # folder which models to test
+
 
 const:
   lr: 0.001
-  num_epochs: 100
+  num_epochs: 500
   batch_size: 16
   num_input_channels: 3                    
   num_classes: 1                            # 0 - no fire, 1 - fire 
@@ -45,3 +50,7 @@ const:
   th_fire: 0.25
   dropout: 0.1
   n_filters: 16
+
+distill:
+  T: 1.0
+  alpha: 0.5
