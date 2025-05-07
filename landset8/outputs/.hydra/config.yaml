@@ -1,13 +1,15 @@
 model:
-  name: fddwnet
-teacher: null
+  name: enet
+teacher:
+  name: unet
 path:
+  teacher_model: ./weights/landset8_default/4/unet_66_val_0.00_f1_0.91.pt
   dataset: ./../datasets/Landsat8-ActiveFire/
-  output_model: weights/landset8_default/8/
-  weights_test: weights/landset8_default/8/
+  output_model: weights/kd/2/
+  weights_test: weights/kd/2/
 const:
   lr: 0.001
-  num_epochs: 100
+  num_epochs: 500
   batch_size: 16
   num_input_channels: 3
   num_classes: 1
@@ -17,3 +19,6 @@ const:
   th_fire: 0.25
   dropout: 0.1
   n_filters: 16
+distill:
+  T: 1.0
+  alpha: 0.5
