@@ -243,8 +243,8 @@ def main(cfg: DictConfig):
     print(OmegaConf.to_yaml(cfg))
 
     # TRAINING
-    fp = FirePredict(cfg)
-    fp.train()
+    # fp = FirePredict(cfg)
+    # fp.train()
     # wandb.finish()
 
     print("\nTesting...\n")
