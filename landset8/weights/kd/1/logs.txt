@@ -1572,93 +1572,48 @@ Validation Loss: 0.00022, Precision: 0.918, Recall: 0.778, F1 Score: 0.843, IoU:
 
 Testing...
 
-weights/kd/1/enet_0_val_0.00_f1_0.00.pt
- - Precision: 0.000, Recall: 0.000, F1 Score: 0.000, IoU: 0.000, Accuracy: 1.000
-weights/kd/1/enet_1_val_0.00_f1_0.00.pt
- - Precision: 0.549, Recall: 0.002, F1 Score: 0.004, IoU: 0.002, Accuracy: 1.000
-weights/kd/1/enet_2_val_0.00_f1_0.29.pt
- - Precision: 0.741, Recall: 0.172, F1 Score: 0.279, IoU: 0.162, Accuracy: 1.000
-weights/kd/1/enet_3_val_0.00_f1_0.40.pt
- - Precision: 0.822, Recall: 0.259, F1 Score: 0.394, IoU: 0.245, Accuracy: 1.000
-weights/kd/1/enet_4_val_0.00_f1_0.56.pt
- - Precision: 0.807, Recall: 0.420, F1 Score: 0.553, IoU: 0.382, Accuracy: 1.000
-weights/kd/1/enet_5_val_0.00_f1_0.61.pt
- - Precision: 0.805, Recall: 0.481, F1 Score: 0.602, IoU: 0.431, Accuracy: 1.000
-weights/kd/1/enet_6_val_0.00_f1_0.72.pt
- - Precision: 0.767, Recall: 0.654, F1 Score: 0.706, IoU: 0.546, Accuracy: 1.000
-weights/kd/1/enet_7_val_0.00_f1_0.68.pt
- - Precision: 0.824, Recall: 0.573, F1 Score: 0.676, IoU: 0.511, Accuracy: 1.000
-weights/kd/1/enet_8_val_0.00_f1_0.74.pt
- - Precision: 0.824, Recall: 0.666, F1 Score: 0.736, IoU: 0.583, Accuracy: 1.000
-weights/kd/1/enet_9_val_0.00_f1_0.74.pt
- - Precision: 0.852, Recall: 0.652, F1 Score: 0.739, IoU: 0.586, Accuracy: 1.000
-weights/kd/1/enet_10_val_0.00_f1_0.77.pt
- - Precision: 0.823, Recall: 0.704, F1 Score: 0.759, IoU: 0.611, Accuracy: 1.000
-weights/kd/1/enet_11_val_0.00_f1_0.76.pt
- - Precision: 0.855, Recall: 0.674, F1 Score: 0.754, IoU: 0.605, Accuracy: 1.000
-weights/kd/1/enet_13_val_0.00_f1_0.79.pt
- - Precision: 0.836, Recall: 0.730, F1 Score: 0.779, IoU: 0.638, Accuracy: 1.000
-weights/kd/1/enet_15_val_0.00_f1_0.79.pt
- - Precision: 0.862, Recall: 0.716, F1 Score: 0.782, IoU: 0.643, Accuracy: 1.000
-weights/kd/1/enet_16_val_0.00_f1_0.80.pt
- - Precision: 0.867, Recall: 0.724, F1 Score: 0.789, IoU: 0.652, Accuracy: 1.000
-weights/kd/1/enet_17_val_0.00_f1_0.80.pt
- - Precision: 0.869, Recall: 0.724, F1 Score: 0.790, IoU: 0.653, Accuracy: 1.000
-weights/kd/1/enet_18_val_0.00_f1_0.80.pt
- - Precision: 0.862, Recall: 0.742, F1 Score: 0.797, IoU: 0.663, Accuracy: 1.000
-weights/kd/1/enet_21_val_0.00_f1_0.82.pt
- - Precision: 0.858, Recall: 0.773, F1 Score: 0.813, IoU: 0.686, Accuracy: 1.000
-weights/kd/1/enet_23_val_0.00_f1_0.82.pt
- - Precision: 0.860, Recall: 0.776, F1 Score: 0.816, IoU: 0.689, Accuracy: 1.000
-weights/kd/1/enet_24_val_0.00_f1_0.83.pt
- - Precision: 0.854, Recall: 0.789, F1 Score: 0.820, IoU: 0.695, Accuracy: 1.000
-weights/kd/1/enet_25_val_0.00_f1_0.82.pt
- - Precision: 0.871, Recall: 0.768, F1 Score: 0.817, IoU: 0.690, Accuracy: 1.000
-weights/kd/1/enet_26_val_0.00_f1_0.82.pt
- - Precision: 0.885, Recall: 0.756, F1 Score: 0.815, IoU: 0.688, Accuracy: 1.000
-weights/kd/1/enet_27_val_0.00_f1_0.83.pt
- - Precision: 0.874, Recall: 0.779, F1 Score: 0.824, IoU: 0.701, Accuracy: 1.000
-weights/kd/1/enet_29_val_0.00_f1_0.83.pt
- - Precision: 0.891, Recall: 0.760, F1 Score: 0.820, IoU: 0.695, Accuracy: 1.000
-weights/kd/1/enet_30_val_0.00_f1_0.83.pt
- - Precision: 0.893, Recall: 0.760, F1 Score: 0.821, IoU: 0.696, Accuracy: 1.000
-weights/kd/1/enet_32_val_0.00_f1_0.83.pt
- - Precision: 0.888, Recall: 0.774, F1 Score: 0.827, IoU: 0.705, Accuracy: 1.000
-weights/kd/1/enet_33_val_0.00_f1_0.84.pt
- - Precision: 0.883, Recall: 0.785, F1 Score: 0.831, IoU: 0.711, Accuracy: 1.000
-weights/kd/1/enet_37_val_0.00_f1_0.83.pt
- - Precision: 0.894, Recall: 0.772, F1 Score: 0.829, IoU: 0.707, Accuracy: 1.000
-weights/kd/1/enet_39_val_0.00_f1_0.84.pt
- - Precision: 0.891, Recall: 0.783, F1 Score: 0.834, IoU: 0.715, Accuracy: 1.000
-weights/kd/1/enet_47_val_0.00_f1_0.84.pt
- - Precision: 0.883, Recall: 0.798, F1 Score: 0.838, IoU: 0.722, Accuracy: 1.000
-weights/kd/1/enet_52_val_0.00_f1_0.84.pt
- - Precision: 0.887, Recall: 0.798, F1 Score: 0.840, IoU: 0.724, Accuracy: 1.000
-weights/kd/1/enet_54_val_0.00_f1_0.84.pt
- - Precision: 0.890, Recall: 0.794, F1 Score: 0.839, IoU: 0.723, Accuracy: 1.000
-weights/kd/1/enet_58_val_0.00_f1_0.84.pt
- - Precision: 0.891, Recall: 0.790, F1 Score: 0.837, IoU: 0.720, Accuracy: 1.000
-weights/kd/1/enet_62_val_0.00_f1_0.84.pt
- - Precision: 0.890, Recall: 0.798, F1 Score: 0.841, IoU: 0.726, Accuracy: 1.000
-weights/kd/1/enet_72_val_0.00_f1_0.84.pt
- - Precision: 0.894, Recall: 0.789, F1 Score: 0.838, IoU: 0.721, Accuracy: 1.000
-weights/kd/1/enet_76_val_0.00_f1_0.85.pt
- - Precision: 0.895, Recall: 0.793, F1 Score: 0.841, IoU: 0.726, Accuracy: 1.000
-weights/kd/1/enet_79_val_0.00_f1_0.85.pt
- - Precision: 0.892, Recall: 0.801, F1 Score: 0.844, IoU: 0.730, Accuracy: 1.000
-weights/kd/1/enet_91_val_0.00_f1_0.85.pt
- - Precision: 0.882, Recall: 0.816, F1 Score: 0.848, IoU: 0.736, Accuracy: 1.000
-weights/kd/1/enet_99_val_0.00_f1_0.85.pt
- - Precision: 0.897, Recall: 0.795, F1 Score: 0.843, IoU: 0.729, Accuracy: 1.000
-weights/kd/1/enet_102_val_0.00_f1_0.85.pt
- - Precision: 0.883, Recall: 0.818, F1 Score: 0.849, IoU: 0.738, Accuracy: 1.000
-weights/kd/1/enet_117_val_0.00_f1_0.85.pt
- - Precision: 0.893, Recall: 0.805, F1 Score: 0.847, IoU: 0.734, Accuracy: 1.000
-weights/kd/1/enet_120_val_0.00_f1_0.85.pt
- - Precision: 0.890, Recall: 0.812, F1 Score: 0.849, IoU: 0.738, Accuracy: 1.000
-weights/kd/1/enet_131_val_0.00_f1_0.85.pt
- - Precision: 0.894, Recall: 0.807, F1 Score: 0.848, IoU: 0.736, Accuracy: 1.000
-weights/kd/1/enet_161_val_0.00_f1_0.85.pt
- - Precision: 0.889, Recall: 0.812, F1 Score: 0.849, IoU: 0.737, Accuracy: 1.000
-weights/kd/1/enet_199_val_0.00_f1_0.85.pt
- - Precision: 0.892, Recall: 0.813, F1 Score: 0.851, IoU: 0.740, Accuracy: 1.000
+weights/kd/1/enet_0_val_0.00_f1_0.00.pt - Precision: 0.000, Recall: 0.000, F1 Score: 0.000, IoU: 0.000, Accuracy: 1.000
+weights/kd/1/enet_1_val_0.00_f1_0.00.pt - Precision: 0.549, Recall: 0.002, F1 Score: 0.004, IoU: 0.002, Accuracy: 1.000
+weights/kd/1/enet_2_val_0.00_f1_0.29.pt - Precision: 0.741, Recall: 0.172, F1 Score: 0.279, IoU: 0.162, Accuracy: 1.000
+weights/kd/1/enet_3_val_0.00_f1_0.40.pt - Precision: 0.822, Recall: 0.259, F1 Score: 0.394, IoU: 0.245, Accuracy: 1.000
+weights/kd/1/enet_4_val_0.00_f1_0.56.pt - Precision: 0.807, Recall: 0.420, F1 Score: 0.553, IoU: 0.382, Accuracy: 1.000
+weights/kd/1/enet_5_val_0.00_f1_0.61.pt - Precision: 0.805, Recall: 0.481, F1 Score: 0.602, IoU: 0.431, Accuracy: 1.000
+weights/kd/1/enet_6_val_0.00_f1_0.72.pt - Precision: 0.767, Recall: 0.654, F1 Score: 0.706, IoU: 0.546, Accuracy: 1.000
+weights/kd/1/enet_7_val_0.00_f1_0.68.pt - Precision: 0.824, Recall: 0.573, F1 Score: 0.676, IoU: 0.511, Accuracy: 1.000
+weights/kd/1/enet_8_val_0.00_f1_0.74.pt - Precision: 0.824, Recall: 0.666, F1 Score: 0.736, IoU: 0.583, Accuracy: 1.000
+weights/kd/1/enet_9_val_0.00_f1_0.74.pt - Precision: 0.852, Recall: 0.652, F1 Score: 0.739, IoU: 0.586, Accuracy: 1.000
+weights/kd/1/enet_10_val_0.00_f1_0.77.pt - Precision: 0.823, Recall: 0.704, F1 Score: 0.759, IoU: 0.611, Accuracy: 1.000
+weights/kd/1/enet_11_val_0.00_f1_0.76.pt - Precision: 0.855, Recall: 0.674, F1 Score: 0.754, IoU: 0.605, Accuracy: 1.000
+weights/kd/1/enet_13_val_0.00_f1_0.79.pt - Precision: 0.836, Recall: 0.730, F1 Score: 0.779, IoU: 0.638, Accuracy: 1.000
+weights/kd/1/enet_15_val_0.00_f1_0.79.pt - Precision: 0.862, Recall: 0.716, F1 Score: 0.782, IoU: 0.643, Accuracy: 1.000
+weights/kd/1/enet_16_val_0.00_f1_0.80.pt - Precision: 0.867, Recall: 0.724, F1 Score: 0.789, IoU: 0.652, Accuracy: 1.000
+weights/kd/1/enet_17_val_0.00_f1_0.80.pt - Precision: 0.869, Recall: 0.724, F1 Score: 0.790, IoU: 0.653, Accuracy: 1.000
+weights/kd/1/enet_18_val_0.00_f1_0.80.pt - Precision: 0.862, Recall: 0.742, F1 Score: 0.797, IoU: 0.663, Accuracy: 1.000
+weights/kd/1/enet_21_val_0.00_f1_0.82.pt - Precision: 0.858, Recall: 0.773, F1 Score: 0.813, IoU: 0.686, Accuracy: 1.000
+weights/kd/1/enet_23_val_0.00_f1_0.82.pt - Precision: 0.860, Recall: 0.776, F1 Score: 0.816, IoU: 0.689, Accuracy: 1.000
+weights/kd/1/enet_24_val_0.00_f1_0.83.pt - Precision: 0.854, Recall: 0.789, F1 Score: 0.820, IoU: 0.695, Accuracy: 1.000
+weights/kd/1/enet_25_val_0.00_f1_0.82.pt - Precision: 0.871, Recall: 0.768, F1 Score: 0.817, IoU: 0.690, Accuracy: 1.000
+weights/kd/1/enet_26_val_0.00_f1_0.82.pt - Precision: 0.885, Recall: 0.756, F1 Score: 0.815, IoU: 0.688, Accuracy: 1.000
+weights/kd/1/enet_27_val_0.00_f1_0.83.pt - Precision: 0.874, Recall: 0.779, F1 Score: 0.824, IoU: 0.701, Accuracy: 1.000
+weights/kd/1/enet_29_val_0.00_f1_0.83.pt - Precision: 0.891, Recall: 0.760, F1 Score: 0.820, IoU: 0.695, Accuracy: 1.000
+weights/kd/1/enet_30_val_0.00_f1_0.83.pt - Precision: 0.893, Recall: 0.760, F1 Score: 0.821, IoU: 0.696, Accuracy: 1.000
+weights/kd/1/enet_32_val_0.00_f1_0.83.pt - Precision: 0.888, Recall: 0.774, F1 Score: 0.827, IoU: 0.705, Accuracy: 1.000
+weights/kd/1/enet_33_val_0.00_f1_0.84.pt - Precision: 0.883, Recall: 0.785, F1 Score: 0.831, IoU: 0.711, Accuracy: 1.000
+weights/kd/1/enet_37_val_0.00_f1_0.83.pt - Precision: 0.894, Recall: 0.772, F1 Score: 0.829, IoU: 0.707, Accuracy: 1.000
+weights/kd/1/enet_39_val_0.00_f1_0.84.pt - Precision: 0.891, Recall: 0.783, F1 Score: 0.834, IoU: 0.715, Accuracy: 1.000
+weights/kd/1/enet_47_val_0.00_f1_0.84.pt - Precision: 0.883, Recall: 0.798, F1 Score: 0.838, IoU: 0.722, Accuracy: 1.000
+weights/kd/1/enet_52_val_0.00_f1_0.84.pt - Precision: 0.887, Recall: 0.798, F1 Score: 0.840, IoU: 0.724, Accuracy: 1.000
+weights/kd/1/enet_54_val_0.00_f1_0.84.pt - Precision: 0.890, Recall: 0.794, F1 Score: 0.839, IoU: 0.723, Accuracy: 1.000
+weights/kd/1/enet_58_val_0.00_f1_0.84.pt - Precision: 0.891, Recall: 0.790, F1 Score: 0.837, IoU: 0.720, Accuracy: 1.000
+weights/kd/1/enet_62_val_0.00_f1_0.84.pt - Precision: 0.890, Recall: 0.798, F1 Score: 0.841, IoU: 0.726, Accuracy: 1.000
+weights/kd/1/enet_72_val_0.00_f1_0.84.pt - Precision: 0.894, Recall: 0.789, F1 Score: 0.838, IoU: 0.721, Accuracy: 1.000
+weights/kd/1/enet_76_val_0.00_f1_0.85.pt - Precision: 0.895, Recall: 0.793, F1 Score: 0.841, IoU: 0.726, Accuracy: 1.000
+weights/kd/1/enet_79_val_0.00_f1_0.85.pt - Precision: 0.892, Recall: 0.801, F1 Score: 0.844, IoU: 0.730, Accuracy: 1.000
+weights/kd/1/enet_91_val_0.00_f1_0.85.pt - Precision: 0.882, Recall: 0.816, F1 Score: 0.848, IoU: 0.736, Accuracy: 1.000
+weights/kd/1/enet_99_val_0.00_f1_0.85.pt - Precision: 0.897, Recall: 0.795, F1 Score: 0.843, IoU: 0.729, Accuracy: 1.000
+weights/kd/1/enet_102_val_0.00_f1_0.85.pt - Precision: 0.883, Recall: 0.818, F1 Score: 0.849, IoU: 0.738, Accuracy: 1.000
+weights/kd/1/enet_117_val_0.00_f1_0.85.pt - Precision: 0.893, Recall: 0.805, F1 Score: 0.847, IoU: 0.734, Accuracy: 1.000
+weights/kd/1/enet_120_val_0.00_f1_0.85.pt - Precision: 0.890, Recall: 0.812, F1 Score: 0.849, IoU: 0.738, Accuracy: 1.000
+weights/kd/1/enet_131_val_0.00_f1_0.85.pt - Precision: 0.894, Recall: 0.807, F1 Score: 0.848, IoU: 0.736, Accuracy: 1.000
+weights/kd/1/enet_161_val_0.00_f1_0.85.pt - Precision: 0.889, Recall: 0.812, F1 Score: 0.849, IoU: 0.737, Accuracy: 1.000
+weights/kd/1/enet_199_val_0.00_f1_0.85.pt - Precision: 0.892, Recall: 0.813, F1 Score: 0.851, IoU: 0.740, Accuracy: 1.000
