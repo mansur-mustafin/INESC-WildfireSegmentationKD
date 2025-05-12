@@ -108,4 +108,4 @@ class UNet(nn.Module):
 
         out = self.out_conv(c9)
         # out = self.sigmoid(out) In case of BCEWithLogitsLoss.
-        return {"out": out}
+        return {"out": out, "aux": c5}
