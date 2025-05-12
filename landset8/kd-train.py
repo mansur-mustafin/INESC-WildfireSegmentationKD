@@ -40,11 +40,17 @@ class FirePredict():
             self.student.load_state_dict(torch.load(path))
 
         self.criterion = nn.BCEWithLogitsLoss()
+        self.criterion_KD = nn.MSELoss()
+
+        self.adapter = nn.Conv2d(256, 128, kernel_size=1, bias=False)
+
         self.optimizer = optim.Adam(
-            self.student.parameters(),
+            list(self.student.parameters()) + list(self.adapter.parameters()),
             lr=self.cfg.const.lr,
             weight_decay=self.cfg.const.weight_decay
         )
+        
+
 
     def _create_data_loaders(self):
         train_dataset = Landset8Dataset(
@@ -73,18 +79,22 @@ class FirePredict():
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.teacher = self.teacher.to(device)
         self.student = self.student.to(device)
+        self.adapter = self.adapter.to(device)
 
         best_val_loss = float('inf')
         epsilon = 1e-14
         num_epochs = self.cfg.const.num_epochs
         T = self.cfg.distill.T
         alpha = self.cfg.distill.alpha
+        lbd = self.cfg.distill.lbd
 
         # wandb.watch(self.student, log="all", log_freq=100)
 
         for epoch in range(num_epochs):
             self.student.train()
             running_loss = 0.0
+            running_loss_CEL = 0.0
+            running_loss_KD = 0.0
 
             for images, labels in tqdm(self.train_dataloader, desc=f"Epoch {epoch+1}/{num_epochs}"):
                 # for images, labels in self.train_dataloader:
@@ -92,37 +102,44 @@ class FirePredict():
                 labels = labels.unsqueeze(1).float().to(device)
 
                 with torch.no_grad():
-                    teacher_logit = self.teacher(images)['out']
-                student_logit = self.student(images)['out']
+                    teacher_out = self.teacher(images)
+                student_out = self.student(images)
+
+                teacher_logit = teacher_out['out']
+                student_logit = student_out['out']
 
                 loss_CEL = self.criterion(student_logit, labels)
 
+                # KD loss
+                s_feat = student_out['aux']
+                t_feat = teacher_out['aux']
 
-                s_prob = torch.sigmoid(student_logit / T)
-                t_prob = torch.sigmoid(teacher_logit / T).detach()
+                if t_feat.shape[-2:] != s_feat.shape[-2:]:
+                    t_feat = F.interpolate(t_feat, size=s_feat.shape[-2:], mode="bilinear", align_corners=False)
 
-                t_prob_bin = torch.cat([1 - t_prob, t_prob], dim=1)         # (N,2,H,W)
-                s_prob_bin = torch.cat([
-                        torch.log(1 - s_prob + 10**-7),
-                        torch.log(s_prob     + 10**-7)
-                    ], dim=1)  
-
-                N, _, H, W = teacher_logit.shape
-                loss_KD = torch.sum(t_prob_bin * (t_prob_bin.log() - s_prob_bin)) / (N * H * W) * (T * T)
+                t_feat = self.adapter(t_feat) 
+                
+                loss_KD = self.criterion_KD(s_feat, t_feat)
 
                 # print(float(loss_KD.detach()))
 
-                loss = alpha * loss_CEL + (1 - alpha) * loss_KD
+                loss = loss_CEL + lbd * loss_KD
 
                 self.optimizer.zero_grad()
                 loss.backward()
                 self.optimizer.step()
 
                 running_loss += loss.item()
+                running_loss_CEL += loss_CEL.item()
+                running_loss_KD += loss_KD.item()
+
+            # wandb.log({"train_loss": running_loss / len(self.train_dataloader)})
 
             epoch_loss = running_loss / len(self.train_dataloader)
+            epoch_loss_CEL = running_loss_CEL / len(self.train_dataloader)
+            epoch_loss_KD = running_loss_KD / len(self.train_dataloader)
 
-            print(f'Epoch {epoch+1}/{num_epochs} Training loss: {epoch_loss:.7f}')
+            print(f'Epoch {epoch+1}/{num_epochs} Loss: {epoch_loss:.7f}, CEL: {epoch_loss_CEL:.7f}, KD: {epoch_loss_KD:.7f}')
 
             # wandb.log({"train_loss": epoch_loss})
 
@@ -243,16 +260,16 @@ def main(cfg: DictConfig):
     print(OmegaConf.to_yaml(cfg))
 
     # TRAINING
-    # fp = FirePredict(cfg)
-    # fp.train()
+    fp = FirePredict(cfg)
+    fp.train()
     # wandb.finish()
 
-    print("\nTesting...\n")
+    # print("\nTesting...\n")
 
     # TESTING
-    for weight_path in get_model_paths(cfg.path.weights_test, cfg.model.name):
-        fp = FirePredict(cfg, weight_path)
-        fp.test()
+    # for weight_path in get_model_paths(cfg.path.weights_test, cfg.model.name):
+    #     fp = FirePredict(cfg, weight_path)
+    #     fp.test()
 
 
 if __name__ == "__main__":

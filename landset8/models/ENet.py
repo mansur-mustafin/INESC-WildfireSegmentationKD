@@ -620,6 +620,8 @@ class ENet(nn.Module):
         x = self.asymmetric3_6(x)
         x = self.dilated3_7(x)
 
+        aux = x
+
         # Stage 4 - Decoder
         x = self.upsample4_0(x, max_indices2_0, output_size=stage2_input_size)
         x = self.regular4_1(x)
@@ -630,4 +632,4 @@ class ENet(nn.Module):
         x = self.regular5_1(x)
         x = self.transposed_conv(x, output_size=input_size)
 
-        return {"out": x}
+        return {"out": x, "aux": aux}
