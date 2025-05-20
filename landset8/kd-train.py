@@ -264,12 +264,12 @@ def main(cfg: DictConfig):
     fp.train()
     # wandb.finish()
 
-    # print("\nTesting...\n")
+    print("\nTesting...\n")
 
     # TESTING
-    # for weight_path in get_model_paths(cfg.path.weights_test, cfg.model.name):
-    #     fp = FirePredict(cfg, weight_path)
-    #     fp.test()
+    for weight_path in get_model_paths(cfg.path.weights_test, cfg.model.name):
+        fp = FirePredict(cfg, weight_path)
+        fp.test()
 
 
 if __name__ == "__main__":
