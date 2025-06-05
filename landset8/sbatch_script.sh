@@ -1,13 +1,10 @@
 #!/bin/bash
 #
-#SBATCH --partition=gpu_min8gb  # Partition where the job will be run. Check with "$ sinfo".
-#SBATCH --qos=gpu_min8gb        # QoS level. Must match the partition name. External users must add the suffix "_ext". Check with "$sacctmgr show qos".
+#SBATCH --partition=gpu_min11gb  # Partition where the job will be run. Check with "$ sinfo".
+#SBATCH --qos=gpu_min11gb        # QoS level. Must match the partition name. External users must add the suffix "_ext". Check with "$sacctmgr show qos".
 #SBATCH --job-name=NS            # Job name
 #SBATCH -o slurm_%x.%j.out       # File containing STDOUT output
 #SBATCH -e slurm_%x.%j.err       # File containing STDERR output. If ommited, use STDOUT.
 
 # Commands / scripts to run (e.g., python3 train.py)
-python3 kd-train.py --config-path=conf/kd --config-name=feature-based-1
-python3 kd-train.py --config-path=conf/kd --config-name=feature-based-2
-python3 kd-train.py --config-path=conf/kd --config-name=feature-based-3
-python3 kd-train.py --config-path=conf/kd --config-name=feature-based-4
+python3 kd-train.py --config-path=conf/kd --config-name=feature-based-00001

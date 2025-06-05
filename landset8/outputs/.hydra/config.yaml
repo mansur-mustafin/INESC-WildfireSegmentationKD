@@ -5,8 +5,8 @@ teacher:
 path:
   teacher_model: ./weights/landset8_default/4/unet_66_val_0.00_f1_0.91.pt
   dataset: ./../datasets/Landsat8-ActiveFire/
-  output_model: weights/kd/test/
-  weights_test: weights/kd/test/
+  output_model: weights/kd-adapter-v1/1/
+  weights_test: weights/kd-adapter-v1/1/
 const:
   lr: 0.001
   num_epochs: 500
