@@ -1,0 +1,503 @@
+Configuration: 
+model:
+  name: enet
+teacher:
+  name: unet
+path:
+  teacher_model: ./weights/landset8_default/4/unet_66_val_0.00_f1_0.91.pt
+  dataset: /nas-ctm01/datasets/public/Langsat8-ActiveFire/dataset/compressed/
+  dataset_local: ./../datasets/landsat_subset_40GB/
+  output_model: weights/kd-adapter-v1/3/
+  weights_test: weights/kd-adapter-v1/3/
+const:
+  lr: 0.001
+  num_epochs: 200
+  batch_size: 16
+  num_input_channels: 3
+  num_classes: 1
+  weight_decay: 0
+  lbd: 500
+  mask: voting
+  th_fire: 0.25
+  dropout: 0.1
+  n_filters: 16
+distill:
+  T: 1.0
+  alpha: 0.5
+  lbd: 1
+
+Epoch 1/200 Loss: 0.1917690, CEL: 0.0332245, KD: 0.1585445
+Validation Loss: 0.00129, Precision: 0.791, Recall: 0.000, F1 Score: 0.001, IoU: 0.000, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_0_val_0.00_f1_0.00.pt
+Epoch 2/200 Loss: 0.0432493, CEL: 0.0010103, KD: 0.0422390
+Validation Loss: 0.00065, Precision: 0.743, Recall: 0.251, F1 Score: 0.375, IoU: 0.231, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_1_val_0.00_f1_0.37.pt
+Epoch 3/200 Loss: 0.0328623, CEL: 0.0006263, KD: 0.0322360
+Validation Loss: 0.00052, Precision: 0.712, Recall: 0.389, F1 Score: 0.503, IoU: 0.336, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_2_val_0.00_f1_0.50.pt
+Epoch 4/200 Loss: 0.0279347, CEL: 0.0005119, KD: 0.0274228
+Validation Loss: 0.00045, Precision: 0.777, Recall: 0.407, F1 Score: 0.534, IoU: 0.364, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_3_val_0.00_f1_0.53.pt
+Epoch 5/200 Loss: 0.0249592, CEL: 0.0004487, KD: 0.0245106
+Validation Loss: 0.00047, Precision: 0.766, Recall: 0.396, F1 Score: 0.522, IoU: 0.353, Acc: 1.000
+Epoch 6/200 Loss: 0.0222388, CEL: 0.0004097, KD: 0.0218291
+Validation Loss: 0.00041, Precision: 0.748, Recall: 0.563, F1 Score: 0.642, IoU: 0.473, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_5_val_0.00_f1_0.64.pt
+Epoch 7/200 Loss: 0.0200520, CEL: 0.0003821, KD: 0.0196700
+Validation Loss: 0.00039, Precision: 0.870, Recall: 0.419, F1 Score: 0.565, IoU: 0.394, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_6_val_0.00_f1_0.57.pt
+Epoch 8/200 Loss: 0.0192912, CEL: 0.0003605, KD: 0.0189307
+Validation Loss: 0.00037, Precision: 0.815, Recall: 0.564, F1 Score: 0.666, IoU: 0.500, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_7_val_0.00_f1_0.67.pt
+Epoch 9/200 Loss: 0.0186169, CEL: 0.0003426, KD: 0.0182743
+Validation Loss: 0.00034, Precision: 0.806, Recall: 0.649, F1 Score: 0.719, IoU: 0.561, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_8_val_0.00_f1_0.72.pt
+Epoch 10/200 Loss: 0.0174758, CEL: 0.0003328, KD: 0.0171430
+Validation Loss: 0.00034, Precision: 0.845, Recall: 0.603, F1 Score: 0.704, IoU: 0.543, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_9_val_0.00_f1_0.70.pt
+Epoch 11/200 Loss: 0.0168696, CEL: 0.0003241, KD: 0.0165456
+Validation Loss: 0.00033, Precision: 0.856, Recall: 0.605, F1 Score: 0.709, IoU: 0.549, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_10_val_0.00_f1_0.71.pt
+Epoch 12/200 Loss: 0.0161598, CEL: 0.0003183, KD: 0.0158416
+Validation Loss: 0.00033, Precision: 0.816, Recall: 0.666, F1 Score: 0.733, IoU: 0.579, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_11_val_0.00_f1_0.73.pt
+Epoch 13/200 Loss: 0.0144539, CEL: 0.0003107, KD: 0.0141432
+Validation Loss: 0.00032, Precision: 0.861, Recall: 0.627, F1 Score: 0.726, IoU: 0.569, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_12_val_0.00_f1_0.73.pt
+Epoch 14/200 Loss: 0.0138302, CEL: 0.0003092, KD: 0.0135210
+Validation Loss: 0.00032, Precision: 0.851, Recall: 0.641, F1 Score: 0.731, IoU: 0.576, Acc: 1.000
+Epoch 15/200 Loss: 0.0133671, CEL: 0.0003062, KD: 0.0130609
+Validation Loss: 0.00032, Precision: 0.825, Recall: 0.655, F1 Score: 0.730, IoU: 0.575, Acc: 1.000
+Epoch 16/200 Loss: 0.0128036, CEL: 0.0003007, KD: 0.0125029
+Validation Loss: 0.00032, Precision: 0.854, Recall: 0.611, F1 Score: 0.713, IoU: 0.553, Acc: 1.000
+Epoch 17/200 Loss: 0.0121526, CEL: 0.0002984, KD: 0.0118542
+Validation Loss: 0.00031, Precision: 0.852, Recall: 0.648, F1 Score: 0.736, IoU: 0.583, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_16_val_0.00_f1_0.74.pt
+Epoch 18/200 Loss: 0.0118566, CEL: 0.0003010, KD: 0.0115556
+Validation Loss: 0.00031, Precision: 0.863, Recall: 0.642, F1 Score: 0.736, IoU: 0.583, Acc: 1.000
+Epoch 19/200 Loss: 0.0119084, CEL: 0.0002960, KD: 0.0116123
+Validation Loss: 0.00031, Precision: 0.835, Recall: 0.673, F1 Score: 0.745, IoU: 0.594, Acc: 1.000
+Epoch 20/200 Loss: 0.0111913, CEL: 0.0002947, KD: 0.0108967
+Validation Loss: 0.00031, Precision: 0.871, Recall: 0.632, F1 Score: 0.732, IoU: 0.578, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_19_val_0.00_f1_0.73.pt
+Epoch 21/200 Loss: 0.0110102, CEL: 0.0002917, KD: 0.0107185
+Validation Loss: 0.00031, Precision: 0.840, Recall: 0.683, F1 Score: 0.754, IoU: 0.605, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_20_val_0.00_f1_0.75.pt
+Epoch 22/200 Loss: 0.0119499, CEL: 0.0002926, KD: 0.0116574
+Validation Loss: 0.00031, Precision: 0.850, Recall: 0.664, F1 Score: 0.746, IoU: 0.594, Acc: 1.000
+Epoch 23/200 Loss: 0.0112475, CEL: 0.0002907, KD: 0.0109568
+Validation Loss: 0.00031, Precision: 0.880, Recall: 0.619, F1 Score: 0.727, IoU: 0.571, Acc: 1.000
+Epoch 24/200 Loss: 0.0105976, CEL: 0.0002885, KD: 0.0103092
+Validation Loss: 0.00030, Precision: 0.845, Recall: 0.677, F1 Score: 0.752, IoU: 0.602, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_23_val_0.00_f1_0.75.pt
+Epoch 25/200 Loss: 0.0100158, CEL: 0.0002889, KD: 0.0097269
+Validation Loss: 0.00031, Precision: 0.825, Recall: 0.708, F1 Score: 0.762, IoU: 0.615, Acc: 1.000
+Epoch 26/200 Loss: 0.0102352, CEL: 0.0002865, KD: 0.0099487
+Validation Loss: 0.00030, Precision: 0.843, Recall: 0.680, F1 Score: 0.753, IoU: 0.604, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_25_val_0.00_f1_0.75.pt
+Epoch 27/200 Loss: 0.0098429, CEL: 0.0002868, KD: 0.0095561
+Validation Loss: 0.00031, Precision: 0.880, Recall: 0.620, F1 Score: 0.728, IoU: 0.572, Acc: 1.000
+Epoch 28/200 Loss: 0.0095331, CEL: 0.0002843, KD: 0.0092488
+Validation Loss: 0.00030, Precision: 0.856, Recall: 0.669, F1 Score: 0.751, IoU: 0.601, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_27_val_0.00_f1_0.75.pt
+Epoch 29/200 Loss: 0.0095459, CEL: 0.0002844, KD: 0.0092616
+Validation Loss: 0.00030, Precision: 0.860, Recall: 0.664, F1 Score: 0.749, IoU: 0.599, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_28_val_0.00_f1_0.75.pt
+Epoch 30/200 Loss: 0.0096916, CEL: 0.0002832, KD: 0.0094084
+Validation Loss: 0.00030, Precision: 0.871, Recall: 0.645, F1 Score: 0.741, IoU: 0.589, Acc: 1.000
+Epoch 31/200 Loss: 0.0091203, CEL: 0.0002824, KD: 0.0088379
+Validation Loss: 0.00032, Precision: 0.832, Recall: 0.647, F1 Score: 0.728, IoU: 0.573, Acc: 1.000
+Epoch 32/200 Loss: 0.0092227, CEL: 0.0002835, KD: 0.0089392
+Validation Loss: 0.00030, Precision: 0.849, Recall: 0.677, F1 Score: 0.753, IoU: 0.604, Acc: 1.000
+Epoch 33/200 Loss: 0.0086202, CEL: 0.0002827, KD: 0.0083375
+Validation Loss: 0.00032, Precision: 0.869, Recall: 0.622, F1 Score: 0.725, IoU: 0.569, Acc: 1.000
+Epoch 34/200 Loss: 0.0087709, CEL: 0.0002801, KD: 0.0084908
+Validation Loss: 0.00030, Precision: 0.831, Recall: 0.704, F1 Score: 0.762, IoU: 0.616, Acc: 1.000
+Epoch 35/200 Loss: 0.0086580, CEL: 0.0002790, KD: 0.0083790
+Validation Loss: 0.00030, Precision: 0.875, Recall: 0.638, F1 Score: 0.738, IoU: 0.585, Acc: 1.000
+Epoch 36/200 Loss: 0.0082826, CEL: 0.0002773, KD: 0.0080053
+Validation Loss: 0.00030, Precision: 0.828, Recall: 0.706, F1 Score: 0.762, IoU: 0.615, Acc: 1.000
+Epoch 37/200 Loss: 0.0084361, CEL: 0.0002780, KD: 0.0081581
+Validation Loss: 0.00030, Precision: 0.829, Recall: 0.712, F1 Score: 0.766, IoU: 0.621, Acc: 1.000
+Epoch 38/200 Loss: 0.0085210, CEL: 0.0002781, KD: 0.0082429
+Validation Loss: 0.00030, Precision: 0.863, Recall: 0.656, F1 Score: 0.746, IoU: 0.594, Acc: 1.000
+Epoch 39/200 Loss: 0.0082646, CEL: 0.0002779, KD: 0.0079868
+Validation Loss: 0.00030, Precision: 0.821, Recall: 0.714, F1 Score: 0.763, IoU: 0.617, Acc: 1.000
+Epoch 40/200 Loss: 0.0080355, CEL: 0.0002784, KD: 0.0077572
+Validation Loss: 0.00030, Precision: 0.855, Recall: 0.676, F1 Score: 0.755, IoU: 0.607, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_39_val_0.00_f1_0.76.pt
+Epoch 41/200 Loss: 0.0081725, CEL: 0.0002756, KD: 0.0078969
+Validation Loss: 0.00031, Precision: 0.897, Recall: 0.604, F1 Score: 0.722, IoU: 0.565, Acc: 1.000
+Epoch 42/200 Loss: 0.0079417, CEL: 0.0002742, KD: 0.0076675
+Validation Loss: 0.00030, Precision: 0.821, Recall: 0.726, F1 Score: 0.771, IoU: 0.627, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_41_val_0.00_f1_0.77.pt
+Epoch 43/200 Loss: 0.0077563, CEL: 0.0002753, KD: 0.0074811
+Validation Loss: 0.00030, Precision: 0.812, Recall: 0.736, F1 Score: 0.773, IoU: 0.629, Acc: 1.000
+Epoch 44/200 Loss: 0.0077413, CEL: 0.0002747, KD: 0.0074666
+Validation Loss: 0.00030, Precision: 0.856, Recall: 0.672, F1 Score: 0.753, IoU: 0.603, Acc: 1.000
+Epoch 45/200 Loss: 0.0079608, CEL: 0.0002746, KD: 0.0076862
+Validation Loss: 0.00030, Precision: 0.869, Recall: 0.650, F1 Score: 0.744, IoU: 0.592, Acc: 1.000
+Epoch 46/200 Loss: 0.0077424, CEL: 0.0002761, KD: 0.0074663
+Validation Loss: 0.00030, Precision: 0.850, Recall: 0.687, F1 Score: 0.760, IoU: 0.613, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_45_val_0.00_f1_0.76.pt
+Epoch 47/200 Loss: 0.0077307, CEL: 0.0002718, KD: 0.0074589
+Validation Loss: 0.00030, Precision: 0.860, Recall: 0.668, F1 Score: 0.752, IoU: 0.603, Acc: 1.000
+Epoch 48/200 Loss: 0.0074664, CEL: 0.0002755, KD: 0.0071909
+Validation Loss: 0.00030, Precision: 0.836, Recall: 0.706, F1 Score: 0.765, IoU: 0.620, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_47_val_0.00_f1_0.77.pt
+Epoch 49/200 Loss: 0.0073367, CEL: 0.0002701, KD: 0.0070666
+Validation Loss: 0.00030, Precision: 0.834, Recall: 0.710, F1 Score: 0.767, IoU: 0.622, Acc: 1.000
+Epoch 50/200 Loss: 0.0074266, CEL: 0.0002712, KD: 0.0071554
+Validation Loss: 0.00030, Precision: 0.869, Recall: 0.661, F1 Score: 0.751, IoU: 0.601, Acc: 1.000
+Epoch 51/200 Loss: 0.0075344, CEL: 0.0002710, KD: 0.0072635
+Validation Loss: 0.00031, Precision: 0.902, Recall: 0.593, F1 Score: 0.716, IoU: 0.557, Acc: 1.000
+Epoch 52/200 Loss: 0.0074111, CEL: 0.0002742, KD: 0.0071369
+Validation Loss: 0.00031, Precision: 0.892, Recall: 0.605, F1 Score: 0.721, IoU: 0.564, Acc: 1.000
+Epoch 53/200 Loss: 0.0072986, CEL: 0.0002754, KD: 0.0070232
+Validation Loss: 0.00030, Precision: 0.850, Recall: 0.689, F1 Score: 0.761, IoU: 0.614, Acc: 1.000
+Epoch 54/200 Loss: 0.0071728, CEL: 0.0002729, KD: 0.0069000
+Validation Loss: 0.00030, Precision: 0.871, Recall: 0.658, F1 Score: 0.749, IoU: 0.599, Acc: 1.000
+Epoch 55/200 Loss: 0.0068181, CEL: 0.0002699, KD: 0.0065483
+Validation Loss: 0.00030, Precision: 0.850, Recall: 0.694, F1 Score: 0.764, IoU: 0.618, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_54_val_0.00_f1_0.76.pt
+Epoch 56/200 Loss: 0.0070409, CEL: 0.0002700, KD: 0.0067709
+Validation Loss: 0.00030, Precision: 0.803, Recall: 0.752, F1 Score: 0.776, IoU: 0.634, Acc: 1.000
+Epoch 57/200 Loss: 0.0069906, CEL: 0.0002696, KD: 0.0067211
+Validation Loss: 0.00030, Precision: 0.893, Recall: 0.618, F1 Score: 0.731, IoU: 0.575, Acc: 1.000
+Epoch 58/200 Loss: 0.0069600, CEL: 0.0002706, KD: 0.0066894
+Validation Loss: 0.00030, Precision: 0.859, Recall: 0.675, F1 Score: 0.756, IoU: 0.607, Acc: 1.000
+Epoch 59/200 Loss: 0.0068139, CEL: 0.0002684, KD: 0.0065455
+Validation Loss: 0.00032, Precision: 0.777, Recall: 0.775, F1 Score: 0.776, IoU: 0.634, Acc: 1.000
+Epoch 60/200 Loss: 0.0073469, CEL: 0.0002706, KD: 0.0070763
+Validation Loss: 0.00030, Precision: 0.861, Recall: 0.675, F1 Score: 0.757, IoU: 0.609, Acc: 1.000
+Epoch 61/200 Loss: 0.0069957, CEL: 0.0002680, KD: 0.0067277
+Validation Loss: 0.00030, Precision: 0.811, Recall: 0.742, F1 Score: 0.775, IoU: 0.632, Acc: 1.000
+Epoch 62/200 Loss: 0.0068823, CEL: 0.0002672, KD: 0.0066151
+Validation Loss: 0.00029, Precision: 0.865, Recall: 0.673, F1 Score: 0.757, IoU: 0.609, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_61_val_0.00_f1_0.76.pt
+Epoch 63/200 Loss: 0.0068661, CEL: 0.0002680, KD: 0.0065981
+Validation Loss: 0.00030, Precision: 0.867, Recall: 0.670, F1 Score: 0.756, IoU: 0.607, Acc: 1.000
+Epoch 64/200 Loss: 0.0069355, CEL: 0.0002679, KD: 0.0066676
+Validation Loss: 0.00030, Precision: 0.849, Recall: 0.690, F1 Score: 0.761, IoU: 0.614, Acc: 1.000
+Epoch 65/200 Loss: 0.0067626, CEL: 0.0002680, KD: 0.0064946
+Validation Loss: 0.00029, Precision: 0.841, Recall: 0.708, F1 Score: 0.769, IoU: 0.624, Acc: 1.000
+Epoch 66/200 Loss: 0.0068437, CEL: 0.0002677, KD: 0.0065760
+Validation Loss: 0.00030, Precision: 0.862, Recall: 0.671, F1 Score: 0.754, IoU: 0.606, Acc: 1.000
+Epoch 67/200 Loss: 0.0073146, CEL: 0.0002701, KD: 0.0070445
+Validation Loss: 0.00031, Precision: 0.850, Recall: 0.687, F1 Score: 0.760, IoU: 0.613, Acc: 1.000
+Epoch 68/200 Loss: 0.0064817, CEL: 0.0002678, KD: 0.0062139
+Validation Loss: 0.00030, Precision: 0.886, Recall: 0.637, F1 Score: 0.741, IoU: 0.589, Acc: 1.000
+Epoch 69/200 Loss: 0.0068142, CEL: 0.0002667, KD: 0.0065475
+Validation Loss: 0.00030, Precision: 0.831, Recall: 0.723, F1 Score: 0.773, IoU: 0.630, Acc: 1.000
+Epoch 70/200 Loss: 0.0065331, CEL: 0.0002680, KD: 0.0062651
+Validation Loss: 0.00030, Precision: 0.822, Recall: 0.734, F1 Score: 0.775, IoU: 0.633, Acc: 1.000
+Epoch 71/200 Loss: 0.0068406, CEL: 0.0002690, KD: 0.0065715
+Validation Loss: 0.00030, Precision: 0.831, Recall: 0.717, F1 Score: 0.770, IoU: 0.626, Acc: 1.000
+Epoch 72/200 Loss: 0.0066945, CEL: 0.0002673, KD: 0.0064271
+Validation Loss: 0.00030, Precision: 0.855, Recall: 0.689, F1 Score: 0.763, IoU: 0.617, Acc: 1.000
+Epoch 73/200 Loss: 0.0065435, CEL: 0.0002643, KD: 0.0062792
+Validation Loss: 0.00030, Precision: 0.860, Recall: 0.681, F1 Score: 0.760, IoU: 0.613, Acc: 1.000
+Epoch 74/200 Loss: 0.0064528, CEL: 0.0002662, KD: 0.0061865
+Validation Loss: 0.00030, Precision: 0.894, Recall: 0.611, F1 Score: 0.725, IoU: 0.569, Acc: 1.000
+Epoch 75/200 Loss: 0.0063667, CEL: 0.0002642, KD: 0.0061025
+Validation Loss: 0.00029, Precision: 0.832, Recall: 0.720, F1 Score: 0.771, IoU: 0.628, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_74_val_0.00_f1_0.77.pt
+Epoch 76/200 Loss: 0.0064785, CEL: 0.0002652, KD: 0.0062134
+Validation Loss: 0.00030, Precision: 0.857, Recall: 0.680, F1 Score: 0.758, IoU: 0.610, Acc: 1.000
+Epoch 77/200 Loss: 0.0065611, CEL: 0.0002643, KD: 0.0062967
+Validation Loss: 0.00030, Precision: 0.886, Recall: 0.630, F1 Score: 0.736, IoU: 0.583, Acc: 1.000
+Epoch 78/200 Loss: 0.0061683, CEL: 0.0002649, KD: 0.0059034
+Validation Loss: 0.00031, Precision: 0.856, Recall: 0.691, F1 Score: 0.764, IoU: 0.619, Acc: 1.000
+Epoch 79/200 Loss: 0.0063756, CEL: 0.0002627, KD: 0.0061129
+Validation Loss: 0.00029, Precision: 0.848, Recall: 0.703, F1 Score: 0.769, IoU: 0.624, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_78_val_0.00_f1_0.77.pt
+Epoch 80/200 Loss: 0.0061709, CEL: 0.0002628, KD: 0.0059080
+Validation Loss: 0.00030, Precision: 0.896, Recall: 0.619, F1 Score: 0.732, IoU: 0.577, Acc: 1.000
+Epoch 81/200 Loss: 0.0063370, CEL: 0.0002645, KD: 0.0060725
+Validation Loss: 0.00030, Precision: 0.876, Recall: 0.653, F1 Score: 0.748, IoU: 0.597, Acc: 1.000
+Epoch 82/200 Loss: 0.0061939, CEL: 0.0002616, KD: 0.0059324
+Validation Loss: 0.00029, Precision: 0.866, Recall: 0.673, F1 Score: 0.757, IoU: 0.609, Acc: 1.000
+Epoch 83/200 Loss: 0.0060731, CEL: 0.0002615, KD: 0.0058116
+Validation Loss: 0.00029, Precision: 0.857, Recall: 0.689, F1 Score: 0.764, IoU: 0.618, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_82_val_0.00_f1_0.76.pt
+Epoch 84/200 Loss: 0.0061874, CEL: 0.0002617, KD: 0.0059257
+Validation Loss: 0.00029, Precision: 0.863, Recall: 0.683, F1 Score: 0.763, IoU: 0.616, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_83_val_0.00_f1_0.76.pt
+Epoch 85/200 Loss: 0.0060050, CEL: 0.0002603, KD: 0.0057446
+Validation Loss: 0.00029, Precision: 0.836, Recall: 0.722, F1 Score: 0.775, IoU: 0.632, Acc: 1.000
+Epoch 86/200 Loss: 0.0062171, CEL: 0.0002603, KD: 0.0059568
+Validation Loss: 0.00029, Precision: 0.848, Recall: 0.710, F1 Score: 0.773, IoU: 0.630, Acc: 1.000
+Epoch 87/200 Loss: 0.0059830, CEL: 0.0002600, KD: 0.0057230
+Validation Loss: 0.00029, Precision: 0.847, Recall: 0.704, F1 Score: 0.769, IoU: 0.625, Acc: 1.000
+Epoch 88/200 Loss: 0.0060010, CEL: 0.0002610, KD: 0.0057400
+Validation Loss: 0.00030, Precision: 0.847, Recall: 0.699, F1 Score: 0.766, IoU: 0.621, Acc: 1.000
+Epoch 89/200 Loss: 0.0062586, CEL: 0.0002599, KD: 0.0059986
+Validation Loss: 0.00030, Precision: 0.838, Recall: 0.719, F1 Score: 0.774, IoU: 0.631, Acc: 1.000
+Epoch 90/200 Loss: 0.0060460, CEL: 0.0002571, KD: 0.0057889
+Validation Loss: 0.00029, Precision: 0.844, Recall: 0.713, F1 Score: 0.773, IoU: 0.630, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_89_val_0.00_f1_0.77.pt
+Epoch 91/200 Loss: 0.0059327, CEL: 0.0002607, KD: 0.0056720
+Validation Loss: 0.00031, Precision: 0.847, Recall: 0.699, F1 Score: 0.766, IoU: 0.621, Acc: 1.000
+Epoch 92/200 Loss: 0.0060050, CEL: 0.0002591, KD: 0.0057458
+Validation Loss: 0.00029, Precision: 0.853, Recall: 0.699, F1 Score: 0.769, IoU: 0.624, Acc: 1.000
+Epoch 93/200 Loss: 0.0058728, CEL: 0.0002590, KD: 0.0056139
+Validation Loss: 0.00029, Precision: 0.844, Recall: 0.709, F1 Score: 0.771, IoU: 0.627, Acc: 1.000
+Epoch 94/200 Loss: 0.0057388, CEL: 0.0002562, KD: 0.0054826
+Validation Loss: 0.00029, Precision: 0.850, Recall: 0.707, F1 Score: 0.772, IoU: 0.629, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_93_val_0.00_f1_0.77.pt
+Epoch 95/200 Loss: 0.0057897, CEL: 0.0002569, KD: 0.0055328
+Validation Loss: 0.00029, Precision: 0.864, Recall: 0.680, F1 Score: 0.761, IoU: 0.614, Acc: 1.000
+Epoch 96/200 Loss: 0.0059255, CEL: 0.0002582, KD: 0.0056673
+Validation Loss: 0.00029, Precision: 0.846, Recall: 0.707, F1 Score: 0.770, IoU: 0.627, Acc: 1.000
+Epoch 97/200 Loss: 0.0057700, CEL: 0.0002570, KD: 0.0055130
+Validation Loss: 0.00029, Precision: 0.849, Recall: 0.703, F1 Score: 0.769, IoU: 0.625, Acc: 1.000
+Epoch 98/200 Loss: 0.0057629, CEL: 0.0002591, KD: 0.0055038
+Validation Loss: 0.00029, Precision: 0.848, Recall: 0.704, F1 Score: 0.770, IoU: 0.626, Acc: 1.000
+Epoch 99/200 Loss: 0.0057247, CEL: 0.0002607, KD: 0.0054640
+Validation Loss: 0.00030, Precision: 0.817, Recall: 0.742, F1 Score: 0.778, IoU: 0.636, Acc: 1.000
+Epoch 100/200 Loss: 0.0057283, CEL: 0.0002580, KD: 0.0054703
+Validation Loss: 0.00029, Precision: 0.840, Recall: 0.711, F1 Score: 0.770, IoU: 0.626, Acc: 1.000
+Epoch 101/200 Loss: 0.0057213, CEL: 0.0002573, KD: 0.0054640
+Validation Loss: 0.00029, Precision: 0.851, Recall: 0.699, F1 Score: 0.767, IoU: 0.623, Acc: 1.000
+Epoch 102/200 Loss: 0.0057645, CEL: 0.0002590, KD: 0.0055055
+Validation Loss: 0.00030, Precision: 0.848, Recall: 0.692, F1 Score: 0.762, IoU: 0.615, Acc: 1.000
+Epoch 103/200 Loss: 0.0058681, CEL: 0.0002571, KD: 0.0056110
+Validation Loss: 0.00029, Precision: 0.856, Recall: 0.696, F1 Score: 0.768, IoU: 0.623, Acc: 1.000
+Epoch 104/200 Loss: 0.0059700, CEL: 0.0002577, KD: 0.0057123
+Validation Loss: 0.00030, Precision: 0.876, Recall: 0.656, F1 Score: 0.751, IoU: 0.601, Acc: 1.000
+Epoch 105/200 Loss: 0.0055977, CEL: 0.0002589, KD: 0.0053388
+Validation Loss: 0.00030, Precision: 0.885, Recall: 0.638, F1 Score: 0.741, IoU: 0.589, Acc: 1.000
+Epoch 106/200 Loss: 0.0055068, CEL: 0.0002561, KD: 0.0052508
+Validation Loss: 0.00030, Precision: 0.870, Recall: 0.670, F1 Score: 0.757, IoU: 0.609, Acc: 1.000
+Epoch 107/200 Loss: 0.0056939, CEL: 0.0002554, KD: 0.0054385
+Validation Loss: 0.00029, Precision: 0.877, Recall: 0.661, F1 Score: 0.754, IoU: 0.605, Acc: 1.000
+Epoch 108/200 Loss: 0.0055984, CEL: 0.0002537, KD: 0.0053447
+Validation Loss: 0.00029, Precision: 0.844, Recall: 0.713, F1 Score: 0.773, IoU: 0.630, Acc: 1.000
+Epoch 109/200 Loss: 0.0055568, CEL: 0.0002562, KD: 0.0053006
+Validation Loss: 0.00029, Precision: 0.845, Recall: 0.709, F1 Score: 0.771, IoU: 0.627, Acc: 1.000
+Epoch 110/200 Loss: 0.0055759, CEL: 0.0002553, KD: 0.0053206
+Validation Loss: 0.00029, Precision: 0.862, Recall: 0.684, F1 Score: 0.763, IoU: 0.617, Acc: 1.000
+Epoch 111/200 Loss: 0.0056250, CEL: 0.0002574, KD: 0.0053676
+Validation Loss: 0.00029, Precision: 0.863, Recall: 0.689, F1 Score: 0.766, IoU: 0.621, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_110_val_0.00_f1_0.77.pt
+Epoch 112/200 Loss: 0.0053955, CEL: 0.0002534, KD: 0.0051420
+Validation Loss: 0.00029, Precision: 0.845, Recall: 0.710, F1 Score: 0.772, IoU: 0.628, Acc: 1.000
+Epoch 113/200 Loss: 0.0054872, CEL: 0.0002569, KD: 0.0052303
+Validation Loss: 0.00029, Precision: 0.867, Recall: 0.677, F1 Score: 0.760, IoU: 0.613, Acc: 1.000
+Epoch 114/200 Loss: 0.0053937, CEL: 0.0002570, KD: 0.0051367
+Validation Loss: 0.00029, Precision: 0.831, Recall: 0.730, F1 Score: 0.777, IoU: 0.635, Acc: 1.000
+Epoch 115/200 Loss: 0.0056027, CEL: 0.0002550, KD: 0.0053476
+Validation Loss: 0.00029, Precision: 0.856, Recall: 0.700, F1 Score: 0.771, IoU: 0.627, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_114_val_0.00_f1_0.77.pt
+Epoch 116/200 Loss: 0.0055026, CEL: 0.0002537, KD: 0.0052490
+Validation Loss: 0.00029, Precision: 0.845, Recall: 0.713, F1 Score: 0.774, IoU: 0.631, Acc: 1.000
+Epoch 117/200 Loss: 0.0052880, CEL: 0.0002529, KD: 0.0050351
+Validation Loss: 0.00029, Precision: 0.869, Recall: 0.678, F1 Score: 0.762, IoU: 0.616, Acc: 1.000
+Epoch 118/200 Loss: 0.0057642, CEL: 0.0002536, KD: 0.0055106
+Validation Loss: 0.00029, Precision: 0.840, Recall: 0.721, F1 Score: 0.776, IoU: 0.634, Acc: 1.000
+Epoch 119/200 Loss: 0.0053121, CEL: 0.0002532, KD: 0.0050589
+Validation Loss: 0.00029, Precision: 0.881, Recall: 0.655, F1 Score: 0.751, IoU: 0.602, Acc: 1.000
+Epoch 120/200 Loss: 0.0053798, CEL: 0.0002510, KD: 0.0051288
+Validation Loss: 0.00029, Precision: 0.860, Recall: 0.696, F1 Score: 0.770, IoU: 0.626, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_119_val_0.00_f1_0.77.pt
+Epoch 121/200 Loss: 0.0053092, CEL: 0.0002515, KD: 0.0050577
+Validation Loss: 0.00031, Precision: 0.908, Recall: 0.587, F1 Score: 0.713, IoU: 0.555, Acc: 1.000
+Epoch 122/200 Loss: 0.0052684, CEL: 0.0002529, KD: 0.0050155
+Validation Loss: 0.00029, Precision: 0.860, Recall: 0.693, F1 Score: 0.767, IoU: 0.623, Acc: 1.000
+Epoch 123/200 Loss: 0.0053602, CEL: 0.0002529, KD: 0.0051074
+Validation Loss: 0.00029, Precision: 0.856, Recall: 0.698, F1 Score: 0.769, IoU: 0.624, Acc: 1.000
+Epoch 124/200 Loss: 0.0052986, CEL: 0.0002517, KD: 0.0050469
+Validation Loss: 0.00029, Precision: 0.859, Recall: 0.696, F1 Score: 0.769, IoU: 0.624, Acc: 1.000
+Epoch 125/200 Loss: 0.0053166, CEL: 0.0002515, KD: 0.0050651
+Validation Loss: 0.00029, Precision: 0.836, Recall: 0.728, F1 Score: 0.778, IoU: 0.637, Acc: 1.000
+Epoch 126/200 Loss: 0.0051570, CEL: 0.0002519, KD: 0.0049051
+Validation Loss: 0.00029, Precision: 0.847, Recall: 0.709, F1 Score: 0.772, IoU: 0.629, Acc: 1.000
+Epoch 127/200 Loss: 0.0052815, CEL: 0.0002521, KD: 0.0050294
+Validation Loss: 0.00029, Precision: 0.857, Recall: 0.697, F1 Score: 0.769, IoU: 0.625, Acc: 1.000
+Epoch 128/200 Loss: 0.0052992, CEL: 0.0002555, KD: 0.0050437
+Validation Loss: 0.00032, Precision: 0.808, Recall: 0.716, F1 Score: 0.760, IoU: 0.612, Acc: 1.000
+Epoch 129/200 Loss: 0.0051965, CEL: 0.0002544, KD: 0.0049422
+Validation Loss: 0.00029, Precision: 0.856, Recall: 0.691, F1 Score: 0.765, IoU: 0.619, Acc: 1.000
+Epoch 130/200 Loss: 0.0053119, CEL: 0.0002486, KD: 0.0050633
+Validation Loss: 0.00030, Precision: 0.895, Recall: 0.619, F1 Score: 0.732, IoU: 0.578, Acc: 1.000
+Epoch 131/200 Loss: 0.0053081, CEL: 0.0002515, KD: 0.0050567
+Validation Loss: 0.00029, Precision: 0.852, Recall: 0.696, F1 Score: 0.766, IoU: 0.621, Acc: 1.000
+Epoch 132/200 Loss: 0.0055489, CEL: 0.0002520, KD: 0.0052969
+Validation Loss: 0.00029, Precision: 0.856, Recall: 0.695, F1 Score: 0.767, IoU: 0.622, Acc: 1.000
+Epoch 133/200 Loss: 0.0052597, CEL: 0.0002509, KD: 0.0050088
+Validation Loss: 0.00029, Precision: 0.863, Recall: 0.691, F1 Score: 0.768, IoU: 0.623, Acc: 1.000
+Epoch 134/200 Loss: 0.0051770, CEL: 0.0002506, KD: 0.0049264
+Validation Loss: 0.00029, Precision: 0.849, Recall: 0.713, F1 Score: 0.775, IoU: 0.633, Acc: 1.000
+Epoch 135/200 Loss: 0.0052625, CEL: 0.0002504, KD: 0.0050121
+Validation Loss: 0.00029, Precision: 0.870, Recall: 0.681, F1 Score: 0.764, IoU: 0.618, Acc: 1.000
+Epoch 136/200 Loss: 0.0052745, CEL: 0.0002518, KD: 0.0050227
+Validation Loss: 0.00030, Precision: 0.845, Recall: 0.699, F1 Score: 0.765, IoU: 0.619, Acc: 1.000
+Epoch 137/200 Loss: 0.0053144, CEL: 0.0002511, KD: 0.0050633
+Validation Loss: 0.00029, Precision: 0.845, Recall: 0.711, F1 Score: 0.772, IoU: 0.629, Acc: 1.000
+Epoch 138/200 Loss: 0.0055021, CEL: 0.0002527, KD: 0.0052494
+Validation Loss: 0.00029, Precision: 0.859, Recall: 0.696, F1 Score: 0.769, IoU: 0.625, Acc: 1.000
+Epoch 139/200 Loss: 0.0050566, CEL: 0.0002487, KD: 0.0048079
+Validation Loss: 0.00029, Precision: 0.846, Recall: 0.718, F1 Score: 0.777, IoU: 0.635, Acc: 1.000
+Epoch 140/200 Loss: 0.0052133, CEL: 0.0002488, KD: 0.0049645
+Validation Loss: 0.00029, Precision: 0.877, Recall: 0.664, F1 Score: 0.756, IoU: 0.607, Acc: 1.000
+Epoch 141/200 Loss: 0.0050273, CEL: 0.0002501, KD: 0.0047772
+Validation Loss: 0.00029, Precision: 0.853, Recall: 0.702, F1 Score: 0.770, IoU: 0.627, Acc: 1.000
+Epoch 142/200 Loss: 0.0054202, CEL: 0.0002533, KD: 0.0051669
+Validation Loss: 0.00029, Precision: 0.861, Recall: 0.685, F1 Score: 0.763, IoU: 0.617, Acc: 1.000
+Epoch 143/200 Loss: 0.0051780, CEL: 0.0002528, KD: 0.0049252
+Validation Loss: 0.00029, Precision: 0.856, Recall: 0.695, F1 Score: 0.767, IoU: 0.622, Acc: 1.000
+Epoch 144/200 Loss: 0.0051720, CEL: 0.0002525, KD: 0.0049196
+Validation Loss: 0.00030, Precision: 0.882, Recall: 0.653, F1 Score: 0.750, IoU: 0.600, Acc: 1.000
+Epoch 145/200 Loss: 0.0051034, CEL: 0.0002524, KD: 0.0048510
+Validation Loss: 0.00029, Precision: 0.850, Recall: 0.707, F1 Score: 0.772, IoU: 0.629, Acc: 1.000
+Epoch 146/200 Loss: 0.0055728, CEL: 0.0002517, KD: 0.0053210
+Validation Loss: 0.00029, Precision: 0.850, Recall: 0.706, F1 Score: 0.771, IoU: 0.628, Acc: 1.000
+Epoch 147/200 Loss: 0.0052252, CEL: 0.0002497, KD: 0.0049755
+Validation Loss: 0.00029, Precision: 0.843, Recall: 0.713, F1 Score: 0.773, IoU: 0.630, Acc: 1.000
+Epoch 148/200 Loss: 0.0050930, CEL: 0.0002495, KD: 0.0048434
+Validation Loss: 0.00029, Precision: 0.845, Recall: 0.717, F1 Score: 0.775, IoU: 0.633, Acc: 1.000
+Epoch 149/200 Loss: 0.0050904, CEL: 0.0002483, KD: 0.0048421
+Validation Loss: 0.00029, Precision: 0.857, Recall: 0.696, F1 Score: 0.768, IoU: 0.623, Acc: 1.000
+Epoch 150/200 Loss: 0.0050910, CEL: 0.0002498, KD: 0.0048412
+Validation Loss: 0.00029, Precision: 0.887, Recall: 0.647, F1 Score: 0.748, IoU: 0.598, Acc: 1.000
+Epoch 151/200 Loss: 0.0052664, CEL: 0.0002478, KD: 0.0050186
+Validation Loss: 0.00029, Precision: 0.878, Recall: 0.665, F1 Score: 0.757, IoU: 0.609, Acc: 1.000
+Epoch 152/200 Loss: 0.0051093, CEL: 0.0002500, KD: 0.0048593
+Validation Loss: 0.00029, Precision: 0.846, Recall: 0.717, F1 Score: 0.777, IoU: 0.635, Acc: 1.000
+Epoch 153/200 Loss: 0.0050663, CEL: 0.0002476, KD: 0.0048187
+Validation Loss: 0.00029, Precision: 0.863, Recall: 0.697, F1 Score: 0.771, IoU: 0.627, Acc: 1.000
+Epoch 154/200 Loss: 0.0050866, CEL: 0.0002491, KD: 0.0048375
+Validation Loss: 0.00029, Precision: 0.848, Recall: 0.713, F1 Score: 0.775, IoU: 0.632, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_153_val_0.00_f1_0.77.pt
+Epoch 155/200 Loss: 0.0049117, CEL: 0.0002465, KD: 0.0046652
+Validation Loss: 0.00029, Precision: 0.842, Recall: 0.719, F1 Score: 0.776, IoU: 0.634, Acc: 1.000
+Epoch 156/200 Loss: 0.0049557, CEL: 0.0002475, KD: 0.0047082
+Validation Loss: 0.00029, Precision: 0.866, Recall: 0.683, F1 Score: 0.764, IoU: 0.618, Acc: 1.000
+Epoch 157/200 Loss: 0.0050073, CEL: 0.0002472, KD: 0.0047601
+Validation Loss: 0.00029, Precision: 0.866, Recall: 0.687, F1 Score: 0.766, IoU: 0.621, Acc: 1.000
+Epoch 158/200 Loss: 0.0050430, CEL: 0.0002467, KD: 0.0047963
+Validation Loss: 0.00029, Precision: 0.849, Recall: 0.709, F1 Score: 0.773, IoU: 0.629, Acc: 1.000
+Epoch 159/200 Loss: 0.0048226, CEL: 0.0002475, KD: 0.0045751
+Validation Loss: 0.00029, Precision: 0.862, Recall: 0.694, F1 Score: 0.769, IoU: 0.625, Acc: 1.000
+Epoch 160/200 Loss: 0.0048914, CEL: 0.0002489, KD: 0.0046425
+Validation Loss: 0.00029, Precision: 0.868, Recall: 0.677, F1 Score: 0.761, IoU: 0.614, Acc: 1.000
+Epoch 161/200 Loss: 0.0049781, CEL: 0.0002480, KD: 0.0047302
+Validation Loss: 0.00030, Precision: 0.827, Recall: 0.725, F1 Score: 0.773, IoU: 0.630, Acc: 1.000
+Epoch 162/200 Loss: 0.0049243, CEL: 0.0002477, KD: 0.0046767
+Validation Loss: 0.00029, Precision: 0.851, Recall: 0.712, F1 Score: 0.775, IoU: 0.633, Acc: 1.000
+Epoch 163/200 Loss: 0.0050874, CEL: 0.0002476, KD: 0.0048399
+Validation Loss: 0.00029, Precision: 0.843, Recall: 0.717, F1 Score: 0.775, IoU: 0.632, Acc: 1.000
+Epoch 164/200 Loss: 0.0048127, CEL: 0.0002469, KD: 0.0045659
+Validation Loss: 0.00029, Precision: 0.867, Recall: 0.682, F1 Score: 0.764, IoU: 0.618, Acc: 1.000
+Epoch 165/200 Loss: 0.0054723, CEL: 0.0002500, KD: 0.0052223
+Validation Loss: 0.00029, Precision: 0.865, Recall: 0.680, F1 Score: 0.762, IoU: 0.615, Acc: 1.000
+Epoch 166/200 Loss: 0.0050044, CEL: 0.0002480, KD: 0.0047564
+Validation Loss: 0.00029, Precision: 0.838, Recall: 0.727, F1 Score: 0.779, IoU: 0.637, Acc: 1.000
+Epoch 167/200 Loss: 0.0048361, CEL: 0.0002462, KD: 0.0045899
+Validation Loss: 0.00029, Precision: 0.847, Recall: 0.717, F1 Score: 0.776, IoU: 0.634, Acc: 1.000
+Epoch 168/200 Loss: 0.0047804, CEL: 0.0002456, KD: 0.0045348
+Validation Loss: 0.00029, Precision: 0.857, Recall: 0.700, F1 Score: 0.771, IoU: 0.627, Acc: 1.000
+Epoch 169/200 Loss: 0.0049580, CEL: 0.0002452, KD: 0.0047128
+Validation Loss: 0.00029, Precision: 0.856, Recall: 0.705, F1 Score: 0.773, IoU: 0.630, Acc: 1.000
+Epoch 170/200 Loss: 0.0048287, CEL: 0.0002455, KD: 0.0045831
+Validation Loss: 0.00029, Precision: 0.862, Recall: 0.695, F1 Score: 0.770, IoU: 0.625, Acc: 1.000
+Epoch 171/200 Loss: 0.0047365, CEL: 0.0002464, KD: 0.0044901
+Validation Loss: 0.00029, Precision: 0.865, Recall: 0.685, F1 Score: 0.765, IoU: 0.619, Acc: 1.000
+Epoch 172/200 Loss: 0.0047568, CEL: 0.0002449, KD: 0.0045119
+Validation Loss: 0.00029, Precision: 0.886, Recall: 0.655, F1 Score: 0.753, IoU: 0.604, Acc: 1.000
+Epoch 173/200 Loss: 0.0048062, CEL: 0.0002450, KD: 0.0045612
+Validation Loss: 0.00029, Precision: 0.852, Recall: 0.711, F1 Score: 0.775, IoU: 0.633, Acc: 1.000
+Epoch 174/200 Loss: 0.0047016, CEL: 0.0002449, KD: 0.0044567
+Validation Loss: 0.00029, Precision: 0.880, Recall: 0.656, F1 Score: 0.752, IoU: 0.602, Acc: 1.000
+Epoch 175/200 Loss: 0.0048567, CEL: 0.0002466, KD: 0.0046100
+Validation Loss: 0.00029, Precision: 0.872, Recall: 0.677, F1 Score: 0.762, IoU: 0.616, Acc: 1.000
+Epoch 176/200 Loss: 0.0048077, CEL: 0.0002451, KD: 0.0045626
+Validation Loss: 0.00029, Precision: 0.858, Recall: 0.697, F1 Score: 0.769, IoU: 0.625, Acc: 1.000
+Epoch 177/200 Loss: 0.0047550, CEL: 0.0002448, KD: 0.0045103
+Validation Loss: 0.00029, Precision: 0.875, Recall: 0.673, F1 Score: 0.761, IoU: 0.614, Acc: 1.000
+Epoch 178/200 Loss: 0.0047844, CEL: 0.0002443, KD: 0.0045401
+Validation Loss: 0.00029, Precision: 0.830, Recall: 0.745, F1 Score: 0.785, IoU: 0.646, Acc: 1.000
+Epoch 179/200 Loss: 0.0047887, CEL: 0.0002459, KD: 0.0045428
+Validation Loss: 0.00029, Precision: 0.824, Recall: 0.748, F1 Score: 0.784, IoU: 0.645, Acc: 1.000
+Epoch 180/200 Loss: 0.0046880, CEL: 0.0002434, KD: 0.0044446
+Validation Loss: 0.00029, Precision: 0.864, Recall: 0.692, F1 Score: 0.769, IoU: 0.624, Acc: 1.000
+Epoch 181/200 Loss: 0.0047586, CEL: 0.0002449, KD: 0.0045137
+Validation Loss: 0.00029, Precision: 0.864, Recall: 0.690, F1 Score: 0.767, IoU: 0.622, Acc: 1.000
+Epoch 182/200 Loss: 0.0047514, CEL: 0.0002434, KD: 0.0045079
+Validation Loss: 0.00029, Precision: 0.823, Recall: 0.750, F1 Score: 0.785, IoU: 0.646, Acc: 1.000
+Epoch 183/200 Loss: 0.0047563, CEL: 0.0002438, KD: 0.0045124
+Validation Loss: 0.00029, Precision: 0.871, Recall: 0.677, F1 Score: 0.762, IoU: 0.615, Acc: 1.000
+Epoch 184/200 Loss: 0.0046850, CEL: 0.0002447, KD: 0.0044404
+Validation Loss: 0.00029, Precision: 0.849, Recall: 0.716, F1 Score: 0.777, IoU: 0.635, Acc: 1.000
+Saved model to: weights/kd-adapter-v1/3/enet_183_val_0.00_f1_0.78.pt
+Epoch 185/200 Loss: 0.0045956, CEL: 0.0002437, KD: 0.0043519
+Validation Loss: 0.00030, Precision: 0.901, Recall: 0.612, F1 Score: 0.729, IoU: 0.573, Acc: 1.000
+Epoch 186/200 Loss: 0.0049250, CEL: 0.0002437, KD: 0.0046814
+Validation Loss: 0.00029, Precision: 0.857, Recall: 0.703, F1 Score: 0.772, IoU: 0.629, Acc: 1.000
+Epoch 187/200 Loss: 0.0047664, CEL: 0.0002448, KD: 0.0045216
+Validation Loss: 0.00030, Precision: 0.890, Recall: 0.648, F1 Score: 0.750, IoU: 0.600, Acc: 1.000
+Epoch 188/200 Loss: 0.0046679, CEL: 0.0002440, KD: 0.0044239
+Validation Loss: 0.00029, Precision: 0.863, Recall: 0.687, F1 Score: 0.765, IoU: 0.619, Acc: 1.000
+Epoch 189/200 Loss: 0.0046092, CEL: 0.0002441, KD: 0.0043651
+Validation Loss: 0.00031, Precision: 0.905, Recall: 0.596, F1 Score: 0.719, IoU: 0.561, Acc: 1.000
+Epoch 190/200 Loss: 0.0046660, CEL: 0.0002421, KD: 0.0044238
+Validation Loss: 0.00029, Precision: 0.849, Recall: 0.713, F1 Score: 0.775, IoU: 0.633, Acc: 1.000
+Epoch 191/200 Loss: 0.0046155, CEL: 0.0002429, KD: 0.0043726
+Validation Loss: 0.00029, Precision: 0.866, Recall: 0.687, F1 Score: 0.766, IoU: 0.621, Acc: 1.000
+Epoch 192/200 Loss: 0.0046457, CEL: 0.0002439, KD: 0.0044017
+Validation Loss: 0.00029, Precision: 0.874, Recall: 0.677, F1 Score: 0.763, IoU: 0.617, Acc: 1.000
+Epoch 193/200 Loss: 0.0045926, CEL: 0.0002441, KD: 0.0043485
+Validation Loss: 0.00029, Precision: 0.864, Recall: 0.689, F1 Score: 0.767, IoU: 0.622, Acc: 1.000
+Epoch 194/200 Loss: 0.0046332, CEL: 0.0002427, KD: 0.0043905
+Validation Loss: 0.00029, Precision: 0.861, Recall: 0.697, F1 Score: 0.770, IoU: 0.626, Acc: 1.000
+Epoch 195/200 Loss: 0.0046631, CEL: 0.0002446, KD: 0.0044184
+Validation Loss: 0.00029, Precision: 0.850, Recall: 0.717, F1 Score: 0.778, IoU: 0.636, Acc: 1.000
+Epoch 196/200 Loss: 0.0047329, CEL: 0.0002421, KD: 0.0044908
+Validation Loss: 0.00031, Precision: 0.914, Recall: 0.584, F1 Score: 0.713, IoU: 0.554, Acc: 1.000
+Epoch 197/200 Loss: 0.0045834, CEL: 0.0002418, KD: 0.0043416
+Validation Loss: 0.00029, Precision: 0.867, Recall: 0.689, F1 Score: 0.768, IoU: 0.623, Acc: 1.000
+Epoch 198/200 Loss: 0.0045634, CEL: 0.0002471, KD: 0.0043163
+Validation Loss: 0.00029, Precision: 0.877, Recall: 0.673, F1 Score: 0.761, IoU: 0.615, Acc: 1.000
+Epoch 199/200 Loss: 0.0045843, CEL: 0.0002470, KD: 0.0043372
+Validation Loss: 0.00029, Precision: 0.879, Recall: 0.670, F1 Score: 0.760, IoU: 0.613, Acc: 1.000
+Epoch 200/200 Loss: 0.0045375, CEL: 0.0002420, KD: 0.0042955
+Validation Loss: 0.00030, Precision: 0.886, Recall: 0.656, F1 Score: 0.753, IoU: 0.604, Acc: 1.000
+
+Testing...
+
+weights/kd-adapter-v1/3/enet_0_val_0.00_f1_0.00.pt	 - Precision: 0.840, Recall: 0.000, F1 Score: 0.001, IoU: 0.000, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_1_val_0.00_f1_0.37.pt	 - Precision: 0.733, Recall: 0.246, F1 Score: 0.368, IoU: 0.225, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_2_val_0.00_f1_0.50.pt	 - Precision: 0.701, Recall: 0.385, F1 Score: 0.497, IoU: 0.331, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_3_val_0.00_f1_0.53.pt	 - Precision: 0.766, Recall: 0.400, F1 Score: 0.526, IoU: 0.356, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_5_val_0.00_f1_0.64.pt	 - Precision: 0.732, Recall: 0.558, F1 Score: 0.633, IoU: 0.463, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_6_val_0.00_f1_0.57.pt	 - Precision: 0.861, Recall: 0.415, F1 Score: 0.560, IoU: 0.389, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_7_val_0.00_f1_0.67.pt	 - Precision: 0.808, Recall: 0.558, F1 Score: 0.660, IoU: 0.493, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_8_val_0.00_f1_0.72.pt	 - Precision: 0.798, Recall: 0.642, F1 Score: 0.712, IoU: 0.552, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_9_val_0.00_f1_0.70.pt	 - Precision: 0.833, Recall: 0.598, F1 Score: 0.696, IoU: 0.534, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_10_val_0.00_f1_0.71.pt	 - Precision: 0.845, Recall: 0.600, F1 Score: 0.702, IoU: 0.541, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_11_val_0.00_f1_0.73.pt	 - Precision: 0.808, Recall: 0.660, F1 Score: 0.727, IoU: 0.571, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_12_val_0.00_f1_0.73.pt	 - Precision: 0.850, Recall: 0.624, F1 Score: 0.719, IoU: 0.562, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_16_val_0.00_f1_0.74.pt	 - Precision: 0.843, Recall: 0.643, F1 Score: 0.730, IoU: 0.574, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_19_val_0.00_f1_0.73.pt	 - Precision: 0.861, Recall: 0.627, F1 Score: 0.726, IoU: 0.569, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_20_val_0.00_f1_0.75.pt	 - Precision: 0.823, Recall: 0.676, F1 Score: 0.743, IoU: 0.591, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_23_val_0.00_f1_0.75.pt	 - Precision: 0.835, Recall: 0.670, F1 Score: 0.744, IoU: 0.592, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_25_val_0.00_f1_0.75.pt	 - Precision: 0.834, Recall: 0.675, F1 Score: 0.746, IoU: 0.595, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_27_val_0.00_f1_0.75.pt	 - Precision: 0.848, Recall: 0.662, F1 Score: 0.744, IoU: 0.592, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_28_val_0.00_f1_0.75.pt	 - Precision: 0.849, Recall: 0.661, F1 Score: 0.743, IoU: 0.591, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_39_val_0.00_f1_0.76.pt	 - Precision: 0.848, Recall: 0.672, F1 Score: 0.750, IoU: 0.600, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_41_val_0.00_f1_0.77.pt	 - Precision: 0.811, Recall: 0.725, F1 Score: 0.766, IoU: 0.621, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_45_val_0.00_f1_0.76.pt	 - Precision: 0.841, Recall: 0.683, F1 Score: 0.754, IoU: 0.605, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_47_val_0.00_f1_0.77.pt	 - Precision: 0.829, Recall: 0.702, F1 Score: 0.760, IoU: 0.613, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_54_val_0.00_f1_0.76.pt	 - Precision: 0.840, Recall: 0.690, F1 Score: 0.758, IoU: 0.610, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_61_val_0.00_f1_0.76.pt	 - Precision: 0.854, Recall: 0.671, F1 Score: 0.752, IoU: 0.602, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_74_val_0.00_f1_0.77.pt	 - Precision: 0.822, Recall: 0.715, F1 Score: 0.765, IoU: 0.620, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_78_val_0.00_f1_0.77.pt	 - Precision: 0.837, Recall: 0.701, F1 Score: 0.763, IoU: 0.617, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_82_val_0.00_f1_0.76.pt	 - Precision: 0.847, Recall: 0.686, F1 Score: 0.758, IoU: 0.611, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_83_val_0.00_f1_0.76.pt	 - Precision: 0.854, Recall: 0.680, F1 Score: 0.757, IoU: 0.609, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_89_val_0.00_f1_0.77.pt	 - Precision: 0.836, Recall: 0.711, F1 Score: 0.769, IoU: 0.624, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_93_val_0.00_f1_0.77.pt	 - Precision: 0.841, Recall: 0.704, F1 Score: 0.767, IoU: 0.622, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_110_val_0.00_f1_0.77.pt	 - Precision: 0.854, Recall: 0.685, F1 Score: 0.760, IoU: 0.613, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_114_val_0.00_f1_0.77.pt	 - Precision: 0.848, Recall: 0.698, F1 Score: 0.765, IoU: 0.620, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_119_val_0.00_f1_0.77.pt	 - Precision: 0.852, Recall: 0.695, F1 Score: 0.765, IoU: 0.620, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_153_val_0.00_f1_0.77.pt	 - Precision: 0.840, Recall: 0.712, F1 Score: 0.771, IoU: 0.628, Accuracy: 1.000
+weights/kd-adapter-v1/3/enet_183_val_0.00_f1_0.78.pt	 - Precision: 0.841, Recall: 0.716, F1 Score: 0.773, IoU: 0.630, Accuracy: 1.000

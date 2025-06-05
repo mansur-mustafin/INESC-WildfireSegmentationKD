@@ -33,9 +33,10 @@ path:
   teacher_model: "./weights/landset8_default/4/unet_66_val_0.00_f1_0.91.pt"
 
   dataset: "/nas-ctm01/datasets/public/Langsat8-ActiveFire/dataset/compressed/"
+  dataset_local: "./../datasets/landsat_subset_40GB/"
 
-  output_model: "weights/kd/4/"
-  weights_test: "weights/kd/4/"           # folder which models to test
+  output_model: "weights/kd-adapter-v1/4/"
+  weights_test: "weights/kd-adapter-v1/4/"           # folder which models to test
 
 
 const:
@@ -54,4 +55,4 @@ const:
 distill:
   T: 1.0
   alpha: 0.5
-  lbd: 10
+  lbd: 0.1
