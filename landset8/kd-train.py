@@ -1,4 +1,4 @@
-import wandb
+# import wandb
 import time
 import json
 import hydra
@@ -14,11 +14,12 @@ from torch.utils.data import DataLoader
 from landset8_loader import Landset8Dataset
 from model_manager import ModelManager
 from utils import *
+from adapter import MLP
 
 # Login WANDD
-with open("wandb_secret.json", "r") as f:
-    secrets = json.load(f)
-wandb.login(key=secrets["WANDB_API_KEY"])
+# with open("wandb_secret.json", "r") as f:
+#     secrets = json.load(f)
+# wandb.login(key=secrets["WANDB_API_KEY"])
 
 
 class FirePredict():
@@ -42,7 +43,11 @@ class FirePredict():
         self.criterion = nn.BCEWithLogitsLoss()
         self.criterion_KD = nn.MSELoss()
 
-        self.adapter = nn.Conv2d(128, 256, kernel_size=1, bias=False)
+        self.adapter = MLP(
+            in_c=128,
+            out_c=256,
+            hidden_ratio=cfg.distill.hidden_ratio
+        )
 
         self.optimizer = optim.Adam(
             list(self.student.parameters()) + list(self.adapter.parameters()),
@@ -76,6 +81,7 @@ class FirePredict():
             prefetch_factor=8, persistent_workers=True,
         )
 
+
     def train(self):
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.teacher = self.teacher.to(device)
@@ -89,7 +95,7 @@ class FirePredict():
         alpha = self.cfg.distill.alpha
         lbd = self.cfg.distill.lbd
 
-        wandb.watch(self.student, log="all", log_freq=100)
+        # wandb.watch(self.student, log="all", log_freq=100)
 
         for epoch in range(num_epochs):
             self.student.train()
@@ -138,7 +144,7 @@ class FirePredict():
             epoch_loss_CEL = running_loss_CEL / len(self.train_dataloader)
             epoch_loss_KD = running_loss_KD / len(self.train_dataloader)
 
-            wandb.log({"train_loss": epoch_loss, "train_loss_CEL": epoch_loss_CEL, "train_loss_KD": epoch_loss_KD})
+            # wandb.log({"train_loss": epoch_loss, "train_loss_CEL": epoch_loss_CEL, "train_loss_KD": epoch_loss_KD})
             print(f'Epoch {epoch+1}/{num_epochs} Loss: {epoch_loss:.7f}, CEL: {epoch_loss_CEL:.7f}, KD: {epoch_loss_KD:.7f}')
 
             # Validation
@@ -186,13 +192,13 @@ class FirePredict():
 
             print(f'Validation Loss: {val_loss:.5f}, Precision: {precision[0]:.3f}, Recall: {recall[0]:.3f}, F1 Score: {f1[0]:.3f}, IoU: {iou[0]:.3f}, Acc: {accuracy[0]:.3f}')
 
-            wandb.log({
-                "val_loss": val_loss,
-                "val_acc": accuracy[0],
-                "val_precision": precision[0],
-                "val_recall": recall[0],
-                "val_f1": f1[0]
-            })
+            # wandb.log({
+            #     "val_loss": val_loss,
+            #     "val_acc": accuracy[0],
+            #     "val_precision": precision[0],
+            #     "val_recall": recall[0],
+            #     "val_f1": f1[0]
+            # })
 
             save_model = False
 
@@ -204,6 +210,7 @@ class FirePredict():
                 path = self.cfg.path.output_model + f"{self.cfg.model.name}_{epoch}_val_{val_loss:.2f}_f1_{f1[0]:.2f}.pt"
                 torch.save(self.student.state_dict(), path)
                 print('Saved model to: ' + path)
+
 
     def test(self):
         test_dataset = Landset8Dataset(
@@ -256,14 +263,14 @@ class FirePredict():
 
 @hydra.main(config_path=None, config_name=None, version_base=None)
 def main(cfg: DictConfig):
-    wandb.init(project="FirePrediction", config=OmegaConf.to_container(cfg, resolve=True), name=f"Run_{time.strftime('%Y%m%d-%H%M%S')}")
+    # wandb.init(project="FirePrediction", config=OmegaConf.to_container(cfg, resolve=True), name=f"Run_{time.strftime('%Y%m%d-%H%M%S')}")
     print("Configuration: ")
     print(OmegaConf.to_yaml(cfg))
 
     # TRAINING
     fp = FirePredict(cfg)
     fp.train()
-    wandb.finish()
+    # wandb.finish()
 
     print("\nTesting...\n")
 
