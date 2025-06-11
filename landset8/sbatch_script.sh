@@ -8,3 +8,4 @@
 
 # Commands / scripts to run (e.g., python3 train.py)
 python3 kd-train.py --config-path=conf/kd-adapter-v2 --config-name=feature-based-1
+python3 kd-train.py --config-path=conf/kd-adapter-v2 --config-name=feature-based-2

@@ -3,7 +3,7 @@ import torch.nn as nn
 class MLP(nn.Module):
 
     def __init__(self, in_c, out_c, hidden_ratio = 1):
-        super.__init__()
+        super().__init__()
 
         hidden_c = in_c * hidden_ratio
 

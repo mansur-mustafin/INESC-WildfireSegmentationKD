@@ -1,4 +1,4 @@
-# import wandb
+import wandb
 import time
 import json
 import hydra
@@ -17,9 +17,9 @@ from utils import *
 from adapter import MLP
 
 # Login WANDD
-# with open("wandb_secret.json", "r") as f:
-#     secrets = json.load(f)
-# wandb.login(key=secrets["WANDB_API_KEY"])
+with open("wandb_secret.json", "r") as f:
+    secrets = json.load(f)
+wandb.login(key=secrets["WANDB_API_KEY"])
 
 
 class FirePredict():
@@ -95,7 +95,7 @@ class FirePredict():
         alpha = self.cfg.distill.alpha
         lbd = self.cfg.distill.lbd
 
-        # wandb.watch(self.student, log="all", log_freq=100)
+        wandb.watch(self.student, log="all", log_freq=100)
 
         for epoch in range(num_epochs):
             self.student.train()
@@ -103,8 +103,8 @@ class FirePredict():
             running_loss_CEL = 0.0
             running_loss_KD = 0.0
 
-            # for images, labels in tqdm(self.train_dataloader, desc=f"Epoch {epoch+1}/{num_epochs}"):
-            for images, labels in self.train_dataloader:
+            for images, labels in tqdm(self.train_dataloader, desc=f"Epoch {epoch+1}/{num_epochs}"):
+            # for images, labels in self.train_dataloader:
                 images = images.to(device)
                 labels = labels.unsqueeze(1).float().to(device)
 
@@ -144,7 +144,7 @@ class FirePredict():
             epoch_loss_CEL = running_loss_CEL / len(self.train_dataloader)
             epoch_loss_KD = running_loss_KD / len(self.train_dataloader)
 
-            # wandb.log({"train_loss": epoch_loss, "train_loss_CEL": epoch_loss_CEL, "train_loss_KD": epoch_loss_KD})
+            wandb.log({"train_loss": epoch_loss, "train_loss_CEL": epoch_loss_CEL, "train_loss_KD": epoch_loss_KD})
             print(f'Epoch {epoch+1}/{num_epochs} Loss: {epoch_loss:.7f}, CEL: {epoch_loss_CEL:.7f}, KD: {epoch_loss_KD:.7f}')
 
             # Validation
@@ -192,13 +192,13 @@ class FirePredict():
 
             print(f'Validation Loss: {val_loss:.5f}, Precision: {precision[0]:.3f}, Recall: {recall[0]:.3f}, F1 Score: {f1[0]:.3f}, IoU: {iou[0]:.3f}, Acc: {accuracy[0]:.3f}')
 
-            # wandb.log({
-            #     "val_loss": val_loss,
-            #     "val_acc": accuracy[0],
-            #     "val_precision": precision[0],
-            #     "val_recall": recall[0],
-            #     "val_f1": f1[0]
-            # })
+            wandb.log({
+                "val_loss": val_loss,
+                "val_acc": accuracy[0],
+                "val_precision": precision[0],
+                "val_recall": recall[0],
+                "val_f1": f1[0]
+            })
 
             save_model = False
 
@@ -263,14 +263,14 @@ class FirePredict():
 
 @hydra.main(config_path=None, config_name=None, version_base=None)
 def main(cfg: DictConfig):
-    # wandb.init(project="FirePrediction", config=OmegaConf.to_container(cfg, resolve=True), name=f"Run_{time.strftime('%Y%m%d-%H%M%S')}")
+    wandb.init(project="FirePrediction", config=OmegaConf.to_container(cfg, resolve=True), name=f"Run_{time.strftime('%Y%m%d-%H%M%S')}")
     print("Configuration: ")
     print(OmegaConf.to_yaml(cfg))
 
     # TRAINING
     fp = FirePredict(cfg)
     fp.train()
-    # wandb.finish()
+    wandb.finish()
 
     print("\nTesting...\n")
 
