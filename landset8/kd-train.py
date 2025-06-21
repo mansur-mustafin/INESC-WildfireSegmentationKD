@@ -46,8 +46,11 @@ class FirePredict():
         self.adapter = MLP(
             in_c=128,
             out_c=256,
-            hidden_ratio=cfg.distill.hidden_ratio
+            hidden_ratio=cfg.distill.hidden_ratio,
+            dropout=cfg.distill.adapter_dropout
         )
+
+        print(self.adapter.training)
 
         self.optimizer = optim.Adam(
             list(self.student.parameters()) + list(self.adapter.parameters()),
@@ -263,21 +266,21 @@ class FirePredict():
 
 @hydra.main(config_path=None, config_name=None, version_base=None)
 def main(cfg: DictConfig):
-    wandb.init(project="FirePrediction", config=OmegaConf.to_container(cfg, resolve=True), name=f"Run_{time.strftime('%Y%m%d-%H%M%S')}")
-    print("Configuration: ")
-    print(OmegaConf.to_yaml(cfg))
+    # wandb.init(project="FirePrediction", config=OmegaConf.to_container(cfg, resolve=True), name=f"Run_{time.strftime('%Y%m%d-%H%M%S')}")
+    # print("Configuration: ")
+    # print(OmegaConf.to_yaml(cfg))
 
     # TRAINING
     fp = FirePredict(cfg)
-    fp.train()
-    wandb.finish()
+    # fp.train()
+    # wandb.finish()
 
     print("\nTesting...\n")
 
     # TESTING
-    for weight_path in get_model_paths(cfg.path.weights_test, cfg.model.name):
-        fp = FirePredict(cfg, weight_path)
-        fp.test()
+    # for weight_path in get_model_paths(cfg.path.weights_test, cfg.model.name):
+    #     fp = FirePredict(cfg, weight_path)
+    #     fp.test()
 
 
 if __name__ == "__main__":
