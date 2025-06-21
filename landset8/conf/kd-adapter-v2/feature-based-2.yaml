@@ -35,8 +35,8 @@ path:
   dataset: "./../datasets/Landsat8-ActiveFire/"
   dataset_local: "./../datasets/Landsat8-ActiveFire/"
 
-  output_model: "weights/kd-adapter-v2/2/"
-  weights_test: "weights/kd-adapter-v2/2/"           # folder which models to test
+  output_model: "weights/kd-adapter-v2/4/"
+  weights_test: "weights/kd-adapter-v2/4/"           # folder which models to test
 
 
 const:
@@ -57,3 +57,4 @@ distill:
   alpha: 0.5
   lbd: 0.001
   hidden_ratio: 2
+  adapter_dropout: 0.1
