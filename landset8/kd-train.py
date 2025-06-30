@@ -1,4 +1,4 @@
-import wandb
+# import wandb
 import time
 import json
 import hydra
@@ -17,9 +17,9 @@ from utils import *
 from adapter import MLP
 
 # Login WANDD
-with open("wandb_secret.json", "r") as f:
-    secrets = json.load(f)
-wandb.login(key=secrets["WANDB_API_KEY"])
+# with open("wandb_secret.json", "r") as f:
+#     secrets = json.load(f)
+# wandb.login(key=secrets["WANDB_API_KEY"])
 
 
 class FirePredict():
@@ -43,14 +43,7 @@ class FirePredict():
         self.criterion = nn.BCEWithLogitsLoss()
         self.criterion_KD = nn.MSELoss()
 
-        self.adapter = MLP(
-            in_c=128,
-            out_c=256,
-            hidden_ratio=cfg.distill.hidden_ratio,
-            dropout=cfg.distill.adapter_dropout
-        )
-
-        print(self.adapter.training)
+        self.adapter = nn.Conv2d(128, 256, kernel_size=1, bias=False)
 
         self.optimizer = optim.Adam(
             list(self.student.parameters()) + list(self.adapter.parameters()),
@@ -62,25 +55,25 @@ class FirePredict():
     def _create_data_loaders(self):
         train_dataset = Landset8Dataset(
             images_csv="./split/images_train.csv",
-            dataset_dir=self.cfg.path.dataset_local,
+            dataset_dir=self.cfg.path.dataset,
             mask=self.cfg.const.mask,
             augment=False
         )
 
         val_dataset = Landset8Dataset(
             images_csv="./split/images_val.csv",
-            dataset_dir=self.cfg.path.dataset_local,
+            dataset_dir=self.cfg.path.dataset,
             mask=self.cfg.const.mask,
             augment=False
         )
 
         self.train_dataloader = DataLoader(
-            train_dataset, batch_size=self.cfg.const.batch_size, shuffle=True, num_workers=8, drop_last=True,
+            train_dataset, batch_size=self.cfg.const.batch_size, shuffle=True, num_workers=4, drop_last=True,
             prefetch_factor=8, persistent_workers=True,
         )
 
         self.val_dataloader = DataLoader(
-            val_dataset, batch_size=self.cfg.const.batch_size, shuffle=False, num_workers=8, drop_last=True,
+            val_dataset, batch_size=self.cfg.const.batch_size, shuffle=False, num_workers=4, drop_last=True,
             prefetch_factor=8, persistent_workers=True,
         )
 
@@ -98,7 +91,7 @@ class FirePredict():
         alpha = self.cfg.distill.alpha
         lbd = self.cfg.distill.lbd
 
-        wandb.watch(self.student, log="all", log_freq=100)
+        # wandb.watch(self.student, log="all", log_freq=100)
 
         for epoch in range(num_epochs):
             self.student.train()
@@ -147,7 +140,7 @@ class FirePredict():
             epoch_loss_CEL = running_loss_CEL / len(self.train_dataloader)
             epoch_loss_KD = running_loss_KD / len(self.train_dataloader)
 
-            wandb.log({"train_loss": epoch_loss, "train_loss_CEL": epoch_loss_CEL, "train_loss_KD": epoch_loss_KD})
+            # wandb.log({"train_loss": epoch_loss, "train_loss_CEL": epoch_loss_CEL, "train_loss_KD": epoch_loss_KD})
             print(f'Epoch {epoch+1}/{num_epochs} Loss: {epoch_loss:.7f}, CEL: {epoch_loss_CEL:.7f}, KD: {epoch_loss_KD:.7f}')
 
             # Validation
@@ -195,13 +188,13 @@ class FirePredict():
 
             print(f'Validation Loss: {val_loss:.5f}, Precision: {precision[0]:.3f}, Recall: {recall[0]:.3f}, F1 Score: {f1[0]:.3f}, IoU: {iou[0]:.3f}, Acc: {accuracy[0]:.3f}')
 
-            wandb.log({
-                "val_loss": val_loss,
-                "val_acc": accuracy[0],
-                "val_precision": precision[0],
-                "val_recall": recall[0],
-                "val_f1": f1[0]
-            })
+            # wandb.log({
+            #     "val_loss": val_loss,
+            #     "val_acc": accuracy[0],
+            #     "val_precision": precision[0],
+            #     "val_recall": recall[0],
+            #     "val_f1": f1[0]
+            # })
 
             save_model = False
 
@@ -272,7 +265,7 @@ def main(cfg: DictConfig):
 
     # TRAINING
     fp = FirePredict(cfg)
-    # fp.train()
+    fp.train()
     # wandb.finish()
 
     print("\nTesting...\n")

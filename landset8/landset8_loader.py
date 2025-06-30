@@ -14,10 +14,11 @@ MAX_PIXEL_VALUE = 65535
 
 class Landset8Dataset(Dataset):
 
-    def __init__(self, images_csv, dataset_dir, mask, augment=False):
+    def __init__(self, images_csv, dataset_dir, mask, augment=False, cache=False):
         """
         Args:
             mask: Kumar, Schroeder, Murphy, intersections, voting
+            cache: Cache the dataset in memory
         """
         self.data = pd.read_csv(images_csv, skiprows=1, header=None)[0].tolist()
         self.dataset_dir = dataset_dir
@@ -42,22 +43,31 @@ class Landset8Dataset(Dataset):
         else:
             self.transform = A.Compose([])
 
+        self.cache = {} if cache else None
+
     def __len__(self):
         return len(self.data)
 
     def __getitem__(self, index):
         image_filename = self.data[index].strip()
-        image_path, mask_path = self._generate_path(image_filename)
 
-        image_path = os.path.join(self.dataset_dir, image_path)
-        mask_path = os.path.join(self.dataset_dir, mask_path)
+        if self.cache is not None and image_filename in self.cache:
+            image, mask = self.cache[image_filename]
+        else:
+            image_path, mask_path = self._generate_path(image_filename)
 
-        with rasterio.open(image_path) as src:
-            image = src.read((7, 6, 2)).astype(np.float32) / MAX_PIXEL_VALUE
-        with rasterio.open(mask_path) as src:
-            mask = src.read(1).astype(np.float32)
+            image_path = os.path.join(self.dataset_dir, image_path)
+            mask_path = os.path.join(self.dataset_dir, mask_path)
 
-        image = image.transpose(1, 2, 0)
+            with rasterio.open(image_path) as src:
+                image = src.read((7, 6, 2)).astype(np.float32) / MAX_PIXEL_VALUE
+            with rasterio.open(mask_path) as src:
+                mask = src.read(1).astype(np.float32)
+
+            image = image.transpose(1, 2, 0)
+
+            if self.cache is not None:
+                self.cache[image_filename] = (image, mask)
 
         augmented = self.transform(image=image, mask=mask)
         image = augmented["image"]
