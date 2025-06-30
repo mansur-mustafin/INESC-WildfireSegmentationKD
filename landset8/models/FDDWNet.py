@@ -202,6 +202,8 @@ class FDDWNet(nn.Module):
         branch_1 = self.FDDWC_12_1(branch_1)
         output_1 = self.FDDWC_13_1(branch_1)
 
+        aux = output_1
+
         output_1 = self.up_1(output_1)
         
         output_2 = self.FDDWC_up_low_2(output_0)
@@ -222,4 +224,4 @@ class FDDWNet(nn.Module):
         
         output = self.output_conv(output)
         
-        return {"out": output}
+        return {"out": output, "aux": aux}
