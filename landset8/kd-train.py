@@ -257,6 +257,55 @@ class FirePredict():
         print(f' - Precision: {precision[0]:.3f}, Recall: {recall[0]:.3f}, F1 Score: {f1[0]:.3f}, IoU: {iou[0]:.3f}, Accuracy: {accuracy[0]:.3f}')
 
 
+    def test_manual(self):
+        test_dataset = Landset8Dataset(
+            images_csv="./split/TODO.csv",
+            dataset_dir=self.cfg.path.dataset,
+            mask=self.cfg.const.mask,
+            augment=False
+        )
+        test_dataloader = DataLoader(
+            test_dataset, batch_size=self.cfg.const.batch_size, shuffle=False, num_workers=8, drop_last=True,
+            prefetch_factor=8, persistent_workers=True,
+        )
+
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        self.student = self.student.to(device)
+        self.student.eval()
+
+        TP_all = np.zeros((2, 1))
+        FP_all = np.zeros((2, 1))
+        TN_all = np.zeros((2, 1))
+        FN_all = np.zeros((2, 1))
+        epsilon = 1e-14
+
+        with torch.no_grad():
+            # for images, labels in tqdm(test_dataloader):
+            for images, labels in test_dataloader:
+                images, labels = images.to(device), labels.to(device)
+                outputs = self.student(images)['out']
+
+                if self.cfg.const.num_classes == 1:
+                    preds = (outputs[:, 0, :, :] > self.cfg.const.th_fire).cpu().numpy().astype(np.uint8).flatten()
+                else:
+                    preds = torch.argmax(outputs, dim=1).cpu().numpy().flatten()
+                labels_np = labels.cpu().numpy().flatten()
+
+                TP, FP, TN, FN, _ = eval_image(preds, labels_np, 2)
+                TP_all += TP
+                FP_all += FP
+                TN_all += TN
+                FN_all += FN
+
+        accuracy = (TP_all[1] + TN_all[1]) / (TP_all[1] + TN_all[1] + FP_all[1] + FN_all[1] + epsilon)
+        precision = TP_all[1] / (TP_all[1] + FP_all[1] + epsilon)
+        recall = TP_all[1] / (TP_all[1] + FN_all[1] + epsilon)
+        f1 = 2 * precision * recall / (precision + recall + epsilon)
+        iou = TP_all[1] / (TP_all[1] + FP_all[1] + FN_all[1] + epsilon)
+
+        print(f' - Precision: {precision[0]:.3f}, Recall: {recall[0]:.3f}, F1 Score: {f1[0]:.3f}, IoU: {iou[0]:.3f}, Accuracy: {accuracy[0]:.3f}')
+
+
 @hydra.main(config_path=None, config_name=None, version_base=None)
 def main(cfg: DictConfig):
     # wandb.init(project="FirePrediction", config=OmegaConf.to_container(cfg, resolve=True), name=f"Run_{time.strftime('%Y%m%d-%H%M%S')}")
@@ -264,8 +313,8 @@ def main(cfg: DictConfig):
     # print(OmegaConf.to_yaml(cfg))
 
     # TRAINING
-    fp = FirePredict(cfg)
-    fp.train()
+    # fp = FirePredict(cfg)
+    # fp.train()
     # wandb.finish()
 
     print("\nTesting...\n")
@@ -274,6 +323,8 @@ def main(cfg: DictConfig):
     # for weight_path in get_model_paths(cfg.path.weights_test, cfg.model.name):
     #     fp = FirePredict(cfg, weight_path)
     #     fp.test()
+
+    FirePredict(cfg, "/home/mansur/Desktop/NewSpace/landset8/weights/kd-FDDWNet/8/fddwnet_25_val_0.00_f1_0.88.pt").test()
 
 
 if __name__ == "__main__":
