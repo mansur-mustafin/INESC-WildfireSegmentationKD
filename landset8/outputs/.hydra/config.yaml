@@ -6,6 +6,7 @@ path:
   teacher_model: ./weights/landset8_default/4/unet_66_val_0.00_f1_0.91.pt
   dataset: ./../datasets/Landsat8-ActiveFire/
   dataset_local: ./../datasets/Landsat8-ActiveFire/
+  dataset_manual: ./../datasets/manual_annotations/compressed/
   output_model: weights/kd-FDDWNet/3/
   weights_test: weights/kd-FDDWNet/3/
 const:

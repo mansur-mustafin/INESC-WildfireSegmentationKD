@@ -1,4 +1,5 @@
 import os
+import re
 import random
 
 import pickle
@@ -7,6 +8,7 @@ import numpy as np
 import pandas as pd
 import albumentations as A
 import torch
+import glob
 from torch.utils.data import Dataset
 
 MAX_PIXEL_VALUE = 65535
@@ -87,3 +89,42 @@ class Landset8Dataset(Dataset):
         row = self.df.get(image_filename, "File not found")
         column = 'masks_'+self.mask
         return row.name, row[column]
+
+
+class Landset8ManualDataset(Dataset):
+    
+    def __init__(self, root_dir):
+        self.root_dir = root_dir
+        self.image_dir = os.path.join(root_dir, "landsat_patches")
+        self.mask_dir = os.path.join(root_dir, "manual_annotations_patches")
+
+        image_paths = sorted(glob.glob(os.path.join(self.image_dir, "*.tif")))
+        mask_basenames = {self.remove_v1(os.path.basename(p)): p
+                          for p in glob.glob(os.path.join(self.mask_dir, "*.tif"))}
+
+        self.samples = []
+        for ip in image_paths:
+            fname = os.path.basename(ip)
+            mp = mask_basenames.get(self.remove_v1(fname), None)
+            if mp is not None:
+                self.samples.append((ip, mp))
+
+    def __len__(self):
+        return len(self.samples)
+    
+    def __getitem__(self, index):
+        image_path, mask_path = self.samples[index]
+
+        with rasterio.open(image_path) as src:
+            image = src.read((7, 6, 2)).astype(np.float32) / MAX_PIXEL_VALUE
+
+        with rasterio.open(mask_path) as src:
+            mask = src.read(1).astype(np.float32)
+
+        image = torch.tensor(image, dtype=torch.float32)
+        mask = torch.tensor(mask, dtype=torch.long)
+
+        return image, mask
+    
+    def remove_v1(self, fname):
+        return fname.replace('_v1_', '_')
