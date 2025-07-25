@@ -11,7 +11,7 @@ import torch.optim as optim
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
 
-from landset8_loader import Landset8Dataset
+from landset8_loader import Landset8Dataset, Landset8ManualDataset
 from model_manager import ModelManager
 from utils import *
 from adapter import MLP
@@ -258,11 +258,8 @@ class FirePredict():
 
 
     def test_manual(self):
-        test_dataset = Landset8Dataset(
-            images_csv="./split/TODO.csv",
-            dataset_dir=self.cfg.path.dataset,
-            mask=self.cfg.const.mask,
-            augment=False
+        test_dataset = Landset8ManualDataset(
+            root_dir=self.cfg.path.dataset_manual
         )
         test_dataloader = DataLoader(
             test_dataset, batch_size=self.cfg.const.batch_size, shuffle=False, num_workers=8, drop_last=True,
@@ -324,8 +321,12 @@ def main(cfg: DictConfig):
     #     fp = FirePredict(cfg, weight_path)
     #     fp.test()
 
-    FirePredict(cfg, "/home/mansur/Desktop/NewSpace/landset8/weights/kd-FDDWNet/8/fddwnet_25_val_0.00_f1_0.88.pt").test()
-
+    test_dataset = Landset8ManualDataset(
+        root_dir=cfg.path.dataset_manual
+    )
+    test_dataloader = DataLoader(
+        test_dataset, batch_size=1, shuffle=False, drop_last=True,
+    )
 
 if __name__ == "__main__":
     init_seeds()

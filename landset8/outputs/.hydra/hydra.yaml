@@ -129,18 +129,18 @@ hydra:
   runtime:
     version: 1.3.2
     version_base: '1.3'
-    cwd: /home/mansur/Desktop/NewSpace/landset8
+    cwd: /Users/mansurmustafin/Desktop/NewSpace/landset8
     config_sources:
     - path: hydra.conf
       schema: pkg
       provider: hydra
-    - path: /home/mansur/Desktop/NewSpace/landset8/conf/kd
+    - path: /Users/mansurmustafin/Desktop/NewSpace/landset8/conf/kd
       schema: file
       provider: main
     - path: ''
       schema: structured
       provider: schema
-    output_dir: /home/mansur/Desktop/NewSpace/landset8/outputs
+    output_dir: /Users/mansurmustafin/Desktop/NewSpace/landset8/outputs
     choices:
       hydra/env: default
       hydra/callbacks: null
