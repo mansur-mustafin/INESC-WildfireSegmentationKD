@@ -314,19 +314,48 @@ def main(cfg: DictConfig):
     # fp.train()
     # wandb.finish()
 
-    print("\nTesting...\n")
+    # print("\nTesting...\n")
 
     # TESTING
     # for weight_path in get_model_paths(cfg.path.weights_test, cfg.model.name):
     #     fp = FirePredict(cfg, weight_path)
     #     fp.test()
 
-    test_dataset = Landset8ManualDataset(
-        root_dir=cfg.path.dataset_manual
-    )
-    test_dataloader = DataLoader(
-        test_dataset, batch_size=1, shuffle=False, drop_last=True,
-    )
+
+    base_path = "/home/mansur/Desktop/NewSpace/landset8/"
+
+    cfg.model.name = "unet"
+    FirePredict(cfg, base_path + "weights/landset8_default/4/unet_66_val_0.00_f1_0.91.pt").test_manual()
+
+    cfg.model.name = "enet"
+    FirePredict(cfg, base_path + "weights/landset8_default/6/enet_40_val_0.00_f1_0.81.pt").test_manual()
+    FirePredict(cfg, base_path + "weights/kd/1/enet_199_val_0.00_f1_0.85.pt").test_manual()
+    FirePredict(cfg, base_path + "weights/kd/2/enet_269_val_0.00_f1_0.85.pt").test_manual()
+    FirePredict(cfg, base_path + "weights/kd-adapter-v1/3/enet_183_val_0.00_f1_0.78.pt").test_manual()
+    FirePredict(cfg, base_path + "weights/kd-adapter-v1/4/enet_111_val_0.00_f1_0.77.pt").test_manual()
+    FirePredict(cfg, base_path + "weights/kd-adapter-v1/5/enet_42_val_0.00_f1_0.79.pt").test_manual()
+    FirePredict(cfg, base_path + "weights/kd-adapter-v1/6/enet_41_val_0.00_f1_0.82.pt").test_manual()
+    FirePredict(cfg, base_path + "weights/kd-adapter-v1/7/enet_42_val_0.00_f1_0.83.pt").test_manual()
+
+    cfg.model.name = "fddwnet"
+    FirePredict(cfg, base_path + "weights/landset8_default/8/fddwnet_20_val_0.00_f1_0.88.pt").test()
+    FirePredict(cfg, base_path + "weights/kd-FDDWNet/1/fddwnet_73_val_0.00_f1_0.89.pt").test()
+    FirePredict(cfg, base_path + "weights/kd-FDDWNet/2/fddwnet_229_val_0.00_f1_0.90.pt").test()
+    FirePredict(cfg, base_path + "weights/kd-FDDWNet/3/fddwnet_111_val_0.00_f1_0.72.pt").test()
+    FirePredict(cfg, base_path + "weights/kd-FDDWNet/4/fddwnet_198_val_0.00_f1_0.80.pt").test()
+    FirePredict(cfg, base_path + "weights/kd-FDDWNet/5/fddwnet_167_val_0.00_f1_0.86.pt").test()
+    FirePredict(cfg, base_path + "weights/kd-FDDWNet/6/fddwnet_47_val_0.00_f1_0.87.pt").test()
+    FirePredict(cfg, base_path + "weights/kd-FDDWNet/7/fddwnet_27_val_0.00_f1_0.87.pt").test()
+
+    FirePredict(cfg, base_path + "weights/landset8_default/8/fddwnet_20_val_0.00_f1_0.88.pt").test_manual()
+    FirePredict(cfg, base_path + "weights/kd-FDDWNet/1/fddwnet_73_val_0.00_f1_0.89.pt").test_manual()
+    FirePredict(cfg, base_path + "weights/kd-FDDWNet/2/fddwnet_229_val_0.00_f1_0.90.pt").test_manual()
+    FirePredict(cfg, base_path + "weights/kd-FDDWNet/3/fddwnet_111_val_0.00_f1_0.72.pt").test_manual()
+    FirePredict(cfg, base_path + "weights/kd-FDDWNet/4/fddwnet_198_val_0.00_f1_0.80.pt").test_manual()
+    FirePredict(cfg, base_path + "weights/kd-FDDWNet/5/fddwnet_167_val_0.00_f1_0.86.pt").test_manual()
+    FirePredict(cfg, base_path + "weights/kd-FDDWNet/6/fddwnet_47_val_0.00_f1_0.87.pt").test_manual()
+    FirePredict(cfg, base_path + "weights/kd-FDDWNet/7/fddwnet_27_val_0.00_f1_0.87.pt").test_manual()
+
 
 if __name__ == "__main__":
     init_seeds()
