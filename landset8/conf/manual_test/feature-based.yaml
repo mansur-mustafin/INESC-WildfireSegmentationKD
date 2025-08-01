@@ -34,7 +34,7 @@ path:
 
   dataset: "./../datasets/Landsat8-ActiveFire/"
   dataset_local: "./../datasets/Landsat8-ActiveFire/"
-  dataset_manual: "./../datasets/manual_annotations/compressed/"
+  dataset_manual: "./../datasets/manual_annotations/"
 
   output_model: "weights/kd-FDDWNet/3/"
   weights_test: "weights/kd-FDDWNet/3/"           # folder which models to test
@@ -42,7 +42,7 @@ path:
 const:
   lr: 0.001
   num_epochs: 200
-  batch_size: 16
+  batch_size: 1
   num_input_channels: 3                    
   num_classes: 1                            # 0 - no fire, 1 - fire 
   weight_decay: 0                           # L2 regularization.
