@@ -303,6 +303,55 @@ class FirePredict():
         print(f' - Precision: {precision[0]:.3f}, Recall: {recall[0]:.3f}, F1 Score: {f1[0]:.3f}, IoU: {iou[0]:.3f}, Accuracy: {accuracy[0]:.3f}')
 
 
+    def get_efficiency(self):
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        model = self.student.to(device).eval()
+
+        images, _ = next(iter(self.val_dataloader))
+        x = images[:1].to(device, non_blocking=True)
+
+        print(self.cfg.model.name, end='\t')
+
+        # Params (M)
+        print(sum(p.numel() for p in model.parameters()) / 1e6, end='\t')
+
+        # Size (MB)
+        param_size = 0
+        for param in model.parameters():
+            param_size += param.nelement() * param.element_size()
+        buffer_size = 0
+        for buffer in model.buffers():
+            buffer_size += buffer.nelement() * buffer.element_size()
+
+        size_all_mb = (param_size + buffer_size) / 1024**2
+        print('{:.3f}MB'.format(size_all_mb), end='\t')
+
+        # FLOPS (G)
+
+        # Time (ms) batch=1
+        torch.backends.cudnn.benchmark = True
+        torch.cuda.synchronize()
+
+        with torch.inference_mode():    # warmup
+            for _ in range(500):
+                _ = model(x)
+        torch.cuda.synchronize()
+        times = []
+        with torch.inference_mode():    # timed
+            for _ in range(20000):
+                start = torch.cuda.Event(enable_timing=True)
+                end = torch.cuda.Event(enable_timing=True)
+
+                start.record()
+                _ = model(x)
+                end.record()
+
+                torch.cuda.synchronize()
+                times.append(start.elapsed_time(end))  # ms
+        mean_ms = float(np.mean(times))
+        print(f"{mean_ms:.2f}ms")
+
+
 @hydra.main(config_path=None, config_name=None, version_base=None)
 def main(cfg: DictConfig):
     # wandb.init(project="FirePrediction", config=OmegaConf.to_container(cfg, resolve=True), name=f"Run_{time.strftime('%Y%m%d-%H%M%S')}")
@@ -321,40 +370,14 @@ def main(cfg: DictConfig):
     #     fp = FirePredict(cfg, weight_path)
     #     fp.test()
 
-
-    base_path = "/home/mansur/Desktop/NewSpace/landset8/"
-
     cfg.model.name = "unet"
-    FirePredict(cfg, base_path + "weights/landset8_default/4/unet_66_val_0.00_f1_0.91.pt").test_manual()
+    FirePredict(cfg).get_efficiency()
 
     cfg.model.name = "enet"
-    FirePredict(cfg, base_path + "weights/landset8_default/6/enet_40_val_0.00_f1_0.81.pt").test_manual()
-    FirePredict(cfg, base_path + "weights/kd/1/enet_199_val_0.00_f1_0.85.pt").test_manual()
-    FirePredict(cfg, base_path + "weights/kd/2/enet_269_val_0.00_f1_0.85.pt").test_manual()
-    FirePredict(cfg, base_path + "weights/kd-adapter-v1/3/enet_183_val_0.00_f1_0.78.pt").test_manual()
-    FirePredict(cfg, base_path + "weights/kd-adapter-v1/4/enet_111_val_0.00_f1_0.77.pt").test_manual()
-    FirePredict(cfg, base_path + "weights/kd-adapter-v1/5/enet_42_val_0.00_f1_0.79.pt").test_manual()
-    FirePredict(cfg, base_path + "weights/kd-adapter-v1/6/enet_41_val_0.00_f1_0.82.pt").test_manual()
-    FirePredict(cfg, base_path + "weights/kd-adapter-v1/7/enet_42_val_0.00_f1_0.83.pt").test_manual()
+    FirePredict(cfg).get_efficiency()
 
     cfg.model.name = "fddwnet"
-    FirePredict(cfg, base_path + "weights/landset8_default/8/fddwnet_20_val_0.00_f1_0.88.pt").test()
-    FirePredict(cfg, base_path + "weights/kd-FDDWNet/1/fddwnet_73_val_0.00_f1_0.89.pt").test()
-    FirePredict(cfg, base_path + "weights/kd-FDDWNet/2/fddwnet_229_val_0.00_f1_0.90.pt").test()
-    FirePredict(cfg, base_path + "weights/kd-FDDWNet/3/fddwnet_111_val_0.00_f1_0.72.pt").test()
-    FirePredict(cfg, base_path + "weights/kd-FDDWNet/4/fddwnet_198_val_0.00_f1_0.80.pt").test()
-    FirePredict(cfg, base_path + "weights/kd-FDDWNet/5/fddwnet_167_val_0.00_f1_0.86.pt").test()
-    FirePredict(cfg, base_path + "weights/kd-FDDWNet/6/fddwnet_47_val_0.00_f1_0.87.pt").test()
-    FirePredict(cfg, base_path + "weights/kd-FDDWNet/7/fddwnet_27_val_0.00_f1_0.87.pt").test()
-
-    FirePredict(cfg, base_path + "weights/landset8_default/8/fddwnet_20_val_0.00_f1_0.88.pt").test_manual()
-    FirePredict(cfg, base_path + "weights/kd-FDDWNet/1/fddwnet_73_val_0.00_f1_0.89.pt").test_manual()
-    FirePredict(cfg, base_path + "weights/kd-FDDWNet/2/fddwnet_229_val_0.00_f1_0.90.pt").test_manual()
-    FirePredict(cfg, base_path + "weights/kd-FDDWNet/3/fddwnet_111_val_0.00_f1_0.72.pt").test_manual()
-    FirePredict(cfg, base_path + "weights/kd-FDDWNet/4/fddwnet_198_val_0.00_f1_0.80.pt").test_manual()
-    FirePredict(cfg, base_path + "weights/kd-FDDWNet/5/fddwnet_167_val_0.00_f1_0.86.pt").test_manual()
-    FirePredict(cfg, base_path + "weights/kd-FDDWNet/6/fddwnet_47_val_0.00_f1_0.87.pt").test_manual()
-    FirePredict(cfg, base_path + "weights/kd-FDDWNet/7/fddwnet_27_val_0.00_f1_0.87.pt").test_manual()
+    FirePredict(cfg).get_efficiency()
 
 
 if __name__ == "__main__":
