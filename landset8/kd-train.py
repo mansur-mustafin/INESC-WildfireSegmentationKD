@@ -327,6 +327,21 @@ class FirePredict():
         print('{:.3f}MB'.format(size_all_mb), end='\t')
 
         # FLOPS (G)
+        with torch.inference_mode():
+            from fvcore.nn import FlopCountAnalysis
+
+            class Wrapper(torch.nn.Module): # FlopCountAnalysis expects olny out.
+                def __init__(self, model):
+                    super().__init__()
+                    self.model = model
+                def forward(self, x):
+                    out = self.model(x)
+                    return out["out"] if isinstance(out, dict) and "out" in out else out
+
+            wrapped = Wrapper(model).eval()
+            flops = FlopCountAnalysis(wrapped, x)
+            total_flops = flops.total()
+            print('{:.3f}G'.format(total_flops), end='\t')
 
         # Time (ms) batch=1
         torch.backends.cudnn.benchmark = True
