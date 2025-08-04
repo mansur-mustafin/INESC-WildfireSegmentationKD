@@ -304,6 +304,7 @@ class FirePredict():
 
 
     def get_efficiency(self):
+        print(torch.cuda.get_device_name(torch.cuda.current_device()) + "\n\n")
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         model = self.student.to(device).eval()
 

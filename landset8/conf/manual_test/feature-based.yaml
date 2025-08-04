@@ -8,8 +8,9 @@ hydra:
     dir: outputs/
 
 model:
+  name: ""
   # name: "cgnet"
-  name: "fddwnet"
+  # name: "fddwnet"
   # name: "enet"
   # name: "unet"
   # name: "lraspp"

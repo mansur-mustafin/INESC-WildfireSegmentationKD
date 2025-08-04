@@ -1,5 +1,5 @@
 model:
-  name: fddwnet
+  name: ''
 teacher:
   name: unet
 path:
