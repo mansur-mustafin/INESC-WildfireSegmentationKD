@@ -304,17 +304,17 @@ class FirePredict():
 
 
     def get_efficiency(self):
-        print(torch.cuda.get_device_name(torch.cuda.current_device()) + "\n\n")
+        print(torch.cuda.get_device_name(torch.cuda.current_device()) + "\n")
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         model = self.student.to(device).eval()
 
-        images, _ = next(iter(self.val_dataloader))
-        x = images[:1].to(device, non_blocking=True)
+        images, _ = self.val_dataloader.dataset[3]
+        x = images.unsqueeze(0).to(device, non_blocking=True)
 
         print(self.cfg.model.name, end='\t')
 
         # Params (M)
-        print(sum(p.numel() for p in model.parameters()) / 1e6, end='\t')
+        # print(sum(p.numel() for p in model.parameters()) / 1e6, end='\t')
 
         # Size (MB)
         param_size = 0
@@ -342,7 +342,7 @@ class FirePredict():
             wrapped = Wrapper(model).eval()
             flops = FlopCountAnalysis(wrapped, x)
             total_flops = flops.total()
-            print('{:.3f}G'.format(total_flops), end='\t')
+            print('{:.3f}G'.format(total_flops / 1e9), end='\t')
 
         # Time (ms) batch=1
         torch.backends.cudnn.benchmark = True
