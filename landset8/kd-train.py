@@ -317,17 +317,17 @@ class FirePredict():
         # print(sum(p.numel() for p in model.parameters()) / 1e6, end='\t')
 
         # Size (MB)
-        param_size = 0
-        for param in model.parameters():
-            param_size += param.nelement() * param.element_size()
-        buffer_size = 0
-        for buffer in model.buffers():
-            buffer_size += buffer.nelement() * buffer.element_size()
+        # param_size = 0
+        # for param in model.parameters():
+        #     param_size += param.nelement() * param.element_size()
+        # buffer_size = 0
+        # for buffer in model.buffers():
+        #     buffer_size += buffer.nelement() * buffer.element_size()
 
-        size_all_mb = (param_size + buffer_size) / 1024**2
-        print('{:.3f}MB'.format(size_all_mb), end='\t')
+        # size_all_mb = (param_size + buffer_size) / 1024**2
+        # print('{:.3f}MB'.format(size_all_mb), end='\t')
 
-        # FLOPS (G)
+        # FLOPS (G) fvcore
         with torch.inference_mode():
             from fvcore.nn import FlopCountAnalysis
 
@@ -344,28 +344,59 @@ class FirePredict():
             total_flops = flops.total()
             print('{:.3f}G'.format(total_flops / 1e9), end='\t')
 
+        # FLOPS (G) OpCounter
+        with torch.inference_mode():
+            from thop import profile, clever_format
+            macs_thop, params_thop = profile(wrapped, inputs=(x,), verbose=False)
+            flops = (2 * macs_thop) / 1e9
+
+            macs_str, params_str = clever_format([macs_thop, params_thop], "%.3f")
+            print(f"THOP: {macs_str} MACs ({flops:.3f} GFLOPs)", end='\t')
+
+        # FLOPS (G) torchinfo
+        total_params_ti = None
+        total_madds_ti = None
+        from torchinfo import summary
+        stats = summary(
+            wrapped,
+            input_data=(x,),
+            device=device,
+            mode="eval",
+            col_names=("output_size", "num_params", "mult_adds"),
+            verbose=0,
+        )
+        total_params_ti = getattr(stats, "total_params", None)
+        total_madds_ti = getattr(stats, "total_mult_adds", None)
+
+        if total_madds_ti is not None:
+            gmacs_ti = total_madds_ti / 1e9
+            gflops_ti = 2 * gmacs_ti
+            print(f"torchinfo: {gmacs_ti:.3f} GMAdd ({gflops_ti:.3f} GFLOPs)", end='\t')
+        if total_params_ti is not None:
+            print(f"params={total_params_ti/1e6:.3f}M", end='\t')
+
         # Time (ms) batch=1
-        torch.backends.cudnn.benchmark = True
-        torch.cuda.synchronize()
+        # torch.backends.cudnn.benchmark = True
+        # torch.cuda.synchronize()
 
-        with torch.inference_mode():    # warmup
-            for _ in range(500):
-                _ = model(x)
-        torch.cuda.synchronize()
-        times = []
-        with torch.inference_mode():    # timed
-            for _ in range(20000):
-                start = torch.cuda.Event(enable_timing=True)
-                end = torch.cuda.Event(enable_timing=True)
+        # with torch.inference_mode():    # warmup
+        #     for _ in range(500):
+        #         _ = model(x)
+        # torch.cuda.synchronize()
+        # times = []
+        # with torch.inference_mode():    # timed
+        #     for _ in range(20000):
+        #         start = torch.cuda.Event(enable_timing=True)
+        #         end = torch.cuda.Event(enable_timing=True)
 
-                start.record()
-                _ = model(x)
-                end.record()
+        #         start.record()
+        #         _ = model(x)
+        #         end.record()
 
-                torch.cuda.synchronize()
-                times.append(start.elapsed_time(end))  # ms
-        mean_ms = float(np.mean(times))
-        print(f"{mean_ms:.2f}ms")
+        #         torch.cuda.synchronize()
+        #         times.append(start.elapsed_time(end))  # ms
+        # mean_ms = float(np.mean(times))
+        # print(f"{mean_ms:.2f}ms")
 
 
 @hydra.main(config_path=None, config_name=None, version_base=None)
