@@ -11,9 +11,9 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
 
-from src.wildfire_kd.datasets import Landset8Dataset
-from src.wildfire_kd.model_manager import ModelManager
-from src.wildfire_kd.utils import *
+from .datasets import Landset8Dataset
+from .model_manager import ModelManager
+from .utils import *
 
 class FirePredict():
 

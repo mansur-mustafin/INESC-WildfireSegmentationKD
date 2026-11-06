@@ -12,10 +12,10 @@ import torch.optim as optim
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
 
-from src.wildfire_kd.datasets import Landset8Dataset, Landset8ManualDataset
-from src.wildfire_kd.model_manager import ModelManager
-from src.wildfire_kd.utils import *
-from src.wildfire_kd.adapter import MLP
+from .datasets import Landset8Dataset, Landset8ManualDataset
+from .model_manager import ModelManager
+from .utils import *
+from .adapter import MLP
 
 class FirePredict():
 
@@ -415,15 +415,15 @@ def main(cfg: DictConfig):
 
     try:
         # TRAINING
-        # fp = FirePredict(cfg, run=run)
-        # fp.train()
+        fp = FirePredict(cfg, run=run)
+        fp.train()
 
-        # print("\nTesting...\n")
+        print("\nTesting...\n")
 
         # TESTING
-        # for weight_path in get_model_paths(cfg.path.weights_test, cfg.model.name):
-        #     fp = FirePredict(cfg, weight_path)
-        #     fp.test()
+        for weight_path in get_model_paths(cfg.path.weights_test, cfg.model.name):
+            fp = FirePredict(cfg, weight_path)
+            fp.test()
 
         cfg.model.name = "unet"
         FirePredict(cfg, run=run).get_efficiency()
