@@ -1,0 +1,33 @@
+# Supervised training: FDDWNet baseline.
+# Keep exactly one value uncommented for each setting.
+defaults:
+  - _self_
+
+hydra:
+  run:
+    dir: outputs/
+
+model:
+  name: "fddwnet"
+  # name: "unet"  # Train the teacher.
+  # name: "enet"  # Lightweight student baseline.
+  # name: "cgnet"  # Additional baseline;
+
+path:
+  dataset: "./datasets/Landsat8-ActiveFire/"
+  # Switch both checkpoint paths to match model.name.
+  output_model: "weights/landset8_default/8/"
+  weights_test: "weights/landset8_default/8/"
+
+const:
+  lr: 0.001
+  num_epochs: 100
+  # num_epochs: 200
+  batch_size: 16
+  num_input_channels: 3
+  num_classes: 1
+  weight_decay: 0
+  mask: "voting"
+  th_fire: 0.25
+  dropout: 0.1
+  n_filters: 16
