@@ -1,6 +1,7 @@
-import wandb
 import time
-import json
+from pathlib import Path
+
+from dotenv import load_dotenv
 import hydra
 import numpy as np
 from omegaconf import DictConfig, OmegaConf
@@ -14,16 +15,11 @@ from src.wildfire_kd.datasets import Landset8Dataset
 from src.wildfire_kd.model_manager import ModelManager
 from src.wildfire_kd.utils import *
 
-# Login WANDD
-# with open("wandb_secret.json", "r") as f:
-#     secrets = json.load(f)
-# wandb.login(key=secrets["WANDB_API_KEY"])
-
-
 class FirePredict():
 
-    def __init__(self, cfg: DictConfig, path=None) -> None:
+    def __init__(self, cfg: DictConfig, path=None, run=None) -> None:
         self.cfg = cfg
+        self.run = run
 
         self._create_data_loaders()
 
@@ -71,7 +67,8 @@ class FirePredict():
         epsilon = 1e-14
         num_epochs = self.cfg.const.num_epochs
 
-        wandb.watch(self.model, log="all", log_freq=100)
+        if self.run is not None:
+            self.run.watch(self.model, log="all", log_freq=100)
 
         for epoch in range(num_epochs):
             self.model.train()
@@ -95,7 +92,8 @@ class FirePredict():
 
             print(f'Epoch {epoch+1}/{num_epochs} Training loss: {epoch_loss:.4f}')
 
-            wandb.log({"train_loss": epoch_loss})
+            if self.run is not None:
+                self.run.log({"train_loss": epoch_loss})
 
             # Validation
             self.model.eval()
@@ -142,13 +140,14 @@ class FirePredict():
 
             print(f'Validation Loss: {val_loss:.5f}, Precision: {precision[0]:.3f}, Recall: {recall[0]:.3f}, F1 Score: {f1[0]:.3f}, IoU: {iou[0]:.3f}, Acc: {accuracy[0]:.3f}')
 
-            wandb.log({
-                "val_loss": val_loss,
-                "val_acc": accuracy[0],
-                "val_precision": precision[0],
-                "val_recall": recall[0],
-                "val_f1": f1[0]
-            })
+            if self.run is not None:
+                self.run.log({
+                    "val_loss": val_loss,
+                    "val_acc": accuracy[0],
+                    "val_precision": precision[0],
+                    "val_recall": recall[0],
+                    "val_f1": f1[0]
+                })
 
             save_model = False
 
@@ -209,14 +208,26 @@ class FirePredict():
 
 @hydra.main(config_path="../../conf", config_name="train", version_base=None)
 def main(cfg: DictConfig):
-    wandb.init(project="FirePrediction", config=OmegaConf.to_container(cfg, resolve=True), name=f"Run_{time.strftime('%Y%m%d-%H%M%S')}")
+    load_dotenv(Path(__file__).resolve().parents[2] / ".env")
+    run = None
+    if cfg.wandb.mode != "disabled":
+        import wandb
+        run = wandb.init(
+            project=cfg.wandb.project,
+            mode=cfg.wandb.mode,
+            config=OmegaConf.to_container(cfg, resolve=True),
+            name=f"Run_{time.strftime('%Y%m%d-%H%M%S')}",
+        )
     print("Configuration: ")
     print(OmegaConf.to_yaml(cfg))
 
     # TRAINING
-    fp = FirePredict(cfg)
-    fp.train()
-    wandb.finish()
+    try:
+        fp = FirePredict(cfg, run=run)
+        fp.train()
+    finally:
+        if run is not None:
+            run.finish()
 
     print("\nTesting...\n")
 
