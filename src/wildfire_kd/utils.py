@@ -6,9 +6,6 @@ import torch
 
 
 def eval_image(predict, label, num_classes):
-    """
-    Copiado de Sen2Fire/utils/tools.py
-    """
     index = np.where((label >= 0) & (label < num_classes))
     predict = predict[index]
     label = label[index]
@@ -28,9 +25,6 @@ def eval_image(predict, label, num_classes):
 
 
 def init_seeds(seed=1234):
-    """
-    Copiado de Sen2Fire/Train.py
-    """
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
