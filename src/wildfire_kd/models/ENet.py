@@ -1,4 +1,6 @@
 # Source: https://github.com/davidtvs/PyTorch-ENet/blob/master/models/enet.py
+# Copyright (c) 2018 davidtvs. MIT License; see the repository's LICENSE.
+# Modified to return intermediate features for knowledge distillation.
 
 import torch.nn as nn
 import torch

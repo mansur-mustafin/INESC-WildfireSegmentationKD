@@ -1,3 +1,6 @@
+# Adapted from pereira-gha/activefire, src/utils/unzip_patches.py (CC BY 4.0).
+# Source: https://github.com/pereira-gha/activefire/blob/main/src/utils/unzip_patches.py
+
 import zipfile
 from glob import glob
 import os

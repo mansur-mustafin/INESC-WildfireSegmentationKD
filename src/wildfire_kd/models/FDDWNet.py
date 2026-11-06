@@ -1,4 +1,5 @@
 # Source: https://github.com/lj107024/FDDWNet/blob/master/model/FDDWNet.py
+# see LICENSE exclusions.
 
 import torch
 import torch.nn as nn
