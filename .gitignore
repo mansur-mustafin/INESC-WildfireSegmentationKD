@@ -1,8 +1,8 @@
 # Main
 datasets/
-landset8/wandb_secret.json
-landset8/wandb/
-landset8/outputs/
+wandb_secret.json
+wandb/
+outputs/
 *.pt
 test/
 

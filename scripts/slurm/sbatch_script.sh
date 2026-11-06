@@ -7,4 +7,4 @@
 #SBATCH -e slurm_%x.%j.err       # File containing STDERR output. If ommited, use STDOUT.
 
 # Commands / scripts to run (e.g., python3 train.py)
-python3 kd-train.py --config-path=conf/manual_test --config-name=feature-based
+python3 -m src.wildfire_kd.kd-train --config-path=../../conf/manual_test --config-name=feature-based

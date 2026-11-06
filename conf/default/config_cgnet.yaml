@@ -28,7 +28,7 @@ teacher:
   # name: "deeplabv3_mobilenet_v3_large"
 
 path:
-  dataset: "./../datasets/Landsat8-ActiveFire/"
+  dataset: "./datasets/Landsat8-ActiveFire/"
 
   output_model: "weights/landset8_default/7/"
   weights_test: "weights/landset8_default/7/"           # folder which models to test

@@ -6,8 +6,8 @@ import shutil
 DELETE_ZIP_AFTER_EXTRACTION = True
 
 # This 2 folders cannot be the same:
-FULL_DATASET_ZIPS_PATH = './compressed/'  # where the continent ZIPs are stored
-FULL_DATASET_UNZIP_PATH = './'  # where extracted files will be stored
+FULL_DATASET_ZIPS_PATH = './datasets/Landsat8-ActiveFire/compressed/'  # where the continent ZIPs are stored
+FULL_DATASET_UNZIP_PATH = './datasets/Landsat8-ActiveFire/'  # where extracted files will be stored
 
 patches_output_dir = os.path.join(FULL_DATASET_UNZIP_PATH, 'images', 'patches')
 masks_output_dir = os.path.join(FULL_DATASET_UNZIP_PATH, 'masks', 'patches')

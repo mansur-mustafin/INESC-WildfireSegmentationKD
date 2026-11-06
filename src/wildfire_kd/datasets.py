@@ -26,7 +26,7 @@ class Landset8Dataset(Dataset):
         self.dataset_dir = dataset_dir
         self.mask = mask
         self.seed = 1234
-        with open(dataset_dir+"dataset.pkl", "rb") as file:
+        with open(os.path.join(dataset_dir, "dataset.pkl"), "rb") as file:
             data = pickle.load(file)
         self.df = {fp.split('/')[-1]: row for fp, row in data.set_index('full_path').iterrows()}
 

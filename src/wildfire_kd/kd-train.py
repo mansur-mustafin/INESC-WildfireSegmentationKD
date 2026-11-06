@@ -11,7 +11,7 @@ import torch.optim as optim
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
 
-from src.wildfire_kd.landset8_loader import Landset8Dataset, Landset8ManualDataset
+from src.wildfire_kd.datasets import Landset8Dataset, Landset8ManualDataset
 from src.wildfire_kd.model_manager import ModelManager
 from src.wildfire_kd.utils import *
 from src.wildfire_kd.adapter import MLP
@@ -54,14 +54,14 @@ class FirePredict():
 
     def _create_data_loaders(self):
         train_dataset = Landset8Dataset(
-            images_csv="./split/images_train.csv",
+            images_csv="./data/split/images_train.csv",
             dataset_dir=self.cfg.path.dataset,
             mask=self.cfg.const.mask,
             augment=False
         )
 
         val_dataset = Landset8Dataset(
-            images_csv="./split/images_val.csv",
+            images_csv="./data/split/images_val.csv",
             dataset_dir=self.cfg.path.dataset,
             mask=self.cfg.const.mask,
             augment=False
@@ -210,7 +210,7 @@ class FirePredict():
 
     def test(self):
         test_dataset = Landset8Dataset(
-            images_csv="./split/images_test.csv",
+            images_csv="./data/split/images_test.csv",
             dataset_dir=self.cfg.path.dataset,
             mask=self.cfg.const.mask,
             augment=False
@@ -399,7 +399,7 @@ class FirePredict():
         print(f"{mean_ms:.2f}ms")
 
 
-@hydra.main(config_path=None, config_name=None, version_base=None)
+@hydra.main(config_path="../../conf/kd", config_name="feature-based", version_base=None)
 def main(cfg: DictConfig):
     # wandb.init(project="FirePrediction", config=OmegaConf.to_container(cfg, resolve=True), name=f"Run_{time.strftime('%Y%m%d-%H%M%S')}")
     # print("Configuration: ")

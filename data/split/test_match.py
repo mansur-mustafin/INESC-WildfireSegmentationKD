@@ -1,5 +1,6 @@
 import pandas as pd
 import re
+from pathlib import Path
 
 POSTFIX = ""
 
@@ -21,5 +22,5 @@ def check_duplicate_filenames(csv_file):
                 return
 
 
-csv_path = "images_masks.csv"
+csv_path = Path(__file__).with_name("images_masks.csv")
 check_duplicate_filenames(csv_path)
