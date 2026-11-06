@@ -1,3 +1,5 @@
+# eval_image and init_seeds originate from the Sen2Fire baseline code.
+# Source: https://doi.org/10.5281/zenodo.10881058; see LICENSE exclusions.
 import os
 import random
 

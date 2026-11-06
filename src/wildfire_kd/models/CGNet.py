@@ -1,4 +1,5 @@
 #Source: https://github.com/wutianyiRosun/CGNet/blob/master/model/CGNet.py
+# Copyright (c) 2018 Tianyi Wu. MIT License; see the repository's LICENSE.
 
 ###########################################################################
 # Created by: Tianyi Wu
