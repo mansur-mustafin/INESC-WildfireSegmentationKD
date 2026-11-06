@@ -1,0 +1,52 @@
+# Feature-based distillation: U-Net teacher, FDDWNet student.
+# Keep exactly one value uncommented for each setting.
+# Logits-based KD and pruned U-Net students require code changes first.
+defaults:
+  - _self_
+
+hydra:
+  run:
+    dir: outputs/
+
+model:
+  name: "fddwnet"
+  # name: "enet"  # Also switch the checkpoint paths and KD weight below.
+
+teacher:
+  name: "unet"
+
+path:
+  teacher_model: "./weights/landset8_default/4/unet_66_val_0.00_f1_0.91.pt"
+  dataset: "./datasets/Landsat8-ActiveFire/"
+  dataset_local: "./datasets/Landsat8-ActiveFire/"
+  # dataset_manual: "./datasets/manual_annotations/"  # Used by test_manual().
+  # FDDWNet output paths:
+  output_model: "weights/kd-FDDWNet/3/"
+  weights_test: "weights/kd-FDDWNet/3/"
+
+const:
+  lr: 0.001
+  num_epochs: 200
+  batch_size: 16
+  # batch_size: 1  # Manual evaluation.
+  num_input_channels: 3
+  num_classes: 1
+  weight_decay: 0
+  mask: "voting"
+  th_fire: 0.25
+  dropout: 0.1
+  n_filters: 16
+
+distill:
+  T: 1.0  # unused in the feature loss.
+  alpha: 0.5  # unused in the feature loss.
+  lbd: 1  # FDDWNet KD weight.
+  # Feature-based KD weight sweep:
+  # lbd: 0.1
+  # lbd: 0.01
+  # lbd: 0.001
+  # lbd: 0.0001
+
+  # Used in alternativ Adapter-based KD (adapter.py):
+  # hidden_ratio: 2
+  # adapter_dropout: 0.1

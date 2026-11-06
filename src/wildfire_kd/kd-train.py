@@ -399,7 +399,7 @@ class FirePredict():
         print(f"{mean_ms:.2f}ms")
 
 
-@hydra.main(config_path="../../conf/kd", config_name="feature-based", version_base=None)
+@hydra.main(config_path="../../conf", config_name="kd", version_base=None)
 def main(cfg: DictConfig):
     # wandb.init(project="FirePrediction", config=OmegaConf.to_container(cfg, resolve=True), name=f"Run_{time.strftime('%Y%m%d-%H%M%S')}")
     # print("Configuration: ")

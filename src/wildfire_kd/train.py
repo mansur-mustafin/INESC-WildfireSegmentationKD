@@ -207,7 +207,7 @@ class FirePredict():
         print(f' - Precision: {precision[0]:.3f}, Recall: {recall[0]:.3f}, F1 Score: {f1[0]:.3f}, IoU: {iou[0]:.3f}, Accuracy: {accuracy[0]:.3f}')
 
 
-@hydra.main(config_path="../../conf/default", config_name="config_fddwnet", version_base=None)
+@hydra.main(config_path="../../conf", config_name="train", version_base=None)
 def main(cfg: DictConfig):
     wandb.init(project="FirePrediction", config=OmegaConf.to_container(cfg, resolve=True), name=f"Run_{time.strftime('%Y%m%d-%H%M%S')}")
     print("Configuration: ")
