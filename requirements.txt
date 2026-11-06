@@ -8,3 +8,5 @@ scikit-learn==1.5.1
 albumentations==2.0.4
 pandas
 rasterio==1.4.3
+python-dotenv
+wandb

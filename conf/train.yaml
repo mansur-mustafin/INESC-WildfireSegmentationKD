@@ -7,6 +7,12 @@ hydra:
   run:
     dir: outputs/
 
+wandb:
+  mode: "disabled"
+  # mode: "offline"  # Save locally; no login needed.
+  # mode: "online"  # Read WANDB_API_KEY from .env or the environment.
+  project: "FirePrediction"
+
 model:
   name: "fddwnet"
   # name: "unet"  # Train the teacher.

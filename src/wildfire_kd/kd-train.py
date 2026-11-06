@@ -1,6 +1,7 @@
-# import wandb
 import time
-import json
+from pathlib import Path
+
+from dotenv import load_dotenv
 import hydra
 import numpy as np
 from omegaconf import DictConfig, OmegaConf
@@ -16,16 +17,11 @@ from src.wildfire_kd.model_manager import ModelManager
 from src.wildfire_kd.utils import *
 from src.wildfire_kd.adapter import MLP
 
-# Login WANDD
-# with open("wandb_secret.json", "r") as f:
-#     secrets = json.load(f)
-# wandb.login(key=secrets["WANDB_API_KEY"])
-
-
 class FirePredict():
 
-    def __init__(self, cfg: DictConfig, path=None) -> None:
+    def __init__(self, cfg: DictConfig, path=None, run=None) -> None:
         self.cfg = cfg
+        self.run = run
 
         self._create_data_loaders()
 
@@ -91,7 +87,8 @@ class FirePredict():
         alpha = self.cfg.distill.alpha
         lbd = self.cfg.distill.lbd
 
-        # wandb.watch(self.student, log="all", log_freq=100)
+        if self.run is not None:
+            self.run.watch(self.student, log="all", log_freq=100)
 
         for epoch in range(num_epochs):
             self.student.train()
@@ -140,7 +137,8 @@ class FirePredict():
             epoch_loss_CEL = running_loss_CEL / len(self.train_dataloader)
             epoch_loss_KD = running_loss_KD / len(self.train_dataloader)
 
-            # wandb.log({"train_loss": epoch_loss, "train_loss_CEL": epoch_loss_CEL, "train_loss_KD": epoch_loss_KD})
+            if self.run is not None:
+                self.run.log({"train_loss": epoch_loss, "train_loss_CEL": epoch_loss_CEL, "train_loss_KD": epoch_loss_KD})
             print(f'Epoch {epoch+1}/{num_epochs} Loss: {epoch_loss:.7f}, CEL: {epoch_loss_CEL:.7f}, KD: {epoch_loss_KD:.7f}')
 
             # Validation
@@ -188,13 +186,14 @@ class FirePredict():
 
             print(f'Validation Loss: {val_loss:.5f}, Precision: {precision[0]:.3f}, Recall: {recall[0]:.3f}, F1 Score: {f1[0]:.3f}, IoU: {iou[0]:.3f}, Acc: {accuracy[0]:.3f}')
 
-            # wandb.log({
-            #     "val_loss": val_loss,
-            #     "val_acc": accuracy[0],
-            #     "val_precision": precision[0],
-            #     "val_recall": recall[0],
-            #     "val_f1": f1[0]
-            # })
+            if self.run is not None:
+                self.run.log({
+                    "val_loss": val_loss,
+                    "val_acc": accuracy[0],
+                    "val_precision": precision[0],
+                    "val_recall": recall[0],
+                    "val_f1": f1[0]
+                })
 
             save_model = False
 
@@ -401,30 +400,42 @@ class FirePredict():
 
 @hydra.main(config_path="../../conf", config_name="kd", version_base=None)
 def main(cfg: DictConfig):
-    # wandb.init(project="FirePrediction", config=OmegaConf.to_container(cfg, resolve=True), name=f"Run_{time.strftime('%Y%m%d-%H%M%S')}")
-    # print("Configuration: ")
-    # print(OmegaConf.to_yaml(cfg))
+    load_dotenv(Path(__file__).resolve().parents[2] / ".env")
+    run = None
+    if cfg.wandb.mode != "disabled":
+        import wandb
+        run = wandb.init(
+            project=cfg.wandb.project,
+            mode=cfg.wandb.mode,
+            config=OmegaConf.to_container(cfg, resolve=True),
+            name=f"Run_{time.strftime('%Y%m%d-%H%M%S')}",
+        )
+    print("Configuration: ")
+    print(OmegaConf.to_yaml(cfg))
 
-    # TRAINING
-    # fp = FirePredict(cfg)
-    # fp.train()
-    # wandb.finish()
+    try:
+        # TRAINING
+        # fp = FirePredict(cfg, run=run)
+        # fp.train()
 
-    # print("\nTesting...\n")
+        # print("\nTesting...\n")
 
-    # TESTING
-    # for weight_path in get_model_paths(cfg.path.weights_test, cfg.model.name):
-    #     fp = FirePredict(cfg, weight_path)
-    #     fp.test()
+        # TESTING
+        # for weight_path in get_model_paths(cfg.path.weights_test, cfg.model.name):
+        #     fp = FirePredict(cfg, weight_path)
+        #     fp.test()
 
-    cfg.model.name = "unet"
-    FirePredict(cfg).get_efficiency()
+        cfg.model.name = "unet"
+        FirePredict(cfg, run=run).get_efficiency()
 
-    cfg.model.name = "enet"
-    FirePredict(cfg).get_efficiency()
+        cfg.model.name = "enet"
+        FirePredict(cfg, run=run).get_efficiency()
 
-    cfg.model.name = "fddwnet"
-    FirePredict(cfg).get_efficiency()
+        cfg.model.name = "fddwnet"
+        FirePredict(cfg, run=run).get_efficiency()
+    finally:
+        if run is not None:
+            run.finish()
 
 
 if __name__ == "__main__":
