@@ -11,10 +11,10 @@ import torch.optim as optim
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
 
-from landset8_loader import Landset8Dataset, Landset8ManualDataset
-from model_manager import ModelManager
-from utils import *
-from adapter import MLP
+from src.wildfire_kd.landset8_loader import Landset8Dataset, Landset8ManualDataset
+from src.wildfire_kd.model_manager import ModelManager
+from src.wildfire_kd.utils import *
+from src.wildfire_kd.adapter import MLP
 
 # Login WANDD
 # with open("wandb_secret.json", "r") as f:

@@ -9,10 +9,10 @@ from torchvision.models.segmentation import (
     deeplabv3_mobilenet_v3_large
 )
 
-from models.UNet import UNet
-from models.ENet import ENet
-from models.FDDWNet import FDDWNet
-from models.CGNet import CGNet
+from src.wildfire_kd.models.UNet import UNet
+from src.wildfire_kd.models.ENet import ENet
+from src.wildfire_kd.models.FDDWNet import FDDWNet
+from src.wildfire_kd.models.CGNet import CGNet
 
 class ModelManager:
     
