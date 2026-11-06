@@ -1,13 +1,16 @@
 # Main
-datasets/
-wandb_secret.json
+datasets/Landsat8-ActiveFire/*
+!datasets/Landsat8-ActiveFire/dataset.pkl
+!datasets/Landsat8-ActiveFire/compressed/
+datasets/Landsat8-ActiveFire/compressed/*
+!datasets/Landsat8-ActiveFire/compressed/.gitkeep
 wandb/
 outputs/
 *.pt
 test/
 
 .DS_Store
-landset8/.DS_Store
+datasets/Landsat8-ActiveFire/.DS_Store
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
