@@ -74,7 +74,7 @@ class FirePredict():
         )
 
 
-    def train(self):
+    def train_FB(self):
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.teacher = self.teacher.to(device)
         self.student = self.student.to(device)
@@ -195,6 +195,130 @@ class FirePredict():
                     "val_f1": f1[0]
                 })
 
+            save_model = False
+
+            if val_loss < best_val_loss:
+                best_val_loss = val_loss
+                save_model = True
+
+            if save_model:
+                path = self.cfg.path.output_model + f"{self.cfg.model.name}_{epoch}_val_{val_loss:.2f}_f1_{f1[0]:.2f}.pt"
+                torch.save(self.student.state_dict(), path)
+                print('Saved model to: ' + path)
+
+
+    def train_RB(self):
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        self.teacher = self.teacher.to(device)
+        self.student = self.student.to(device)
+
+        best_val_loss = float('inf')
+        epsilon = 1e-14
+        num_epochs = self.cfg.const.num_epochs
+        T = self.cfg.distill.T
+        alpha = self.cfg.distill.alpha
+
+        if self.run is not None:
+            self.run.watch(self.student, log="all", log_freq=100)
+
+        for epoch in range(num_epochs):
+            self.student.train()
+            running_loss = 0.0
+
+            for images, labels in tqdm(self.train_dataloader, desc=f"Epoch {epoch+1}/{num_epochs}"):
+                # for images, labels in self.train_dataloader:
+                images = images.to(device)
+                labels = labels.unsqueeze(1).float().to(device)
+
+                with torch.no_grad():
+                    teacher_logit = self.teacher(images)['out']
+                student_logit = self.student(images)['out']
+
+                loss_CEL = self.criterion(student_logit, labels)
+
+
+                s_prob = torch.sigmoid(student_logit / T)
+                t_prob = torch.sigmoid(teacher_logit / T).detach()
+
+                t_prob_bin = torch.cat([1 - t_prob, t_prob], dim=1)         # (N,2,H,W)
+                s_prob_bin = torch.cat([
+                        torch.log(1 - s_prob + 10**-7),
+                        torch.log(s_prob     + 10**-7)
+                    ], dim=1)  
+
+                N, _, H, W = teacher_logit.shape
+                loss_KD = torch.sum(t_prob_bin * (t_prob_bin.log() - s_prob_bin)) / (N) * (T * T)
+
+                # print(float(loss_KD.detach()))
+
+                loss = alpha * loss_CEL + (1 - alpha) * loss_KD
+
+                self.optimizer.zero_grad()
+                loss.backward()
+                self.optimizer.step()
+
+                running_loss += loss.item()
+
+            epoch_loss = running_loss / len(self.train_dataloader)
+
+            print(f'Epoch {epoch+1}/{num_epochs} Training loss: {epoch_loss:.7f}')
+
+            if self.run is not None:
+                self.run.log({"train_loss": epoch_loss})
+
+            # Validation
+            self.student.eval()
+            val_loss = 0.0
+
+            TP_all = np.zeros((2, 1))
+            FP_all = np.zeros((2, 1))
+            TN_all = np.zeros((2, 1))
+            FN_all = np.zeros((2, 1))
+            n_valid_sample_all = 0
+
+            with torch.no_grad():
+                for images, labels in self.val_dataloader:
+                    images, labels = images.to(device), labels.to(device)
+                    outputs = self.student(images)['out']
+
+                    # Metrics
+                    if self.cfg.const.num_classes == 1:
+                        preds = (outputs[:, 0, :, :] > self.cfg.const.th_fire).cpu().numpy().astype(np.uint8).flatten()
+                    else:
+                        preds = torch.argmax(outputs, dim=1).cpu().numpy().flatten()
+
+                    labels_np = labels.cpu().numpy().flatten()
+
+                    TP, FP, TN, FN, n_valid_sample = eval_image(preds, labels_np, 2)
+                    TP_all += TP
+                    FP_all += FP
+                    TN_all += TN
+                    FN_all += FN
+                    n_valid_sample_all += n_valid_sample
+
+                    # Loss
+                    labels = labels.unsqueeze(1).float()
+                    loss = self.criterion(outputs, labels)
+                    val_loss += loss.item()
+
+            val_loss /= len(self.val_dataloader)
+
+            accuracy = (TP_all[1] + TN_all[1]) / (TP_all[1] + TN_all[1] + FP_all[1] + FN_all[1] + epsilon)
+            precision = TP_all[1] / (TP_all[1] + FP_all[1] + epsilon)
+            recall = TP_all[1] / (TP_all[1] + FN_all[1] + epsilon)
+            f1 = 2 * precision * recall / (precision + recall + epsilon)
+            iou = TP_all[1] / (TP_all[1] + FP_all[1] + FN_all[1] + epsilon)
+
+            print(f'Validation Loss: {val_loss:.5f}, Precision: {precision[0]:.3f}, Recall: {recall[0]:.3f}, F1 Score: {f1[0]:.3f}, IoU: {iou[0]:.3f}, Acc: {accuracy[0]:.3f}')
+
+            if self.run is not None:
+                self.run.log({
+                    "val_loss": val_loss,
+                    "val_acc": accuracy[0],
+                    "val_precision": precision[0],
+                    "val_recall": recall[0],
+                    "val_f1": f1[0]
+                })
             save_model = False
 
             if val_loss < best_val_loss:
@@ -400,6 +524,9 @@ class FirePredict():
 
 @hydra.main(config_path="../../conf", config_name="kd", version_base=None)
 def main(cfg: DictConfig):
+    if cfg.distill.method not in ("RB", "FB"):
+        raise ValueError("distill.method must be 'RB' or 'FB'.")
+
     load_dotenv(Path(__file__).resolve().parents[2] / ".env")
     run = None
     if cfg.wandb.mode != "disabled":
@@ -416,7 +543,10 @@ def main(cfg: DictConfig):
     try:
         # TRAINING
         fp = FirePredict(cfg, run=run)
-        fp.train()
+        if cfg.distill.method == "RB":
+            fp.train_RB()
+        else:
+            fp.train_FB()
 
         print("\nTesting...\n")
 

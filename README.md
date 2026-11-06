@@ -3,6 +3,50 @@
 Research code associated with the [ICPRAM 2026 paper](https://doi.org/10.5220/0014630000004067).
 The current scripts use the Landsat-8 ActiveFire dataset for wildfire segmentation.
 
+## Installation
+
+Use Python 3.10 and run all commands from the repository root:
+
+```bash
+python3.10 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e .
+```
+
+## Dataset preparation
+
+Download the continent ZIPs from the [ActiveFire dataset](https://github.com/pereira-gha/activefire#datasets-and-weights)
+into `datasets/Landsat8-ActiveFire/compressed/`, then extract them:
+
+```bash
+python scripts/prepare_data.py
+```
+
+The extraction script deletes processed ZIPs. The loader also requires
+`datasets/Landsat8-ActiveFire/dataset.pkl`: a pandas table with `full_path` and
+`masks_voting` columns containing image and mask paths relative to the dataset
+directory. CSV splits are provided in
+`data/split/`.
+
+## Training
+
+```bash
+# U-Net teacher
+mkdir -p weights/teacher/
+python -m wildfire_kd.train model.name=unet \
+  path.output_model=weights/teacher/ path.weights_test=weights/teacher/
+
+# FDDWNet supervised baseline
+python -m wildfire_kd.train
+
+# Feature-based KD; replace YOUR_CHECKPOINT.pt with a saved teacher checkpoint
+python -m wildfire_kd.kd-train path.teacher_model=weights/teacher/YOUR_CHECKPOINT.pt
+```
+
+Settings are in `conf/train.yaml` and `conf/kd.yaml`; W&B is disabled by default.
+Both scripts evaluate saved checkpoints after training. The KD script also runs
+CUDA benchmarks afterward, which require an NVIDIA GPU.
+
 ## How to cite
 
 If you use this code or build on the method, please cite:

@@ -1,6 +1,6 @@
-# Feature-based distillation: U-Net teacher, FDDWNet student.
+# Knowledge distillation: U-Net teacher, FDDWNet student.
 # Keep exactly one value uncommented for each setting.
-# Logits-based KD and pruned U-Net students require code changes first.
+# Pruned U-Net students require code changes first.
 defaults:
   - _self_
 
@@ -44,9 +44,11 @@ const:
   n_filters: 16
 
 distill:
-  T: 1.0  # unused in the feature loss.
-  alpha: 0.5  # unused in the feature loss.
-  lbd: 1  # FDDWNet KD weight.
+  method: "FB"  # Feature-based KD.
+  # method: "RB"  # Response/logits-based KD.
+  T: 1.0  # RB temperature.
+  alpha: 0.5  # RB task-loss weight; KD weight is 1 - alpha.
+  lbd: 1  # FB KD weight.
   # Feature-based KD weight sweep:
   # lbd: 0.1
   # lbd: 0.01
