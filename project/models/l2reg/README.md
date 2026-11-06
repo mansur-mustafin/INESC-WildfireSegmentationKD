@@ -1,1 +1,0 @@
-> This is the same as `normal`, but using L2 regularization.

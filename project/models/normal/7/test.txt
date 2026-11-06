@@ -1,5 +1,0 @@
-models/7/fcn_resnet101_0_val_0.15_f1_0.33.pt     - Precision: 0.431, Recall: 0.139, F1 Score: 0.211, IoU: 0.118, Accuracy: 0.940
-models/7/fcn_resnet101_1_val_0.12_f1_0.46.pt     - Precision: 0.357, Recall: 0.254, F1 Score: 0.297, IoU: 0.174, Accuracy: 0.930
-models/7/fcn_resnet101_2_val_0.12_f1_0.30.pt     - Precision: 0.448, Recall: 0.102, F1 Score: 0.166, IoU: 0.091, Accuracy: 0.941
-models/7/fcn_resnet101_6_val_0.11_f1_0.15.pt     - Precision: 0.428, Recall: 0.052, F1 Score: 0.092, IoU: 0.048, Accuracy: 0.941
-models/7/fcn_resnet101_7_val_0.11_f1_0.30.pt     - Precision: 0.433, Recall: 0.110, F1 Score: 0.176, IoU: 0.096, Accuracy: 0.940
