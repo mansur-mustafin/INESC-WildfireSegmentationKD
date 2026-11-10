@@ -1,0 +1,64 @@
+cff-version: 1.2.0
+message: >-
+  If you use this research code, please cite the paper in preferred-citation.
+  Also cite the dataset publication when using the Landsat-8 ActiveFire data.
+type: software
+title: "Knowledge Distillation for Lightweight Models in Wildfire Segmentation"
+authors:
+  - name: "Wildfire KD contributors"
+repository-code: "https://github.com/mansur-mustafin/INESC-WildfireSegmentationKD"
+url: "https://github.com/mansur-mustafin/INESC-WildfireSegmentationKD"
+# Licensing is scoped by component in LICENSE; this is not a blanket MIT release.
+keywords:
+  - wildfire segmentation
+  - knowledge distillation
+  - Landsat-8
+  - model compression
+preferred-citation:
+  type: conference-paper
+  title: "Knowledge Distillation for Lightweight Models in Wildfire Segmentation"
+  authors:
+    - family-names: Mamede
+      given-names: "Rafael M."
+    - family-names: Ferreira
+      given-names: "Leonardo M."
+    - family-names: Mustafin
+      given-names: Mansur
+    - family-names: Caldeira
+      given-names: Eduarda
+    - family-names: Oliveira
+      given-names: "Hélder P."
+    - family-names: Cardoso
+      given-names: "Jaime S."
+    - family-names: Sequeira
+      given-names: "Ana F."
+  collection-title: "Proceedings of the 15th International Conference on Pattern Recognition Applications and Methods (ICPRAM 2026)"
+  volume: 1
+  year: 2026
+  start: 187
+  end: 196
+  publisher:
+    name: "SCITEPRESS - Science and Technology Publications"
+  doi: "10.5220/0014630000004067"
+  isbn: "978-989-758-797-9"
+  url: "https://doi.org/10.5220/0014630000004067"
+  license: CC-BY-NC-ND-4.0
+references:
+  - type: article
+    title: "Active fire detection in Landsat-8 imagery: A large-scale dataset and a deep-learning study"
+    authors:
+      - family-names: "de Almeida Pereira"
+        given-names: "Gabriel Henrique"
+      - family-names: Fusioka
+        given-names: "André Minoro"
+      - family-names: Nassu
+        given-names: "Bogdan Tomoyuki"
+      - family-names: Minetto
+        given-names: Rodrigo
+    journal: "ISPRS Journal of Photogrammetry and Remote Sensing"
+    volume: 178
+    year: 2021
+    start: 171
+    end: 186
+    doi: "10.1016/j.isprsjprs.2021.06.002"
+    url: "https://github.com/pereira-gha/activefire"

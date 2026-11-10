@@ -1,0 +1,239 @@
+(venv) mansur@g14:~/Desktop/NewSpace/landset8$ ./sbatch_script.sh 
+Configuration: 
+model:
+  name: lraspp
+teacher: null
+path:
+  images_dir: ./../datasets/Landsat8-ActiveFire/images/patches
+  masks_dir: ./../datasets/Landsat8-ActiveFire/masks/voting
+  output_model: models/landset8_default/1/
+  weights_test: models/landset8_default/1/
+const:
+  lr: 0.0001
+  num_epochs: 50
+  batch_size: 8
+  num_input_channels: 10
+  num_classes: 2
+  weight_decay: 0
+  lbd: 500
+  mask_postfix: _voting
+
+Epoch 1/50: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [04:25<00:00, 10.39it/s]
+Epoch 1/50 Training loss: 0.0159
+Validation Loss: 0.002, Precision: 0.472, Recall: 0.111, F1 Score: 0.180, IoU: 0.099, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_0_val_0.00_f1_0.18.pt
+Epoch 2/50: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [09:18<00:00,  4.95it/s]
+Epoch 2/50 Training loss: 0.0011
+Validation Loss: 0.001, Precision: 0.545, Recall: 0.201, F1 Score: 0.293, IoU: 0.172, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_1_val_0.00_f1_0.29.pt
+Epoch 3/50: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [09:18<00:00,  4.94it/s]
+Epoch 3/50 Training loss: 0.0008
+Validation Loss: 0.001, Precision: 0.616, Recall: 0.165, F1 Score: 0.261, IoU: 0.150, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_2_val_0.00_f1_0.26.pt
+Epoch 4/50: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [09:19<00:00,  4.94it/s]
+Epoch 4/50 Training loss: 0.0007
+Validation Loss: 0.001, Precision: 0.659, Recall: 0.147, F1 Score: 0.240, IoU: 0.137, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_3_val_0.00_f1_0.24.pt
+Epoch 5/50: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [09:18<00:00,  4.94it/s]
+Epoch 5/50 Training loss: 0.0006
+Validation Loss: 0.001, Precision: 0.688, Recall: 0.132, F1 Score: 0.221, IoU: 0.124, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_4_val_0.00_f1_0.22.pt
+Epoch 6/50: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [09:19<00:00,  4.94it/s]
+Epoch 6/50 Training loss: 0.0006
+Validation Loss: 0.001, Precision: 0.620, Recall: 0.182, F1 Score: 0.281, IoU: 0.164, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_5_val_0.00_f1_0.28.pt
+Epoch 7/50: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [09:19<00:00,  4.94it/s]
+Epoch 7/50 Training loss: 0.0006
+Validation Loss: 0.001, Precision: 0.730, Recall: 0.100, F1 Score: 0.176, IoU: 0.096, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_6_val_0.00_f1_0.18.pt
+Epoch 8/50: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [09:19<00:00,  4.94it/s]
+Epoch 8/50 Training loss: 0.0006
+Validation Loss: 0.001, Precision: 0.676, Recall: 0.161, F1 Score: 0.261, IoU: 0.150, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_7_val_0.00_f1_0.26.pt
+Epoch 9/50: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [09:19<00:00,  4.94it/s]
+Epoch 9/50 Training loss: 0.0006
+Validation Loss: 0.001, Precision: 0.704, Recall: 0.125, F1 Score: 0.213, IoU: 0.119, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_8_val_0.00_f1_0.21.pt
+Epoch 10/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [09:19<00:00,  4.94it/s]
+Epoch 10/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.757, Recall: 0.100, F1 Score: 0.176, IoU: 0.097, Acc: 1.000
+Epoch 11/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [09:19<00:00,  4.94it/s]
+Epoch 11/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.698, Recall: 0.163, F1 Score: 0.265, IoU: 0.152, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_10_val_0.00_f1_0.26.pt
+Epoch 12/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [09:19<00:00,  4.94it/s]
+Epoch 12/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.683, Recall: 0.170, F1 Score: 0.273, IoU: 0.158, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_11_val_0.00_f1_0.27.pt
+Epoch 13/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [09:19<00:00,  4.94it/s]
+Epoch 13/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.680, Recall: 0.173, F1 Score: 0.275, IoU: 0.160, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_12_val_0.00_f1_0.28.pt
+Epoch 14/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [09:19<00:00,  4.94it/s]
+Epoch 14/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.684, Recall: 0.175, F1 Score: 0.279, IoU: 0.162, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_13_val_0.00_f1_0.28.pt
+Epoch 15/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [09:19<00:00,  4.94it/s]
+Epoch 15/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.706, Recall: 0.163, F1 Score: 0.265, IoU: 0.153, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_14_val_0.00_f1_0.26.pt
+Epoch 16/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [09:18<00:00,  4.94it/s]
+Epoch 16/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.674, Recall: 0.196, F1 Score: 0.303, IoU: 0.179, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_15_val_0.00_f1_0.30.pt
+Epoch 17/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [09:19<00:00,  4.94it/s]
+Epoch 17/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.679, Recall: 0.190, F1 Score: 0.297, IoU: 0.174, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_16_val_0.00_f1_0.30.pt
+Epoch 18/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [09:19<00:00,  4.94it/s]
+Epoch 18/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.727, Recall: 0.156, F1 Score: 0.257, IoU: 0.147, Acc: 1.000
+Epoch 19/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [09:19<00:00,  4.94it/s]
+Epoch 19/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.691, Recall: 0.187, F1 Score: 0.294, IoU: 0.173, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_18_val_0.00_f1_0.29.pt
+Epoch 20/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [09:19<00:00,  4.94it/s]
+Epoch 20/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.671, Recall: 0.210, F1 Score: 0.320, IoU: 0.190, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_19_val_0.00_f1_0.32.pt
+Epoch 21/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [09:19<00:00,  4.94it/s]
+Epoch 21/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.689, Recall: 0.188, F1 Score: 0.296, IoU: 0.174, Acc: 1.000
+Epoch 22/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [09:18<00:00,  4.94it/s]
+Epoch 22/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.672, Recall: 0.208, F1 Score: 0.318, IoU: 0.189, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_21_val_0.00_f1_0.32.pt
+Epoch 23/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [09:18<00:00,  4.94it/s]
+Epoch 23/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.666, Recall: 0.217, F1 Score: 0.328, IoU: 0.196, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_22_val_0.00_f1_0.33.pt
+Epoch 24/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [09:19<00:00,  4.94it/s]
+Epoch 24/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.669, Recall: 0.216, F1 Score: 0.327, IoU: 0.195, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_23_val_0.00_f1_0.33.pt
+Epoch 25/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [09:18<00:00,  4.94it/s]
+Epoch 25/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.688, Recall: 0.200, F1 Score: 0.310, IoU: 0.183, Acc: 1.000
+Epoch 26/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [09:19<00:00,  4.94it/s]
+Epoch 26/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.658, Recall: 0.224, F1 Score: 0.334, IoU: 0.201, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_25_val_0.00_f1_0.33.pt
+Epoch 27/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [09:19<00:00,  4.94it/s]
+Epoch 27/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.669, Recall: 0.215, F1 Score: 0.325, IoU: 0.194, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_26_val_0.00_f1_0.33.pt
+Epoch 28/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [03:14<00:00, 14.22it/s]
+Epoch 28/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.692, Recall: 0.198, F1 Score: 0.308, IoU: 0.182, Acc: 1.000
+Epoch 29/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [02:29<00:00, 18.52it/s]
+Epoch 29/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.681, Recall: 0.206, F1 Score: 0.316, IoU: 0.188, Acc: 1.000
+Epoch 30/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [02:29<00:00, 18.43it/s]
+Epoch 30/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.653, Recall: 0.236, F1 Score: 0.347, IoU: 0.210, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_29_val_0.00_f1_0.35.pt
+Epoch 31/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [02:29<00:00, 18.42it/s]
+Epoch 31/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.668, Recall: 0.217, F1 Score: 0.328, IoU: 0.196, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_30_val_0.00_f1_0.33.pt
+Epoch 32/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [02:30<00:00, 18.36it/s]
+Epoch 32/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.649, Recall: 0.241, F1 Score: 0.351, IoU: 0.213, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_31_val_0.00_f1_0.35.pt
+Epoch 33/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [02:30<00:00, 18.35it/s]
+Epoch 33/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.666, Recall: 0.219, F1 Score: 0.330, IoU: 0.197, Acc: 1.000
+Epoch 34/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [02:30<00:00, 18.37it/s]
+Epoch 34/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.671, Recall: 0.218, F1 Score: 0.329, IoU: 0.197, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_33_val_0.00_f1_0.33.pt
+Epoch 35/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [02:30<00:00, 18.36it/s]
+Epoch 35/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.682, Recall: 0.208, F1 Score: 0.319, IoU: 0.190, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_34_val_0.00_f1_0.32.pt
+Epoch 36/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [04:21<00:00, 10.58it/s]
+Epoch 36/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.706, Recall: 0.179, F1 Score: 0.286, IoU: 0.167, Acc: 1.000
+Epoch 37/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [09:16<00:00,  4.96it/s]
+Epoch 37/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.646, Recall: 0.239, F1 Score: 0.349, IoU: 0.212, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_36_val_0.00_f1_0.35.pt
+Epoch 38/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [03:03<00:00, 15.02it/s]
+Epoch 38/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.667, Recall: 0.225, F1 Score: 0.336, IoU: 0.202, Acc: 1.000
+Epoch 39/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [02:29<00:00, 18.50it/s]
+Epoch 39/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.669, Recall: 0.222, F1 Score: 0.334, IoU: 0.200, Acc: 1.000
+Epoch 40/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [02:29<00:00, 18.41it/s]
+Epoch 40/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.648, Recall: 0.241, F1 Score: 0.351, IoU: 0.213, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_39_val_0.00_f1_0.35.pt
+Epoch 41/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [05:20<00:00,  8.62it/s]
+Epoch 41/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.662, Recall: 0.224, F1 Score: 0.335, IoU: 0.201, Acc: 1.000
+Epoch 42/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [04:39<00:00,  9.88it/s]
+Epoch 42/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.668, Recall: 0.223, F1 Score: 0.335, IoU: 0.201, Acc: 1.000
+Epoch 43/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [02:29<00:00, 18.48it/s]
+Epoch 43/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.680, Recall: 0.214, F1 Score: 0.326, IoU: 0.195, Acc: 1.000
+Epoch 44/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [02:29<00:00, 18.42it/s]
+Epoch 44/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.647, Recall: 0.244, F1 Score: 0.354, IoU: 0.215, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_43_val_0.00_f1_0.35.pt
+Epoch 45/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [07:56<00:00,  5.80it/s]
+Epoch 45/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.655, Recall: 0.243, F1 Score: 0.354, IoU: 0.215, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_44_val_0.00_f1_0.35.pt
+Epoch 46/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [02:27<00:00, 18.71it/s]
+Epoch 46/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.656, Recall: 0.237, F1 Score: 0.348, IoU: 0.211, Acc: 1.000
+Epoch 47/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [02:29<00:00, 18.45it/s]
+Epoch 47/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.665, Recall: 0.231, F1 Score: 0.343, IoU: 0.207, Acc: 1.000
+Epoch 48/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [02:30<00:00, 18.39it/s]
+Epoch 48/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.690, Recall: 0.208, F1 Score: 0.320, IoU: 0.191, Acc: 1.000
+Epoch 49/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [02:30<00:00, 18.32it/s]
+Epoch 49/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.668, Recall: 0.230, F1 Score: 0.342, IoU: 0.206, Acc: 1.000
+Epoch 50/50: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2762/2762 [07:12<00:00,  6.38it/s]
+Epoch 50/50 Training loss: 0.0005
+Validation Loss: 0.001, Precision: 0.652, Recall: 0.244, F1 Score: 0.355, IoU: 0.216, Acc: 1.000
+Saved model to: models/landset8_default/1/lraspp_49_val_0.00_f1_0.36.pt
+
+Testing...
+
+models/landset8_default/1/lraspp_0_val_0.00_f1_0.18.pt   - Precision: 0.473, Recall: 0.117, F1 Score: 0.188, IoU: 0.104, Accuracy: 1.000
+models/landset8_default/1/lraspp_1_val_0.00_f1_0.29.pt   - Precision: 0.548, Recall: 0.201, F1 Score: 0.294, IoU: 0.172, Accuracy: 1.000
+models/landset8_default/1/lraspp_2_val_0.00_f1_0.26.pt   - Precision: 0.631, Recall: 0.164, F1 Score: 0.260, IoU: 0.149, Accuracy: 1.000
+models/landset8_default/1/lraspp_3_val_0.00_f1_0.24.pt   - Precision: 0.675, Recall: 0.145, F1 Score: 0.238, IoU: 0.135, Accuracy: 1.000
+models/landset8_default/1/lraspp_4_val_0.00_f1_0.22.pt   - Precision: 0.702, Recall: 0.133, F1 Score: 0.223, IoU: 0.126, Accuracy: 1.000
+models/landset8_default/1/lraspp_5_val_0.00_f1_0.28.pt   - Precision: 0.624, Recall: 0.175, F1 Score: 0.274, IoU: 0.159, Accuracy: 1.000
+models/landset8_default/1/lraspp_6_val_0.00_f1_0.18.pt   - Precision: 0.753, Recall: 0.104, F1 Score: 0.182, IoU: 0.100, Accuracy: 1.000
+models/landset8_default/1/lraspp_7_val_0.00_f1_0.26.pt   - Precision: 0.689, Recall: 0.160, F1 Score: 0.259, IoU: 0.149, Accuracy: 1.000
+models/landset8_default/1/lraspp_8_val_0.00_f1_0.21.pt   - Precision: 0.728, Recall: 0.127, F1 Score: 0.217, IoU: 0.122, Accuracy: 1.000
+models/landset8_default/1/lraspp_10_val_0.00_f1_0.26.pt  - Precision: 0.701, Recall: 0.163, F1 Score: 0.264, IoU: 0.152, Accuracy: 1.000
+models/landset8_default/1/lraspp_11_val_0.00_f1_0.27.pt  - Precision: 0.690, Recall: 0.168, F1 Score: 0.270, IoU: 0.156, Accuracy: 1.000
+models/landset8_default/1/lraspp_12_val_0.00_f1_0.28.pt  - Precision: 0.683, Recall: 0.174, F1 Score: 0.278, IoU: 0.161, Accuracy: 1.000
+models/landset8_default/1/lraspp_13_val_0.00_f1_0.28.pt  - Precision: 0.690, Recall: 0.173, F1 Score: 0.276, IoU: 0.160, Accuracy: 1.000
+models/landset8_default/1/lraspp_14_val_0.00_f1_0.26.pt  - Precision: 0.709, Recall: 0.163, F1 Score: 0.265, IoU: 0.153, Accuracy: 1.000
+models/landset8_default/1/lraspp_15_val_0.00_f1_0.30.pt  - Precision: 0.672, Recall: 0.194, F1 Score: 0.301, IoU: 0.177, Accuracy: 1.000
+models/landset8_default/1/lraspp_16_val_0.00_f1_0.30.pt  - Precision: 0.684, Recall: 0.187, F1 Score: 0.294, IoU: 0.172, Accuracy: 1.000
+models/landset8_default/1/lraspp_18_val_0.00_f1_0.29.pt  - Precision: 0.697, Recall: 0.185, F1 Score: 0.293, IoU: 0.171, Accuracy: 1.000
+models/landset8_default/1/lraspp_19_val_0.00_f1_0.32.pt  - Precision: 0.677, Recall: 0.203, F1 Score: 0.313, IoU: 0.185, Accuracy: 1.000
+models/landset8_default/1/lraspp_21_val_0.00_f1_0.32.pt  - Precision: 0.678, Recall: 0.204, F1 Score: 0.314, IoU: 0.186, Accuracy: 1.000
+models/landset8_default/1/lraspp_22_val_0.00_f1_0.33.pt  - Precision: 0.670, Recall: 0.212, F1 Score: 0.323, IoU: 0.192, Accuracy: 1.000
+models/landset8_default/1/lraspp_23_val_0.00_f1_0.33.pt  - Precision: 0.672, Recall: 0.211, F1 Score: 0.321, IoU: 0.191, Accuracy: 1.000
+models/landset8_default/1/lraspp_25_val_0.00_f1_0.33.pt  - Precision: 0.661, Recall: 0.221, F1 Score: 0.331, IoU: 0.198, Accuracy: 1.000
+models/landset8_default/1/lraspp_26_val_0.00_f1_0.33.pt  - Precision: 0.673, Recall: 0.213, F1 Score: 0.323, IoU: 0.193, Accuracy: 1.000
+models/landset8_default/1/lraspp_29_val_0.00_f1_0.35.pt  - Precision: 0.659, Recall: 0.232, F1 Score: 0.343, IoU: 0.207, Accuracy: 1.000
+models/landset8_default/1/lraspp_30_val_0.00_f1_0.33.pt  - Precision: 0.674, Recall: 0.214, F1 Score: 0.325, IoU: 0.194, Accuracy: 1.000
+models/landset8_default/1/lraspp_31_val_0.00_f1_0.35.pt  - Precision: 0.652, Recall: 0.237, F1 Score: 0.348, IoU: 0.210, Accuracy: 1.000
+models/landset8_default/1/lraspp_33_val_0.00_f1_0.33.pt  - Precision: 0.679, Recall: 0.214, F1 Score: 0.325, IoU: 0.194, Accuracy: 1.000
+models/landset8_default/1/lraspp_34_val_0.00_f1_0.32.pt  - Precision: 0.690, Recall: 0.206, F1 Score: 0.318, IoU: 0.189, Accuracy: 1.000
+models/landset8_default/1/lraspp_36_val_0.00_f1_0.35.pt  - Precision: 0.654, Recall: 0.236, F1 Score: 0.347, IoU: 0.210, Accuracy: 1.000
+models/landset8_default/1/lraspp_39_val_0.00_f1_0.35.pt  - Precision: 0.656, Recall: 0.238, F1 Score: 0.349, IoU: 0.212, Accuracy: 1.000
+models/landset8_default/1/lraspp_43_val_0.00_f1_0.35.pt  - Precision: 0.659, Recall: 0.238, F1 Score: 0.350, IoU: 0.212, Accuracy: 1.000
+models/landset8_default/1/lraspp_44_val_0.00_f1_0.35.pt  - Precision: 0.661, Recall: 0.239, F1 Score: 0.351, IoU: 0.213, Accuracy: 1.000
+models/landset8_default/1/lraspp_49_val_0.00_f1_0.36.pt  - Precision: 0.661, Recall: 0.239, F1 Score: 0.352, IoU: 0.213, Accuracy: 1.000

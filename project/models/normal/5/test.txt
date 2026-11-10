@@ -1,4 +1,0 @@
-models/5/deeplabv3_resnet50_0_val_0.23_f1_0.03.pt        - Precision: 0.018, Recall: 0.002, F1 Score: 0.004, IoU: 0.002, Accuracy: 0.936
-models/5/deeplabv3_resnet50_1_val_0.19_f1_0.23.pt        - Precision: 0.369, Recall: 0.082, F1 Score: 0.134, IoU: 0.072, Accuracy: 0.939
-models/5/deeplabv3_resnet50_4_val_0.14_f1_0.41.pt        - Precision: 0.196, Recall: 0.261, F1 Score: 0.224, IoU: 0.126, Accuracy: 0.895
-models/5/deeplabv3_resnet50_5_val_0.11_f1_0.35.pt        - Precision: 0.418, Recall: 0.127, F1 Score: 0.195, IoU: 0.108, Accuracy: 0.939
