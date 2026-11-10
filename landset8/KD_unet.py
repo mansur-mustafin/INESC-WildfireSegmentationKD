@@ -19,10 +19,8 @@ from utils import *
 # -----------------------------
 #   Stability options
 # -----------------------------
-
 torch.backends.cudnn.benchmark = False
 torch.backends.cudnn.deterministic = True
-
 torch.set_float32_matmul_precision('medium')
 
 # -----------------------------
