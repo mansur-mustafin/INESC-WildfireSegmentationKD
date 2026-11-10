@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wildfire-kd"
+version = "0.1.0"
+description = "Knowledge distillation for lightweight wildfire segmentation models"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{name = "Wildfire KD contributors"}]
+# Component-specific licenses and exclusions are described in LICENSE.
+license-files = ["LICENSE"]
+dynamic = ["dependencies"]
+
+[project.urls]
+Repository = "https://github.com/mansur-mustafin/INESC-WildfireSegmentationKD"
+Paper = "https://doi.org/10.5220/0014630000004067"
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+# Use an editable install for experiments; conf/ and data/ live in the checkout.
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["wildfire_kd*"]
+namespaces = true
