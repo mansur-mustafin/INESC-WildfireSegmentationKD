@@ -1,0 +1,38 @@
+# Define some constants
+
+defaults:
+  - _self_
+
+hydra:
+  run:
+    dir: .
+  output_subdir: null
+    
+path:
+  dataset: "/nas-ctm01/datasets/public/Langsat8-ActiveFire/dataset/compressed/"
+  teacher_model: "./weights/landset8_default/u_net/unet_76_val_0.00_f1_0.91.pt"
+
+  weights_finetune: "./pruned_models/"
+  output_model: "./distiled_models/"
+model:
+  name: "UNet"
+teacher:
+  name: "UNet"
+const:
+  lr: 0.001
+  num_epochs: 200
+  batch_size: 16
+  num_input_channels: 3                    
+  num_classes: 1                            # 0 - no fire, 1 - fire 
+  weight_decay: 0                           # L2 regularization.
+  lbd: 500
+  mask: "voting"                            # Kumar, Schroeder, Murphy, intersections, voting
+  th_fire: 0.25
+  dropout: 0.1
+  n_filters: 16
+
+
+distill:
+  T: 1.0
+  alpha: 0.5
+  beta: 1
