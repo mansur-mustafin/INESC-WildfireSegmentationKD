@@ -7,13 +7,19 @@ hydra:
   run:
     dir: .
   output_subdir: null
-    
+
+wandb:
+  mode: "disabled"
+  # mode: "offline"  # Save locally; no login needed.
+  # mode: "online"  # Read WANDB_API_KEY from .env or the environment.
+  project: "FirePrediction_Finetune"
+
 path:
-  dataset: "/nas-ctm01/datasets/public/Langsat8-ActiveFire/dataset/compressed/"
+  dataset: "./datasets/Landsat8-ActiveFire/"
   teacher_model: "./weights/landset8_default/u_net/unet_76_val_0.00_f1_0.91.pt"
 
-  weights_finetune: "./pruned_models/"
-  output_model: "./distiled_models/unbalancedweights/"
+  weights_finetune: "./weights/pruned_models/"
+  output_model: "./weights/unbalancedweights/"
 model:
   name: "UNet"
 teacher:

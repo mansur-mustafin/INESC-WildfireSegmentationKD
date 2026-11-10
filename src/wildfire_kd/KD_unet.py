@@ -1,6 +1,7 @@
-import wandb
 import time
-import json
+from pathlib import Path
+
+from dotenv import load_dotenv
 import hydra
 import numpy as np
 from omegaconf import DictConfig, OmegaConf
@@ -12,9 +13,9 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader
 import os
 
-from landset8_loader import Landset8Dataset
-from model_manager import ModelManager
-from utils import *
+from .datasets import Landset8Dataset
+from .model_manager import ModelManager
+from .utils import eval_image, get_model_paths, init_seeds
 
 # -----------------------------
 #   Stability options
@@ -23,20 +24,14 @@ torch.backends.cudnn.benchmark = False
 torch.backends.cudnn.deterministic = True
 torch.set_float32_matmul_precision('medium')
 
-# -----------------------------
-#   WandB login
-# -----------------------------
-with open("wandb_secret.json", "r") as f:
-    secrets = json.load(f)
-wandb.login(key=secrets["WANDB_API_KEY"])
-
 # ==============================================================
 #   FIREPREDICT KD FINE-TUNE
 # ==============================================================
 
 class FirePredict:
-    def __init__(self, cfg: DictConfig, finetune_ckpt=None):
+    def __init__(self, cfg: DictConfig, finetune_ckpt=None, run=None):
         self.cfg = cfg
+        self.run = run
         self._create_data_loaders()
 
         os.makedirs(self.cfg.path.output_model, exist_ok=True)
@@ -68,13 +63,13 @@ class FirePredict:
     # -----------------------------
     def _create_data_loaders(self):
         train_dataset = Landset8Dataset(
-            images_csv="./split/images_train.csv",
+            images_csv="./data/split/images_train.csv",
             dataset_dir=self.cfg.path.dataset,
             mask=self.cfg.const.mask,
             augment=True,
         )
         val_dataset = Landset8Dataset(
-            images_csv="./split/images_val.csv",
+            images_csv="./data/split/images_val.csv",
             dataset_dir=self.cfg.path.dataset,
             mask=self.cfg.const.mask,
             augment=False,
@@ -97,11 +92,8 @@ class FirePredict:
         self.teacher = self.teacher.to(device)
         self.student = self.student.to(device)
 
-        run_name = f"KD_Finetune_{self.cfg.model.name}_{time.strftime('%Y%m%d-%H%M%S')}"
-        wandb.init(project="FirePrediction_Finetune",
-                   config=OmegaConf.to_container(self.cfg, resolve=True),
-                   name=run_name)
-        wandb.watch(self.student, log="all", log_freq=100)
+        if self.run is not None:
+            self.run.watch(self.student, log="all", log_freq=100)
 
         best_val_loss = float("inf")
         epsilon = 1e-14
@@ -153,7 +145,8 @@ class FirePredict:
                 running_loss += loss.item()
 
             train_loss = running_loss / len(self.train_dataloader)
-            wandb.log({"train_loss": train_loss})
+            if self.run is not None:
+                self.run.log({"train_loss": train_loss})
             print(f"Epoch {epoch+1}/{num_epochs} Training loss: {train_loss:.6f}")
 
             # --- Validation ---
@@ -162,10 +155,11 @@ class FirePredict:
                   f"Precision: {precision:.3f}, Recall: {recall:.3f}, "
                   f"F1: {f1:.3f}, IoU: {iou:.3f}, Acc: {acc:.3f}")
 
-            wandb.log({
-                "val_loss": val_loss, "val_precision": precision,
-                "val_recall": recall, "val_f1": f1, "val_acc": acc,
-            })
+            if self.run is not None:
+                self.run.log({
+                    "val_loss": val_loss, "val_precision": precision,
+                    "val_recall": recall, "val_f1": f1, "val_acc": acc,
+                })
 
             # --- Save best checkpoint ---
             ckpt_name = os.path.splitext(os.path.basename(self.checkpoint_path))[0]
@@ -181,8 +175,6 @@ class FirePredict:
                 )
                 torch.save(self.student.state_dict(), save_path)
                 print(f"✅ Saved improved model: {save_path}")
-
-        wandb.finish()
 
     # ==============================================================
     #   VALIDATION LOOP
@@ -220,8 +212,9 @@ class FirePredict:
 # ==============================================================
 #   HYDRA ENTRY POINT
 # ==============================================================
-@hydra.main(config_path=None, config_name=None, version_base=None)
+@hydra.main(config_path="../../conf", config_name="unet_pruned_balancedweights", version_base=None)
 def main(cfg: DictConfig):
+    load_dotenv(Path(__file__).resolve().parents[2] / ".env")
     print("Configuration:\n", OmegaConf.to_yaml(cfg))
 
     ckpt_paths = get_model_paths(cfg.path.weights_finetune, cfg.model.name)
@@ -229,8 +222,21 @@ def main(cfg: DictConfig):
 
     for ckpt in ckpt_paths:
         print(f"\n==== KD Fine-tuning from checkpoint: {ckpt} ====\n")
-        fp = FirePredict(cfg, finetune_ckpt=ckpt)
-        fp.train()
+        run = None
+        if cfg.wandb.mode != "disabled":
+            import wandb
+            run = wandb.init(
+                project=cfg.wandb.project,
+                mode=cfg.wandb.mode,
+                config=OmegaConf.to_container(cfg, resolve=True),
+                name=f"KD_Finetune_{cfg.model.name}_{time.strftime('%Y%m%d-%H%M%S')}",
+            )
+        try:
+            fp = FirePredict(cfg, finetune_ckpt=ckpt, run=run)
+            fp.train()
+        finally:
+            if run is not None:
+                run.finish()
 
 
 if __name__ == "__main__":

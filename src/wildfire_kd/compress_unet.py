@@ -5,7 +5,7 @@ from copy import deepcopy
 import numpy as np
 import argparse
 import os
-from models.UNet import UNet
+from .models.UNet import UNet
 
 
 def count_nonzero_parameters(model):
@@ -68,12 +68,12 @@ def prune_model(model, target_sparsity=0.3, structured=False, remove=True):
 
 def main():
     parser = argparse.ArgumentParser(description="Prune U-Net models for knowledge distillation.")
-    parser.add_argument("--output_dir", type=str, default="./pruned_models", help="Where to save pruned models")
+    parser.add_argument("--output_dir", type=str, default="./weights/pruned_models/", help="Where to save pruned models")
     parser.add_argument("--filters", type=int, default=16, help="Number of base filters in U-Net")
     parser.add_argument("--dropout", type=float, default=0.1, help="Dropout probability")
     parser.add_argument("--structured", action="store_true", help="Use structured pruning (channel-level)")
     parser.add_argument("--sparsities", type=float, nargs="+", default=[ 0.5,.7,.8,.9], help="Target sparsities to prune")
-    parser.add_argument("--checkpoint", type=str, default=None, help="Path to trained model weights (.pth)")
+    parser.add_argument("--checkpoint", type=str, default=None, help="Path to trained model weights")
     args = parser.parse_args()
 
     os.makedirs(args.output_dir, exist_ok=True)
@@ -99,7 +99,7 @@ def main():
         print(f"   Active parameters: {info['remaining_params']:,}/{info['total_params']:,} "
               f"({(1-info['achieved_sparsity'])*100:.2f}% kept)")
 
-        save_path = os.path.join(args.output_dir, f"unet_pruned_{int(sparsity*100)}.pth")
+        save_path = os.path.join(args.output_dir, f"unet_{int(sparsity*100)}_pruned.pt")
         torch.save(pruned_model.state_dict(), save_path)
         print(f"   Saved to {save_path}")
 
